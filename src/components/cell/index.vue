@@ -5,14 +5,18 @@
       'vux-tap-active': isLink || !!link,
       'weui-cell_access': isLink || !!link,
       'vux-cell-no-border-intent': !borderIntent,
-      'vux-cell-disabled': disabled
+      'vux-cell-disabled': disabled,
+      'vux-cell-readonly': readonly
     }"
     :style="style"
     @click="onClick">
     <div class="weui-cell__hd">
       <slot name="icon"></slot>
     </div>
-    <div class="vux-cell-bd" :class="{'vux-cell-primary': primary === 'title' && valueAlign !== 'left'}">
+    <div class="vux-cell-bd" :class="{
+      'vux-cell-primary': primary === 'title' && valueAlign !== 'left',
+      'vux-cell-required': required
+    }">
       <p>
         <label class="vux-label" :style="labelStyles" :class="labelClass" v-if="title || hasTitleSlot">
           <slot name="title">{{ title }}</slot>
@@ -138,12 +142,23 @@ export default {
 .vux-cell-arrow-transition:after {
   transition: transform 300ms;
 }
-.vux-cell-disabled {
+.vux-cell-disabled, .vux-cell-readonly {
   .vux-label {
     color: #b2b2b2;
   }
   &.weui-cell_access .weui-cell__ft:after {
     border-color: @cell-disabled-arrow-color;
+  }
+}
+.vux-cell-required {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    content: '*';
+    color: red;
   }
 }
 </style>

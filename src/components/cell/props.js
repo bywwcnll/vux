@@ -17,6 +17,9 @@ export default function () {
     },
     disabled: Boolean,
     arrowDirection: String, // down or up
-    alignItems: String
+    alignItems: String,
+    /* 基教定制 */
+    required: Boolean,
+    readonly: Boolean
   }
 }
