@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Countdown, Group, Cell, XSwitch } from 'vux'
+import { Countdown, Group, Cell, XSwitch } from 'k12vux'
 
 export default {
   components: {

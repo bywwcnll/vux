@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { XHeader, Actionsheet, TransferDom, ButtonTab, ButtonTabItem } from 'vux'
+import { XHeader, Actionsheet, TransferDom, ButtonTab, ButtonTabItem } from 'k12vux'
 
 export default {
   directives: {

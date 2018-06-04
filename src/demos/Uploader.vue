@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { Divider } from 'vux'
+import { Divider } from 'k12vux'
 
 export default {
   components: {
@@ -39,5 +39,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/weui/widget/weui-uploader/index.less';
+@import '~k12vux/src/styles/weui/widget/weui-uploader/index.less';
 </style>

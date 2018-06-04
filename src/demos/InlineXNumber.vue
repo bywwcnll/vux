@@ -22,7 +22,7 @@ Used within cell:
 </i18n>
 
 <script>
-import { Group, Cell, InlineXNumber } from 'vux'
+import { Group, Cell, InlineXNumber } from 'k12vux'
 
 export default {
   components: {

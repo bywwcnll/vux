@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem, VuxComponentListData as components } from 'vux'
+import { Flexbox, FlexboxItem, VuxComponentListData as components } from 'k12vux'
 import { mapState } from 'vuex'
 import DemoList from './DemoList'
 
@@ -81,7 +81,7 @@ export default {
   },
   computed: {
     ...mapState({
-      demoTop: state => state.vux.demoScrollTop
+      demoTop: state => state.k12vux.demoScrollTop
     })
   }
 }

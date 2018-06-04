@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { FormatTimeFilter, Divider } from 'vux'
+import { FormatTimeFilter, Divider } from 'k12vux'
 
 export default {
   filters: {

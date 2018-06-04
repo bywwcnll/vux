@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="vux-1px-t">
-    
+
     <swipeout>
 
       <swipeout-item @on-close="handleEvents('on-close')" @on-open="handleEvents('on-open')" transition-mode="follow">
@@ -45,7 +45,7 @@
 
     </swipeout>
   </div>
-    
+
 
     <div style="padding:15px;">
       <x-button @click.native="disabled = false" type="primary" :disabled="!disabled">{{ $t('set Enabled') }}</x-button>
@@ -102,7 +102,7 @@ Ignore:
 </i18n>
 
 <script>
-import { GroupTitle, Swipeout, SwipeoutItem, SwipeoutButton, XButton } from 'vux'
+import { GroupTitle, Swipeout, SwipeoutItem, SwipeoutButton, XButton } from 'k12vux'
 
 export default {
   components: {

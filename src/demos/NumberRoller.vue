@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { NumberRoller, Divider } from 'vux'
+import { NumberRoller, Divider } from 'k12vux'
 
 export default {
   components: {

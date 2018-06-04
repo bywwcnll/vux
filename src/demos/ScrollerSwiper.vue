@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Scroller, Swiper } from 'vux'
+import { Scroller, Swiper } from 'k12vux'
 
 export default {
   components: {

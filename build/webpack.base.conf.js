@@ -44,7 +44,7 @@ const webpackConfig = {
         loader: 'eslint-loader',
         enforce: "pre",
         include: [resolve('src'), resolve('test')],
-        exclude: /vue.vux.js$/,
+        exclude: /vue.k12vux.js$/,
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -83,7 +83,7 @@ const webpackConfig = {
   }
 }
 
-const vuxLoader = require('vux-loader')
+const k12vuxLoader = require('k12vux-loader')
 const vuxConfig = require('./vux-config')
-module.exports = vuxLoader.merge(webpackConfig, vuxConfig)
+module.exports = k12vuxLoader.merge(webpackConfig, vuxConfig)
 

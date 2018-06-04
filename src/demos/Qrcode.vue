@@ -27,7 +27,7 @@ current fgColor:
 </i18n>
 
 <script>
-import { Qrcode, Divider } from 'vux'
+import { Qrcode, Divider } from 'k12vux'
 
 export default {
   mounted () {

@@ -65,7 +65,7 @@ See also:
 </i18n>
 
 <script>
-import { Group, CellBox, Checklist, Cell, Divider, XButton } from 'vux'
+import { Group, CellBox, Checklist, Cell, Divider, XButton } from 'k12vux'
 import _ from 'lodash'
 
 export default {

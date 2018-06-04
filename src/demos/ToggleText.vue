@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { Spinner } from 'vux'
+import { Spinner } from 'k12vux'
 
 export default {
   components: {

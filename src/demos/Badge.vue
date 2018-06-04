@@ -41,7 +41,7 @@ Red dot:
 </i18n>
 
 <script>
-import { Badge, Group, Cell } from 'vux'
+import { Badge, Group, Cell } from 'k12vux'
 
 export default {
   components: {

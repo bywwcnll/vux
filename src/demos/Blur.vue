@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem, Blur } from 'vux'
+import { Flexbox, FlexboxItem, Blur } from 'k12vux'
 
 export default {
   components: {

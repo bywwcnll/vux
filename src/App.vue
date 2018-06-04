@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { Radio, Group, Cell, Badge, Drawer, Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'vux'
+import { Radio, Group, Cell, Badge, Drawer, Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'k12vux'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -156,9 +156,9 @@ export default {
       route: state => state.route,
       path: state => state.route.path,
       deviceready: state => state.app.deviceready,
-      demoTop: state => state.vux.demoScrollTop,
-      isLoading: state => state.vux.isLoading,
-      direction: state => state.vux.direction
+      demoTop: state => state.k12vux.demoScrollTop,
+      isLoading: state => state.k12vux.isLoading,
+      direction: state => state.k12vux.direction
     }),
     isShowBar () {
       if (this.entryUrl.indexOf('hide-tab-bar') > -1) {
@@ -184,7 +184,7 @@ export default {
     },
     headerTransition () {
       if (!this.direction) return ''
-      return this.direction === 'forward' ? 'vux-header-fade-in-right' : 'vux-header-fade-in-left'
+      return this.direction === 'forward' ? 'k12vux-header-fade-in-right' : 'k12vux-header-fade-in-left'
     },
     componentName () {
       if (this.route.path) {
@@ -229,9 +229,9 @@ export default {
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/reset.less';
-@import '~vux/src/styles/1px.less';
-@import '~vux/src/styles/tap.less';
+@import '~k12vux/src/styles/reset.less';
+@import '~k12vux/src/styles/1px.less';
+@import '~k12vux/src/styles/tap.less';
 
 body {
   background-color: #fbf9fe;
@@ -280,7 +280,7 @@ html, body {
 }
 
 @font-face {
-  font-family: 'vux-demo';  /* project id 70323 */
+  font-family: 'k12vux-demo';  /* project id 70323 */
   src: url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.eot');
   src: url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.eot?#iefix') format('embedded-opentype'),
   url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.woff') format('woff'),
@@ -289,7 +289,7 @@ html, body {
 }
 
 .demo-icon {
-  font-family: 'vux-demo';
+  font-family: 'k12vux-demo';
   font-size: 20px;
   color: #04BE02;
 }

@@ -145,7 +145,7 @@ set bar-active-color:
 </i18n>
 
 <script>
-import { Tab, TabItem, Sticky, Divider, XButton, Swiper, SwiperItem } from 'vux'
+import { Tab, TabItem, Sticky, Divider, XButton, Swiper, SwiperItem } from 'k12vux'
 const list = () => ['精选', '美食', '电影', '酒店', '外卖']
 
 export default {
@@ -217,8 +217,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~vux/src/styles/1px.less';
-@import '~vux/src/styles/center.less';
+@import '~k12vux/src/styles/1px.less';
+@import '~k12vux/src/styles/center.less';
 
 .box {
   padding: 15px;

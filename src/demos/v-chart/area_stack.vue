@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { VChart, VLine, VArea, VTooltip, VLegend, VScale } from 'vux'
+import { VChart, VLine, VArea, VTooltip, VLegend, VScale } from 'k12vux'
 
 export default {
   components: {

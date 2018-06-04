@@ -64,7 +64,7 @@ please select:
 </i18n>
 
 <script>
-import { Datetime, PopupPicker, Group, Cell, Picker, XButton, Divider, XSwitch } from 'vux'
+import { Datetime, PopupPicker, Group, Cell, Picker, XButton, Divider, XSwitch } from 'k12vux'
 
 export default {
   components: {

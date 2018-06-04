@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Cell, Group, Picker, PopupPicker, XButton, Divider } from 'vux'
+import { Cell, Group, Picker, PopupPicker, XButton, Divider } from 'k12vux'
 const list = [{
   name: '中国',
   value: 'china',

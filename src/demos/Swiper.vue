@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { Swiper, GroupTitle, SwiperItem, XButton, Divider } from 'vux'
+import { Swiper, GroupTitle, SwiperItem, XButton, Divider } from 'k12vux'
 
 const baseList = [{
   url: 'javascript:',

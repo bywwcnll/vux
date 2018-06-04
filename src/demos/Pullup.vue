@@ -52,7 +52,7 @@ placeholder:
 </i18n>
 
 <script>
-import { Scroller, Divider, Spinner } from 'vux'
+import { Scroller, Divider, Spinner } from 'k12vux'
 
 export default {
   components: {

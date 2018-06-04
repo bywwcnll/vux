@@ -14,7 +14,7 @@ wechat emotions:
 </i18n>
 
 <script>
-import { WechatEmotion as Emotion, Divider } from 'vux'
+import { WechatEmotion as Emotion, Divider } from 'k12vux'
 
 export default {
   components: {

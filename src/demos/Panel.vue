@@ -17,7 +17,7 @@ More:
 </i18n>
 
 <script>
-import { Panel, Group, Radio } from 'vux'
+import { Panel, Group, Radio } from 'k12vux'
 
 export default {
   components: {

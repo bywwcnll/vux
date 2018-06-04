@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { Tabbar, TabbarItem } from 'vux'
+import { Tabbar, TabbarItem } from 'k12vux'
 
 export default {
   ready () {

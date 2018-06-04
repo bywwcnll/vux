@@ -15,7 +15,7 @@ daterange-format:
 </i18n>
 
 <script>
-import { Group, DatetimeRange } from 'vux'
+import { Group, DatetimeRange } from 'k12vux'
 
 export default {
   components: {

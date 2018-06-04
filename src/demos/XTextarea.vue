@@ -38,7 +38,7 @@ set height=200:
 </i18n>
 
 <script>
-import { XTextarea, Group, XInput } from 'vux'
+import { XTextarea, Group, XInput } from 'k12vux'
 
 export default {
   components: {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Agree } from 'vux'
+import { Agree } from 'k12vux'
 
 export default {
   components: {

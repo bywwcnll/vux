@@ -40,7 +40,7 @@ step 3:
 </i18n>
 
 <script>
-import { Step, StepItem, XButton, XHr } from 'vux'
+import { Step, StepItem, XButton, XHr } from 'k12vux'
 
 export default {
   components: {

@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { XButton, Range, Group, GroupTitle, Cell } from 'vux'
+import { XButton, Range, Group, GroupTitle, Cell } from 'k12vux'
 
 export default {
   components: {

@@ -127,7 +127,7 @@ We can render a list of calendars order by month:
 </i18n>
 
 <script>
-import { InlineCalendar, Group, XSwitch, Radio, XButton, Cell, Divider } from 'vux'
+import { InlineCalendar, Group, XSwitch, Radio, XButton, Cell, Divider } from 'k12vux'
 
 export default {
   methods: {

@@ -4,7 +4,7 @@
         <group title="更多">
           <popup-picker title="活动类型："
                :data="pickerList" v-model="pickerValue" :columns="1" show-name>
-          </popup-picker>        
+          </popup-picker>
         </group>
 </popup>
 <a @click="show=true">show</a>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Popup, PopupPicker, Group } from 'vux'
+import { Popup, PopupPicker, Group } from 'k12vux'
 
 export default {
   components: {

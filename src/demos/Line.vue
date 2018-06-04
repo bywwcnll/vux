@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Line as XLine } from 'vux'
+import { Line as XLine } from 'k12vux'
 
 export default {
   components: {

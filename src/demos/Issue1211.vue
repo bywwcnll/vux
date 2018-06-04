@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { Checklist } from 'vux'
+  import { Checklist } from 'k12vux'
 
   export default {
     components: {

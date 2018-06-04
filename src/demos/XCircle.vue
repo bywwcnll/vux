@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { XCircle, Range, Icon } from 'vux'
+import { XCircle, Range, Icon } from 'k12vux'
 
 export default {
   ready () {

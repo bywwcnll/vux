@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { XHr } from 'vux'
+import { XHr } from 'k12vux'
 
 export default {
   components: {

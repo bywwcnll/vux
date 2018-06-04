@@ -137,7 +137,7 @@ Messages:
 </i18n>
 
 <script>
-import { Cell, CellBox, CellFormPreview, Group, Badge } from 'vux'
+import { Cell, CellBox, CellFormPreview, Group, Badge } from 'k12vux'
 
 export default {
   mounted () {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { XCircle } from 'vux'
+import { XCircle } from 'k12vux'
 
 export default {
   components: {

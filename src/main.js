@@ -41,7 +41,7 @@ for (let i in finalLocales) {
   Vue.i18n.add(i, finalLocales[i])
 }
 
-import { Group, Cell, DatetimePlugin, CloseDialogsPlugin, ConfigPlugin, BusPlugin, LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin, AppPlugin } from 'vux'
+import { Group, Cell, DatetimePlugin, CloseDialogsPlugin, ConfigPlugin, BusPlugin, LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin, AppPlugin } from 'k12vux'
 
 Vue.component('group', Group)
 Vue.component('cell', Cell)
@@ -54,7 +54,7 @@ if (/zh/.test(nowLocale)) {
   Vue.i18n.set('en')
 }
 
-store.registerModule('vux', {
+store.registerModule('k12vux', {
   state: {
     demoScrollTop: 0,
     isLoading: false,
@@ -138,7 +138,7 @@ if (process.env.NODE_ENV === 'production') {
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
 
-// The following line will be replaced with by vux-loader with routes in ./demo_list.json
+// The following line will be replaced with by k12vuxLoader with routes in ./demo_list.json
 const routes = []
 
 const router = new VueRouter({
@@ -205,10 +205,12 @@ router.afterEach(function (to) {
   isPush = false
   store.commit('updateLoadingStatus', {isLoading: false})
   if (process.env.NODE_ENV === 'production') {
-    ga && ga('set', 'page', to.fullPath)
-    ga && ga('send', 'pageview')
+    // ga && ga('set', 'page', to.fullPath)
+    // ga && ga('send', 'pageview')
   }
 })
+
+console.log(router)
 
 new Vue({
   store,

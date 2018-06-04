@@ -33,7 +33,7 @@ Show popup with datetime-view:
 </i18n>
 
 <script>
-import { DatetimeView, XButton, Popup, TransferDom } from 'vux'
+import { DatetimeView, XButton, Popup, TransferDom } from 'k12vux'
 
 export default {
   components: {

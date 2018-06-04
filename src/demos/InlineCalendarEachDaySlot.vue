@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { InlineCalendar } from 'vux'
+import { InlineCalendar } from 'k12vux'
 
 export default {
   components: {

@@ -42,7 +42,7 @@ Will auto close in 3s:
 </i18n>
 
 <script>
-import { AlertModule, Alert, Group, XSwitch, Cell, TransferDomDirective as TransferDom } from 'vux'
+import { AlertModule, Alert, Group, XSwitch, Cell, TransferDomDirective as TransferDom } from 'k12vux'
 
 export default {
   directives: {

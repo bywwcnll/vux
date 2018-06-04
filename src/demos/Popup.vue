@@ -13,9 +13,9 @@
     <group>
       <x-switch title="donot force rerender on open" v-model="show15"></x-switch>
       <x-switch title="force rerender on open" v-model="show14"></x-switch>
-      
+
     </group>
-    
+
     <group>
       <x-switch title="scroll top on show" inline-desc="default scrollable div" v-model="show17"></x-switch>
       <x-switch title="scroll top on show" inline-desc="custom scrollable div" v-model="show16"></x-switch>
@@ -33,7 +33,7 @@
     </div>
 
     <toast v-model="showToast">You did it!</toast>
-    
+
     <div v-transfer-dom>
       <popup v-model="show1" height="100%">
         <div class="popup1">
@@ -43,7 +43,7 @@
         </div>
       </popup>
     </div>
-    
+
     <div v-transfer-dom>
       <popup v-model="show3">
         <div class="popup2">
@@ -55,7 +55,7 @@
         </div>
       </popup>
     </div>
-    
+
     <div v-transfer-dom>
       <popup v-model="show4">
         <div class="popup2">
@@ -66,7 +66,7 @@
         </div>
       </popup>
     </div>
-    
+
     <div v-transfer-dom>
       <popup v-model="show5" :hide-on-blur=false>
         <div class="popup2">
@@ -77,7 +77,7 @@
         </div>
       </popup>
     </div>
-    
+
     <div v-transfer-dom>
       <popup v-model="show6">
         <div class="popup1">
@@ -94,7 +94,7 @@
     <group>
       <x-switch title="transparent background" v-model="show7"></x-switch>
     </group>
-    
+
     <div v-transfer-dom>
       <popup v-model="show7" height="270px" is-transparent>
         <div style="width: 95%;background-color:#fff;height:250px;margin:0 auto;border-radius:5px;padding-top:10px;">
@@ -124,7 +124,7 @@
         </div>
       </popup>
     </div>
-    
+
     <div v-transfer-dom>
       <popup v-model="show9" position="right">
         <div style="width:200px;">
@@ -207,7 +207,7 @@
 </template>
 
 <script>
-import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, ChinaAddressData } from 'vux'
+import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, ChinaAddressData } from 'k12vux'
 
 import ToggleText from './ToggleText'
 
@@ -268,7 +268,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~vux/src/styles/close.less';
+@import '~k12vux/src/styles/close.less';
 
 .popup0 {
   padding-bottom:15px;

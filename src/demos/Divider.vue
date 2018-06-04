@@ -10,7 +10,7 @@ I have bottom line:
 </i18n>
 
 <script>
-import { Divider } from 'vux'
+import { Divider } from 'k12vux'
 
 export default {
   components: {

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { TransferDomDirective as transferDom, XDialog, XButton } from 'vux'
+import { TransferDomDirective as transferDom, XDialog, XButton } from 'k12vux'
 
 export default {
   components: {

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { Box, Icon } from 'vux'
+import { Box, Icon } from 'k12vux'
 
 export default {
   components: {

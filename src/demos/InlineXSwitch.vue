@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { InlineXSwitch, XSwitch, Group } from 'vux'
+import { InlineXSwitch, XSwitch, Group } from 'k12vux'
 
 export default {
   components: {

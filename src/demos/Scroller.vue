@@ -79,7 +79,7 @@ event:on-scroll-bottom:
 </i18n>
 
 <script>
-import { Scroller, Divider, Spinner, XButton, Group, Cell, LoadMore } from 'vux'
+import { Scroller, Divider, Spinner, XButton, Group, Cell, LoadMore } from 'k12vux'
 
 export default {
   components: {

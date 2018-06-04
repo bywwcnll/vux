@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { Tabbar, TabbarItem, Group, Cell } from 'vux'
+import { Tabbar, TabbarItem, Group, Cell } from 'k12vux'
 
 export default {
   components: {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { Previewer, TransferDom } from 'vux'
+import { Previewer, TransferDom } from 'k12vux'
 
 export default {
   directives: {

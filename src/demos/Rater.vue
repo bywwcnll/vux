@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { Rater, Group, Cell, Range } from 'vux'
+import { Rater, Group, Cell, Range } from 'k12vux'
 
 export default {
   components: {

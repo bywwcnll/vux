@@ -110,7 +110,7 @@ Call prompt by using plugin:
 </i18n>
 
 <script>
-import { Confirm, Group, XSwitch, XButton, TransferDomDirective as TransferDom } from 'vux'
+import { Confirm, Group, XSwitch, XButton, TransferDomDirective as TransferDom } from 'k12vux'
 export default {
   directives: {
     TransferDom

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { VChart, VTooltip, VLine, VScale, VGuide } from 'vux'
+import { VChart, VTooltip, VLine, VScale, VGuide } from 'k12vux'
 
 const data = []
 

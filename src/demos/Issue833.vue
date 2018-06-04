@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Group, Cell, Scroller } from 'vux'
+import { Group, Cell, Scroller } from 'k12vux'
 
 export default {
   name: 'scroll',

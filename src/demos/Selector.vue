@@ -43,7 +43,7 @@
       <cell-box align-items="flex-start"><pre>{{ valueMapList }}</pre></cell-box>
       <cell title="value" :value="valueMapValue"></cell>
     </group>
-    
+
     <div style="padding:15px;">
       <x-button type="primary" @click.native="getValue('valueMapRef')">get full value</x-button>
     </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { Selector, Group, Cell, CellBox, XButton } from 'vux'
+import { Selector, Group, Cell, CellBox, XButton } from 'k12vux'
 
 export default {
   components: {

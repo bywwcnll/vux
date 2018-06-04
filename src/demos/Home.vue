@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { Cell, Group, Badge, Divider } from 'vux'
+import { Cell, Group, Badge, Divider } from 'k12vux'
 
 const pkg = require('../../package.json')
 const version = pkg.version

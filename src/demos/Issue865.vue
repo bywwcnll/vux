@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Group, XInput, XButton } from 'vux'
+import { Group, XInput, XButton } from 'k12vux'
 
 export default {
   components: {

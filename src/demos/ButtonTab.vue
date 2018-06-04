@@ -55,7 +55,7 @@ Use v-model to set selected item:
 </i18n>
 
 <script>
-import { ButtonTab, ButtonTabItem, Divider } from 'vux'
+import { ButtonTab, ButtonTabItem, Divider } from 'k12vux'
 
 export default {
   components: {

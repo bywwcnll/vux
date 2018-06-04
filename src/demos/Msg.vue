@@ -16,7 +16,7 @@ Secondary button:
 </i18n>
 
 <script>
-import { Msg, Divider, XButton } from 'vux'
+import { Msg, Divider, XButton } from 'k12vux'
 
 export default {
   components: {

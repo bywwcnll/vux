@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Grid, GridItem } from 'vux'
+import { Grid, GridItem } from 'k12vux'
 
 export default {
   components: {

@@ -130,7 +130,7 @@ KTV:
 </i18n>
 
 <script>
-import { Flexbox, FlexboxItem } from 'vux'
+import { Flexbox, FlexboxItem } from 'k12vux'
 export default {
   components: {
     Flexbox,
@@ -140,7 +140,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import '~vux/src/styles/1px.less';
+@import '~k12vux/src/styles/1px.less';
 
 .vux-demo .test{
   height:50px;

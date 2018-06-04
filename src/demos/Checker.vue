@@ -225,7 +225,7 @@ awesome:
 </i18n>
 
 <script>
-import { Checker, CheckerItem, Divider, Group, Cell, Popup, TransferDom } from 'vux'
+import { Checker, CheckerItem, Divider, Group, Cell, Popup, TransferDom } from 'k12vux'
 
 export default {
   directives: {

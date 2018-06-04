@@ -50,7 +50,7 @@ const list = [{
     time: '今天早上'
   }]
 }, {
-  name: 'Vux',
+  name: 'k12vux',
   avatar: 'static/demo/comment/2.jpg',
   time: '未来时间',
   like_num: 0,

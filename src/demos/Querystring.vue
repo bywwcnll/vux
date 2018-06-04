@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { querystring } from 'vux'
+import { querystring } from 'k12vux'
 console.log(querystring.parse())
 export default {
   filters: {

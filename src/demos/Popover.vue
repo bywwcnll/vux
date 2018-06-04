@@ -52,7 +52,7 @@ Popover on right:
 </i18n>
 
 <script>
-import { Popover } from 'vux'
+import { Popover } from 'k12vux'
 
 export default {
   components: {

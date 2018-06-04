@@ -125,7 +125,7 @@ Flexible grid:
 </i18n>
 
 <script>
-import { Flexbox, FlexboxItem, Divider } from 'vux'
+import { Flexbox, FlexboxItem, Divider } from 'k12vux'
 
 export default {
   components: {
@@ -137,7 +137,7 @@ export default {
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/1px.less';
+@import '~k12vux/src/styles/1px.less';
 
 .flex-demo {
   text-align: center;

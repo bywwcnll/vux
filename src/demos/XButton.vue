@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { XButton, Box, GroupTitle, Group, Flexbox, FlexboxItem, Divider } from 'vux'
+import { XButton, Box, GroupTitle, Group, Flexbox, FlexboxItem, Divider } from 'k12vux'
 
 export default {
   components: {

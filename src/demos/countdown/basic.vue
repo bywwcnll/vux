@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Countdown, Group, Cell } from 'vux'
+import { Countdown, Group, Cell } from 'k12vux'
 
 export default {
   components: {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Search, Divider } from 'vux'
+import { Search, Divider } from 'k12vux'
 
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
       autoFixed: false,
       value: '',
       value1: 'hello',
-      value2: 'vux'
+      value2: 'k12vux'
     }
   }
 }

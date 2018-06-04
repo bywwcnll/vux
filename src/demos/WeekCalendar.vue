@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { WeekCalendar, InlineCalendar, Divider, Group, Cell } from 'vux'
+import { WeekCalendar, InlineCalendar, Divider, Group, Cell } from 'k12vux'
 
 export default {
   components: {

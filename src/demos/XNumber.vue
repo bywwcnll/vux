@@ -56,7 +56,7 @@ round style:
 </i18n>
 
 <script>
-import { Group, XNumber, XSwitch, Divider } from 'vux'
+import { Group, XNumber, XSwitch, Divider } from 'k12vux'
 
 export default {
   components: {

@@ -47,7 +47,7 @@ Custom template:
 </i18n>
 
 <script>
-import { Clocker, Cell, Group } from 'vux'
+import { Clocker, Cell, Group } from 'k12vux'
 
 export default {
   components: {

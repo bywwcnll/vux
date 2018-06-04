@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { Scroller, Divider, XSwitch, Group, Spinner } from 'vux'
+import { Scroller, Divider, XSwitch, Group, Spinner } from 'k12vux'
 
 export default {
   components: {

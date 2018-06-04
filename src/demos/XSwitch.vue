@@ -38,7 +38,7 @@ switch red:
 </i18n>
 
 <script>
-import { XSwitch, Group, Cell } from 'vux'
+import { XSwitch, Group, Cell } from 'k12vux'
 
 export default {
   components: {

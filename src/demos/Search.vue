@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Search, Group, Cell, XButton } from 'vux'
+import { Search, Group, Cell, XButton } from 'k12vux'
 
 export default {
   components: {

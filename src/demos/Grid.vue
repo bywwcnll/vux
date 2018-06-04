@@ -52,7 +52,7 @@ Custom col:
 </i18n>
 
 <script>
-import { Grid, GridItem, GroupTitle } from 'vux'
+import { Grid, GridItem, GroupTitle } from 'k12vux'
 
 export default {
   components: {

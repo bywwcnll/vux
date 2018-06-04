@@ -194,7 +194,7 @@ Set end-date only:
 </i18n>
 
 <script>
-import { Datetime, Group, XButton } from 'vux'
+import { Datetime, Group, XButton } from 'k12vux'
 
 export default {
   components: {

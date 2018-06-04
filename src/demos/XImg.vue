@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { XImg } from 'vux'
+import { XImg } from 'k12vux'
 export default {
   components: {
     XImg

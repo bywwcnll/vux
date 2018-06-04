@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { XImg, Scroller } from 'vux'
+import { XImg, Scroller } from 'k12vux'
 export default {
   components: {
     XImg,

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Range } from 'vux'
+import { Range } from 'k12vux'
 
 export default {
   data () {

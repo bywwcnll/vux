@@ -61,7 +61,7 @@ Toggle readonly:
 </i18n>
 
 <script>
-import { Group, Calendar, Cell, Badge, CellBox, XButton } from 'vux'
+import { Group, Calendar, Cell, Badge, CellBox, XButton } from 'k12vux'
 
 export default {
   components: {

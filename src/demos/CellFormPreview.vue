@@ -21,7 +21,7 @@ Fish:
 </i18n>
 
 <script>
-import { CellFormPreview, Group, Cell } from 'vux'
+import { CellFormPreview, Group, Cell } from 'k12vux'
 
 export default {
   components: {

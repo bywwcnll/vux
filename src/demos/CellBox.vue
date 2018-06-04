@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Group, Cell, CellBox } from 'vux'
+import { Group, Cell, CellBox } from 'k12vux'
 
 export default {
   components: {

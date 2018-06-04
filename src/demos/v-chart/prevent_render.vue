@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { VChart } from 'vux'
+import { VChart } from 'k12vux'
 
 export default {
   components: {

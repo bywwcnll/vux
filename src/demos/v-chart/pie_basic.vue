@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { VChart, VLine, VArea, VTooltip, VLegend, VBar, VPie, VScale } from 'vux'
+import { VChart, VLine, VArea, VTooltip, VLegend, VBar, VPie, VScale } from 'k12vux'
 
 const map = {
   '芳华': '40%',

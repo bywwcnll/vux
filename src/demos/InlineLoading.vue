@@ -21,7 +21,7 @@ loading:
 </i18n>
 
 <script>
-import { InlineLoading } from 'vux'
+import { InlineLoading } from 'k12vux'
 
 export default {
   components: {

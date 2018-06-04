@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Group, Cell, Divider, XInput } from 'vux'
+import { Group, Cell, Divider, XInput } from 'k12vux'
 
 export default {
   components: {
@@ -25,5 +25,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/loading.less';
+@import '~k12vux/src/styles/loading.less';
 </style>

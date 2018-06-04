@@ -101,7 +101,7 @@ show toast:
 </i18n>
 
 <script>
-import { XDialog, XButton, Group, XSwitch, TransferDomDirective as TransferDom } from 'vux'
+import { XDialog, XButton, Group, XSwitch, TransferDomDirective as TransferDom } from 'k12vux'
 
 export default {
   directives: {
@@ -134,7 +134,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~vux/src/styles/close';
+@import '~k12vux/src/styles/close';
 
 .dialog-demo {
   .weui-dialog{

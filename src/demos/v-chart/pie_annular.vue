@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { VChart, VLine, VArea, VTooltip, VLegend, VBar, VPie, VGuide, VScale } from 'vux'
+import { VChart, VLine, VArea, VTooltip, VLegend, VBar, VPie, VGuide, VScale } from 'k12vux'
 
 const data = [
   { name: '股票类', percent: 83.59, a: '1' },

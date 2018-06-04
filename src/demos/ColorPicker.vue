@@ -26,7 +26,7 @@ A cell without title:
 </i18n>
 
 <script>
-import { ColorPicker, Group, Cell } from 'vux'
+import { ColorPicker, Group, Cell } from 'k12vux'
 
 export default {
   components: {

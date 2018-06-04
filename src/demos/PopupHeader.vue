@@ -42,7 +42,7 @@ Card 4:
 </i18n>
 
 <script>
-import { PopupHeader, Popup, TransferDom, Group, XSwitch, Radio } from 'vux'
+import { PopupHeader, Popup, TransferDom, Group, XSwitch, Radio } from 'k12vux'
 
 export default {
   directives: {

@@ -31,7 +31,7 @@ No loading text:
 </i18n>
 
 <script>
-import { Loading, Group, XSwitch, XButton, TransferDomDirective as TransferDom } from 'vux'
+import { Loading, Group, XSwitch, XButton, TransferDomDirective as TransferDom } from 'k12vux'
 
 export default {
   directives: {

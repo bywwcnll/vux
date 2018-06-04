@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { VChart, VLine, VArea, VTooltip, VLegend } from 'vux'
+import { VChart, VLine, VArea, VTooltip, VLegend } from 'k12vux'
 
 /**
 *[

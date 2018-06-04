@@ -38,7 +38,7 @@
 </i18n>
 
 <script>
-import { Radio, Group } from 'vux'
+import { Radio, Group } from 'k12vux'
 
 export default {
   components: {

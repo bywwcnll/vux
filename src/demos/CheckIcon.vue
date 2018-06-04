@@ -15,7 +15,7 @@
 </i18n>
 
 <script>
-import { CheckIcon } from 'vux'
+import { CheckIcon } from 'k12vux'
 
 export default {
   components: {

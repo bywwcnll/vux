@@ -32,7 +32,7 @@
 </i18n>
 
 <script>
-import { FormPreview } from 'vux'
+import { FormPreview } from 'k12vux'
 
 export default {
   components: {

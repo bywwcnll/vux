@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { WepayInput, XButton } from 'vux'
+import { WepayInput, XButton } from 'k12vux'
 
 export default {
   components: {

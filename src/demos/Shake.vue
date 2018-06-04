@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Shake } from 'vux'
+import { Shake } from 'k12vux'
 
 export default {
   components: {

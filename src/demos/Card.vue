@@ -70,7 +70,7 @@ Use header slot and content slot:
 </i18n>
 
 <script>
-import { Divider, Card } from 'vux'
+import { Divider, Card } from 'k12vux'
 
 export default {
   components: {
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import '~vux/src/styles/1px.less';
+@import '~k12vux/src/styles/1px.less';
 
 .card-demo-flex {
   display: flex;

@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { XTable, LoadMore } from 'vux'
+import { XTable, LoadMore } from 'k12vux'
 
 export default {
   components: {

@@ -91,7 +91,7 @@ Array menu:
 </i18n>
 
 <script>
-import { TransferDom, Actionsheet, Group, XSwitch, Toast } from 'vux'
+import { TransferDom, Actionsheet, Group, XSwitch, Toast } from 'k12vux'
 
 export default {
   components: {

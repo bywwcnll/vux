@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import { Group, Cell } from 'k12vux'
 
 export default {
   components: {

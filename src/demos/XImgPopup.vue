@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { XImg, Popup, TransferDom, XButton } from 'vux'
+import { XImg, Popup, TransferDom, XButton } from 'k12vux'
 
 export default {
   components: {

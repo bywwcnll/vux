@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { Group, PopupRadio } from 'vux'
+import { Group, PopupRadio } from 'k12vux'
 
 export default {
   components: {

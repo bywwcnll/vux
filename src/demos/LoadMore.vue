@@ -14,7 +14,7 @@
 </i18n>
 
 <script>
-import { LoadMore } from 'vux'
+import { LoadMore } from 'k12vux'
 
 export default {
   components: {

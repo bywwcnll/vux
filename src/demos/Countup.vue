@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Countup, XButton } from 'vux'
+import { Countup, XButton } from 'k12vux'
 
 export default {
   components: {

@@ -72,7 +72,7 @@ Done:
 </i18n>
 
 <script>
-import { Flow, FlowState, FlowLine } from 'vux'
+import { Flow, FlowState, FlowLine } from 'k12vux'
 
 export default {
   components: {

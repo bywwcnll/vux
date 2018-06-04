@@ -9,12 +9,12 @@
   <inline-calendar
   end-date="TODAY">
   </inline-calendar>
-  
+
 </div>
 </template>
 
 <script>
-import { InlineCalendar, Divider } from 'vux'
+import { InlineCalendar, Divider } from 'k12vux'
 
 export default {
   data () {

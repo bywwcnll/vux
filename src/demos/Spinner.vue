@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Spinner, Group, Cell } from 'vux'
+import { Spinner, Group, Cell } from 'k12vux'
 
 export default {
   components: {

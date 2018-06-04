@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { XProgress, Box } from 'vux'
+import { XProgress, Box } from 'k12vux'
 
 export default {
   components: {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Group, PopupPicker, XButton } from 'vux'
+import { Group, PopupPicker, XButton } from 'k12vux'
 
 export default {
   components: {

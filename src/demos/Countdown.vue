@@ -24,7 +24,7 @@ Start:
 </i18n>
 
 <script>
-import { Group, Cell, Countdown, XSwitch } from 'vux'
+import { Group, Cell, Countdown, XSwitch } from 'k12vux'
 
 export default {
   components: {

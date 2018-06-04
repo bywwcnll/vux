@@ -24,13 +24,13 @@ const isInclude = function (name, include) {
 
 module.exports = {
   options: {
-    vuxDev: !argv.simulate, // true
-    vuxSetBabel: argv.simulate, // false
-    vuxWriteFile: false,
+    k12vuxDev: !argv.simulate, // true
+    k12vuxSetBabel: argv.simulate, // false
+    k12vuxWriteFile: false,
     env: 'dev'
   },
   plugins: [
-    'vux-ui', 'inline-manifest',
+    'k12vux-ui', 'inline-manifest',
     {
       name: 'duplicate-style',
       options: {

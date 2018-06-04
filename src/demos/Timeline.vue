@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { Timeline, TimelineItem, XButton } from 'vux'
+import { Timeline, TimelineItem, XButton } from 'k12vux'
 
 export default {
   components: {

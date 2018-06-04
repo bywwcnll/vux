@@ -33,7 +33,7 @@ Async data:
 </i18n>
 
 <script>
-import { Group, Cell, Marquee, MarqueeItem, Divider } from 'vux'
+import { Group, Cell, Marquee, MarqueeItem, Divider } from 'k12vux'
 
 export default {
   components: {

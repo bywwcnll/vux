@@ -67,7 +67,7 @@
 </i18n>
 
 <script>
-import { Cell, Group, Picker, GroupTitle, XButton } from 'vux'
+import { Cell, Group, Picker, GroupTitle, XButton } from 'k12vux'
 
 let years = []
 for (var i = 2000; i <= 2030; i++) {

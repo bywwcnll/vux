@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { InlineCalendar, dateFormat, XButton } from 'vux'
+import { InlineCalendar, dateFormat, XButton } from 'k12vux'
 
 const today = dateFormat(new Date(), 'YYYY-MM-DD')
 const yesterday = dateFormat(new Date().getTime() - 24 * 3600 * 1000, 'YYYY-MM-DD')
