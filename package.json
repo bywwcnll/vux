@@ -1,10 +1,10 @@
 {
-  "name": "vux",
-  "version": "2.9.1",
+  "name": "k12vux",
+  "version": "12.0.1",
   "main": "index.js",
   "description": "Mobile web UI based on Vue and WeUI",
   "keywords": [
-    "vux",
+    "k12vux",
     "vue",
     "vue ui",
     "weui",
@@ -16,10 +16,10 @@
     "framework",
     "frontend"
   ],
-  "author": "airyland <airyland@qq.com>",
+  "author": "bywwcnll <2233540467@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airyland/vux"
+    "url": "https://github.com/bywwcnll/k12vux"
   },
   "license": "MIT",
   "scripts": {
