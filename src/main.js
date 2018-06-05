@@ -210,7 +210,7 @@ router.afterEach(function (to) {
   }
 })
 
-console.log(router)
+// console.log(router.options.routes)
 
 new Vue({
   store,

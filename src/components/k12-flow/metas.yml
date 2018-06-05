@@ -1,0 +1,27 @@
+category:
+  en: Data Display
+  zh-CN: 数据展示
+icon: '&#xe656;'
+items:
+  - k12-flow
+  - k12-flow-item
+k12-flow:
+  props:
+    title:
+      type: String
+      default: ''
+      en: "Header's title"
+      zh-CN: "标题"
+k12-flow-item:
+  props:
+    data:
+      type: Object
+      default: {}
+      en: "value"
+      zh-CN: "值"
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'

@@ -73,6 +73,8 @@
   "InlineXNumber": "src/components/inline-x-number/index.vue",
   "InlineXSwitch": "src/components/inline-x-switch/index.vue",
   "InviewDirective": "src/directives/inview/index.js",
+  "K12Flow": "src/components/k12-flow/k12-flow.vue",
+  "K12FlowItem": "src/components/k12-flow/k12-flow-item.vue",
   "Loading": "src/components/loading/index.vue",
   "LoadingPlugin": "src/plugins/loading/index.js",
   "LoadMore": "src/components/load-more/index.vue",
