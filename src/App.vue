@@ -243,7 +243,7 @@ html, body {
 }
 
 .demo-icon-22 {
-  font-family: 'vux-demo';
+  font-family: 'k12vux-demo';
   font-size: 22px;
   color: #888;
 }
@@ -286,6 +286,15 @@ html, body {
   url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.woff') format('woff'),
   url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_70323_wlronpvr565yiudi.svg#iconfont') format('svg');
+}
+
+@font-face {
+  font-family: 'k12icon';  /* project id 694261 */
+  src: url('//at.alicdn.com/t/font_694261_x24u7q4vux22zkt9.eot');
+  src: url('//at.alicdn.com/t/font_694261_x24u7q4vux22zkt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_694261_x24u7q4vux22zkt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_694261_x24u7q4vux22zkt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_694261_x24u7q4vux22zkt9.svg#k12icon') format('svg');
 }
 
 .demo-icon {

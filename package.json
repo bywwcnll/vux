@@ -25,7 +25,6 @@
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js && rimraf docs/demos/v2/ && mkdirp docs/demos/v2 && cp -r docs/demos/temp/* docs/demos/v2/",
-    "build:cdn": "node build/build.js --cdn && rimraf docs/demos/v2/ && mkdirp docs/demos/v2 && cp -rf docs/demos/temp/* docs/demos/v2/",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",

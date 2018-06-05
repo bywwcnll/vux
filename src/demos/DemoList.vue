@@ -39,6 +39,7 @@ export default {
     camelCase
   },
   activated () {
+    console.log(this.components)
     document.querySelector('#demo_list_box').scrollTop = this.demoTop
   },
   mounted () {
