@@ -39,6 +39,9 @@ var markdown = require('markdown-it')({
 
 module.exports = {
   entry: 'src/_index.js',
+  server: {
+    port: 8801
+  },
   generate: {
     routes: require('./src/routes.json')
   },

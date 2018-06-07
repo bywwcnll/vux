@@ -1,5 +1,5 @@
 <template>
-  <div class="k12-flow-step" :class="{'k12-flow-step-last': isLast}">
+  <div class="k12-flow-step">
     <div class="k12-flow-datetime">
       <div v-if="data.time">{{data.time}}</div>
       <div v-if="data.date">{{data.date}}</div>
@@ -10,7 +10,7 @@
       <x-icon v-if="data.status === 'error'" type="android-alert" size="32" class="k12-flow-icon k12-flow-warn"></x-icon>
       <x-icon v-else-if="data.status === 'finish'" type="ios-checkmark" size="32" class="k12-flow-icon k12-flow-success"></x-icon>
       <x-icon v-else-if="data.status === 'process'" type="ios-clock" size="32" class="k12-flow-icon k12-flow-waiting"></x-icon>
-      <div v-if="!isLast" class="k12-flow-line"></div>
+      <div class="k12-flow-line"></div>
     </div>
     <div class="k12-flow-infos">
       <div class="k12-flow-name" :class="{'k12-flow-current-stauts': isLastValidStatus}">{{data.name}}</div>
@@ -33,17 +33,15 @@ export default {
   },
   data () {
     return {
-      isLast: false,
       isLastValidStatus: false
     }
   },
   computed: {},
   methods: {
-    setIsLast () {
+    setIsLastValidStatus () {
       let _parent = this.$parent
       if (_parent && _parent.$options && _parent.$options.name === 'k12-flow') {
         let uidArray = _parent.$children.map(el => el._uid)
-        this.isLast = this._uid === uidArray[_parent.$children.length - 1]
         let statusArray = _parent.$children.map(el => el.data && el.data.status ? el.data.status : '')
         let lastValidStatusIndex = statusArray.indexOf('') - 1
         this.isLastValidStatus = this._uid === uidArray[lastValidStatusIndex]
@@ -57,9 +55,6 @@ export default {
 @import '../../styles/k12.less';
 .k12-flow-step {
   display: flex;
-  &:not(.k12-flow-step-last) {
-    min-height: 76px;
-  }
   .k12-flow-datetime {
     width: 85px;
     text-align: right;

@@ -9,7 +9,7 @@ app.prepare()
       const handle = app.getRequestHandler()
       handle(req, res)
     })
-    server.listen(3000)
+    server.listen(8802)
   })
 
 app.on('ready', () => {

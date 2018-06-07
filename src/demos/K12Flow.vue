@@ -5,6 +5,11 @@
         <div slot="desc">ss</div>
       </k12-flow-item>
     </k12-flow>
+    <k12-flow title="维修进度">
+      <k12-flow-item v-for="(el, index) in list" :key="index" :data="el">
+        <div slot="desc">ss</div>
+      </k12-flow-item>
+    </k12-flow>
   </div>
 </template>
 

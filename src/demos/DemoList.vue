@@ -1,7 +1,7 @@
 <template>
   <div class="demo-list-box" id="demo_list_box" :style="{height: `${height}px`}">
       <flexbox :gutter="0" v-for="(list, index) in components" :key="index">
-        <flexbox-item :span="1/3" v-for="component in list" :key="component.name" class="cbox vux-1px-t vux-tap-active" @click.native="go(component.name.toLowerCase(), component.hasHome)">
+        <flexbox-item :span="1/3" v-for="(component, index) in list" :key="index" class="cbox vux-1px-t vux-tap-active" @click.native="go(component.name.toLowerCase(), component.hasHome)">
           <div class="vux-1px-r cbox-inner">
             <span class="demo-icon demo-icon-big" v-html="component.icon" :style="{color: component.color}"></span>
             <br>
@@ -39,7 +39,7 @@ export default {
     camelCase
   },
   activated () {
-    console.log(this.components)
+    // console.log(this.components)
     document.querySelector('#demo_list_box').scrollTop = this.demoTop
   },
   mounted () {

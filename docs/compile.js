@@ -548,7 +548,7 @@ export default {
 
 
     let _globalImportCode = `// ${t('globally register', lang)}\n\nimport Vue from 'vue'\nimport { ${importList.map(one => one.importName).join(', ')} } from 'vux'\n\n`
-    const urlWithNoTransition = `https://vux.li/demos/v2?locale=${lang}&transition=none/#/component/${componentName}`
+    const urlWithNoTransition = `/demos/v2/index.html?locale=${lang}&transition=none/#/component/${componentName}`
 
     importList.forEach(one => {
       _globalImportCode += `Vue.component('${one.componentName}', ${one.importName})\n`

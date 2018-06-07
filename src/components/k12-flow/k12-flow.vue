@@ -21,8 +21,10 @@ export default {
     return {}
   },
   mounted () {
-    this.$children.forEach(el => {
-      el.setIsLast()
+    this.$nextTick(() => {
+      this.$children.forEach(el => {
+        el.setIsLastValidStatus()
+      })
     })
   },
   computed: {}
@@ -46,5 +48,15 @@ export default {
 .k12-flow-steps {
   min-height: 116px;
   padding: 20px 0;
+  > .k12-flow-step {
+    &:not(:last-child) {
+      min-height: 76px;
+    }
+    &:last-child {
+      .k12-flow-line {
+        display: none;
+      }
+    }
+  }
 }
 </style>

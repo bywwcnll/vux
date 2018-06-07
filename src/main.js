@@ -14,6 +14,8 @@ import componentsLocales from './locales/components.yml'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
+Vue.config.productionTip = false
+
 require('es6-promise').polyfill()
 
 /** i18n **/
