@@ -13,7 +13,7 @@
       <div class="k12-flow-line"></div>
     </div>
     <div class="k12-flow-infos">
-      <div class="k12-flow-name" :class="{'k12-flow-current-stauts': isLastValidStatus}">{{data.name}}</div>
+      <div class="k12-flow-name" :class="{'k12-flow-current-stauts': data.status === 'process'}">{{data.name}}</div>
       <div class="k12-flow-desc">
         <slot name="desc"></slot>
       </div>
@@ -32,22 +32,10 @@ export default {
     }
   },
   data () {
-    return {
-      isLastValidStatus: false
-    }
+    return {}
   },
   computed: {},
-  methods: {
-    setIsLastValidStatus () {
-      let _parent = this.$parent
-      if (_parent && _parent.$options && _parent.$options.name === 'k12-flow') {
-        let uidArray = _parent.$children.map(el => el._uid)
-        let statusArray = _parent.$children.map(el => el.data && el.data.status ? el.data.status : '')
-        let lastValidStatusIndex = statusArray.indexOf('') - 1
-        this.isLastValidStatus = this._uid === uidArray[lastValidStatusIndex]
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 

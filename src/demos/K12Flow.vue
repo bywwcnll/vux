@@ -5,11 +5,6 @@
         <div slot="desc">ss</div>
       </k12-flow-item>
     </k12-flow>
-    <k12-flow title="维修进度">
-      <k12-flow-item v-for="(el, index) in list" :key="index" :data="el">
-        <div slot="desc">ss</div>
-      </k12-flow-item>
-    </k12-flow>
   </div>
 </template>
 
@@ -26,7 +21,7 @@ export default {
       list: [{
         time: '9:00',
         date: '8月2日',
-        status: 'finish',
+        status: '',
         name: '报修申请0'
       }, {
         time: '10:00',
