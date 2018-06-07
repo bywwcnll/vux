@@ -67,6 +67,8 @@ const routes = []
 
 Vue.use(Router)
 
+Vue.config.productionTip = false
+
 const createRouter = () => {
   const router = new Router({
     mode: 'history',

@@ -1,9 +1,10 @@
 {
   "scripts": {
     "gen": "ream generate",
-    "start": "ream start",
+    "start": "ream start --port 8801",
     "build": "ream build",
-    "dev": "ream dev"
+    "dev": "ream dev",
+    "server": "node server.js"
   },
   "dependencies": {
     "axios": "^0.16.1",

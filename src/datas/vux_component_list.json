@@ -293,8 +293,8 @@
       "k12-flow",
       "k12-flow-item"
     ],
-    "category_en": "Data Display",
-    "category_zh-CN": "数据展示",
+    "category_en": "K12 customization",
+    "category_zh-CN": "K12 定制",
     "category_order": 998,
     "hasHome": false
   },

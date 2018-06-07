@@ -333,7 +333,7 @@ components.forEach((file) => {
     })
   }
   const parseReg = '`(.*?)`'
-  const _localImportCode = `import { ${importList.map(one => one.importName).join(', ')} } from 'vux'
+  const _localImportCode = `import { ${importList.map(one => one.importName).join(', ')} } from 'k12vux'
 
 export default {
   components: {
@@ -547,8 +547,8 @@ export default {
     })
 
 
-    let _globalImportCode = `// ${t('globally register', lang)}\n\nimport Vue from 'vue'\nimport { ${importList.map(one => one.importName).join(', ')} } from 'vux'\n\n`
-    const urlWithNoTransition = `/demos/v2/index.html?locale=${lang}&transition=none/#/component/${componentName}`
+    let _globalImportCode = `// ${t('globally register', lang)}\n\nimport Vue from 'vue'\nimport { ${importList.map(one => one.importName).join(', ')} } from 'k12vux'\n\n`
+    const urlWithNoTransition = `http://localhost:8800/locale=${lang}&transition=none/#/component/${componentName}`
 
     importList.forEach(one => {
       _globalImportCode += `Vue.component('${one.componentName}', ${one.importName})\n`
@@ -571,10 +571,10 @@ export default {
           <h1 v-else class="vux-component-name">${importName}</h1>
 
           <p class="component-extra-links">
-            <a href="${url}" target="_blank">${t('demo url', lang)}</a>
-            <a v-if="!demos.length" href="https://github.com/airyland/vux/blob/v2/src/demos/${importName}.vue" target="_blank" @click.prevent="showSourceCode">${t('demo source code', lang)}</a>
-            <a href="https://github.com/airyland/vux/blob/v2/src/components/${componentName}/metas.yml" target="_blank">${t('edit document', lang)}</a>
-            <a href="https://github.com/airyland/vux/blob/v2/src/components/${componentName}/" target="_blank">${t('component source code', lang)}</a>
+            <a v-if="false" href="${url}" target="_blank">${t('demo url', lang)}</a>
+            <a v-if="!demos.length" href="https://github.com/bywwcnll/k12vux/blob/v2/src/demos/${importName}.vue" target="_blank" @click.prevent="showSourceCode">${t('demo source code', lang)}</a>
+            <a href="https://github.com/bywwcnll/k12vux/blob/v2/src/components/${componentName}/metas.yml" target="_blank">${t('edit document', lang)}</a>
+            <a href="https://github.com/bywwcnll/k12vux/blob/v2/src/components/${componentName}/" target="_blank">${t('component source code', lang)}</a>
             <el-popover trigger="hover" v-if="hasReady">
               <div style="width:100%;text-align:center;">
                 <img class="qr" width="100" src="https://qr.vux.li/api.php?text=${encodeURIComponent(url)}"/>
@@ -1014,7 +1014,7 @@ export default {
       }
     },
     async mounted () {
-      const rs = await Axios.get('https://api.github.com/search/issues?q=repo:airyland/vux%20label:component/' + this.componentName)
+      const rs = await Axios.get('https://api.github.com/search/issues?q=repo:bywwcnll/k12vux%20label:component/' + this.componentName)
       this.issues = rs.data.items
       this.hasReady = true
     },
@@ -1161,6 +1161,7 @@ routes.push({
 
 const ori = fs.readFileSync(getPath('./src/index.js'), 'utf-8')
 fs.writeFileSync(getPath('./src/_index.js'), ori.replace('const routes = []', `const routes = []\n${str}`))
+console.log(JSON.stringify(paths, null, 2))
 fs.writeFileSync(getPath('./src/routes.json'), JSON.stringify(paths, null, 2))
 fs.writeFileSync(getPath('./sitemap.txt'), paths.map(path => `https://doc.vux.li${path}`).join('\n'))
 

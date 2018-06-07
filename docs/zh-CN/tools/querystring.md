@@ -5,7 +5,7 @@ title: Vue querystring url 参数解析
 # url 参数解析
 
 ```js
-import { querystring } from 'vux'
+import { querystring } from 'k12vux'
 
 querystring.parse('a=b&c=d') // {a:'b',c:'d'}, 默认参数为 location.search
 

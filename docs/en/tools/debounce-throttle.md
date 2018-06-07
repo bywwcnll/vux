@@ -9,7 +9,7 @@ title: debounce
 :::
 
 ``` js
-import { debounce } from 'vux'
+import { debounce } from 'k12vux'
 
 debounce(func, [wait=0], [options={}])
 ```
@@ -18,7 +18,7 @@ debounce(func, [wait=0], [options={}])
 ## throttle
 
 ``` js
-import { throttle } from 'vux'
+import { throttle } from 'k12vux'
 
 throttle(func, [wait=0], [options={}])
 ```

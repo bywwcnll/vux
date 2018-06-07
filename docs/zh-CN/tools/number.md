@@ -11,7 +11,7 @@ title: vue 数字格式化
 `numberRandom`用于生成两个整数范围内的随机整数
 
 ``` js
-import { numberComma, numberPad, numberRandom } from 'vux'
+import { numberComma, numberPad, numberRandom } from 'k12vux'
 numberComma(21342132) // 21,342,132
 numberComma(21342132, 4) // 2134,2132
 numberComma(21342132.234) // 21,342,132.234

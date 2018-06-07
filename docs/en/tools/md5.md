@@ -11,7 +11,7 @@ title: md5
 :::
 
 ``` js
-import { md5 } from 'vux'
+import { md5 } from 'k12vux'
 
 md5('VUX')
 ```

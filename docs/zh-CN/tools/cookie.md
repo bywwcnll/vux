@@ -5,7 +5,7 @@ title: cookie
 # cookie
 
 ``` js
-import { cookie } from 'vux'
+import { cookie } from 'k12vux'
 ```
 
 `get *cookie.get(name, [options])*`

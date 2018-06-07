@@ -18,7 +18,7 @@ title: v-transfer-dom 指令
 ### 注册局部指令
 
 ``` js
-import { TransferDom } from 'vux'
+import { TransferDom } from 'k12vux'
 
 export default {
   directives: {
@@ -30,7 +30,7 @@ export default {
 ### 注册全局指令
 
 ``` js
-import { TransferDom } from 'vux'
+import { TransferDom } from 'k12vux'
 
 Vue.directive('transfer-dom', TransferDom)
 ```

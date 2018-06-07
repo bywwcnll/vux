@@ -10,7 +10,7 @@ title: vue date 日期格式化
 ## 使用
 
 ``` js
-import { dateFormat } from 'vux'
+import { dateFormat } from 'k12vux'
 
 dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss')
 ```
@@ -18,7 +18,7 @@ dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss')
 ## 作为 filter 使用
 
 ``` js
-import { dateFormat } from 'vux'
+import { dateFormat } from 'k12vux'
 
 export default {
   filters: {

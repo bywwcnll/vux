@@ -381,10 +381,10 @@ nav: ${lang}
       docs += '\n\n---\n'
       docs += `\n### ${one.importName}_COM`
 
-      docs += `\n<span style="color: #999;font-size:12px;"><a href="https://github.com/airyland/vux/blob/v2/src/components/${one.name}/metas.yml" target="_blank">${t('编辑文档', lang)}</a></span>`
+      docs += `\n<span style="color: #999;font-size:12px;"><a href="https://github.com/bywwcnll/k12vux/blob/v2/src/components/${one.name}/metas.yml" target="_blank">${t('编辑文档', lang)}</a></span>`
       docs += `\n&nbsp;&nbsp;<span style="color: #999;font-size:12px;"><a href="#" router-link="/zh-CN/demos/${(one.name || name).replace('-item', '')}">${t("进入demo页面", lang)}</a></span>`
       docs += `\n&nbsp;&nbsp;<span style="color: #999;font-size:12px;"><a href="https://vux.li/demos/v2/#/component/${one.name}" target="_blank">${t("demo 原始链接", lang)}</a></span>`
-      docs += `\n&nbsp;&nbsp;<span style="color: #999;font-size:12px;"><a href="https://github.com/airyland/vux/blob/v2/src/demos/${one.importName}.vue" target="_blank">${t("demo源码", lang)}</a></span>\n`
+      docs += `\n&nbsp;&nbsp;<span style="color: #999;font-size:12px;"><a href="https://github.com/bywwcnll/k12vux/blob/v2/src/demos/${one.importName}.vue" target="_blank">${t("demo源码", lang)}</a></span>\n`
 
       if (one.status === 'deprecated') {
         docs += `\n<p class="warning">${t('该组件已经停止维护。')}${one.deprecatedInfo ? one.deprecatedInfo[lang] : ''}</p>\n`
@@ -398,7 +398,7 @@ nav: ${lang}
         }
       } else {
         docs += '\n``` js'
-        docs += `\nimport { ${one.importName} } from 'vux'`
+        docs += `\nimport { ${one.importName} } from 'k12vux'`
         docs += '\n```\n'
       }
 
@@ -659,7 +659,7 @@ function _camelCase(input) {
 
 function parseChange(str) {
   str = str.replace(/#(\d+)\s?/g, function (a, b) {
-    return `<a href="https://github.com/airyland/vux/issues/${b}" target="_blank">#${b}</a> `
+    return `<a href="https://github.com/bywwcnll/k12vux/issues/${b}" target="_blank">#${b}</a> `
   })
   str = str.replace(/@(\w+)\s?/g, function (a, b) {
     return `<a href="https://github.com/${b}" target="_blank">${a}</a>`
