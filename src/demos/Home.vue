@@ -12,7 +12,7 @@
       <cell title="Live Demo" link="/demo">
         <span class="demo-icon" slot="icon" style="color:#F70968">&#xe633;</span>
       </cell>
-      <cell title="Github" link="http://github.com/airyland/vux" value="Star me">
+      <cell title="Github" link="http://github.com/bywwcnll/k12vux" value="Star me">
         <span class="demo-icon" slot="icon" style="color:#35495e;">&#xe62f;</span>
       </cell>
     </group>
