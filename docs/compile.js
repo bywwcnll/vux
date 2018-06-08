@@ -430,9 +430,9 @@ export default {
       })
     }
 
-    let url = `https://vux.li/demos/v2/#/component/${componentName}`
+    let url = `http://172.16.26.56:8800/#/component/${componentName}`
     if (demos.length) {
-      url = `https://vux.li/demos/v2/#/components/${componentName}/home`
+      url = `http://172.16.26.56:8800/#/components/${componentName}/home`
     }
 
     // toc
