@@ -6,6 +6,7 @@ npm-debug.log
 build/milestone.json
 examples/webpack/
 .idea
+.vscode
 dist/components-commonjs/
 /site
 /docs/changes
