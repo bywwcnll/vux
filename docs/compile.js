@@ -577,7 +577,7 @@ export default {
             <a href="https://github.com/bywwcnll/k12vux/blob/v2/src/components/${componentName}/" target="_blank">${t('component source code', lang)}</a>
             <el-popover trigger="hover" v-if="hasReady">
               <div style="width:100%;text-align:center;">
-                <img class="qr" width="100" src="https://qr.vux.li/api.php?text=${encodeURIComponent(url)}"/>
+                <img class="qr" width="100" src="https://www.kuaizhan.com/common/encode-png?data=${encodeURIComponent(url)}"/>
               </div>
               <a href="javascript:" slot="reference">
               ${t('qr', lang)}
