@@ -1,11 +1,11 @@
-import Comp from './k12-flow.vue'
+import Comp from './index.vue'
 
 import { mount } from 'vue-test-utils'
 import { expect } from 'chai'
 
-describe('K12Flow', () => {
+describe('K12Template', () => {
   it('basic', () => {
     const wrapper = mount(Comp)
-    expect(wrapper.name()).to.equal('k12-flow')
+    expect(wrapper.name()).to.equal('k12-template')
   })
 })

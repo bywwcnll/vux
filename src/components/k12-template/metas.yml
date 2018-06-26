@@ -1,0 +1,16 @@
+category:
+  en: K12 customization
+  zh-CN: K12 定制
+icon: '&#xe656;'
+props:
+  title:
+    type: String
+    default: ''
+    en: "Header's title"
+    zh-CN: "标题"
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'

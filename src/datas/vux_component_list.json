@@ -299,6 +299,22 @@
     "hasHome": false
   },
   {
+    "name": "k12-template",
+    "icon": "&#xe656;",
+    "category_en": "K12 customization",
+    "category_zh-CN": "K12 定制",
+    "category_order": 998,
+    "hasHome": false
+  },
+  {
+    "name": "k12-upload",
+    "icon": "&#xe656;",
+    "category_en": "K12 customization",
+    "category_zh-CN": "K12 定制",
+    "category_order": 998,
+    "hasHome": false
+  },
+  {
     "name": "load-more",
     "icon": "&#xe610;",
     "category_en": "Feedback",

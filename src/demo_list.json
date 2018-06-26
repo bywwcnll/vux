@@ -113,5 +113,7 @@
   "NumberRoller",
   "IconLoading",
   "InlineXSwitch",
-  "K12Flow"
+  "K12Flow",
+  "K12Template",
+  "K12Upload"
 ]
