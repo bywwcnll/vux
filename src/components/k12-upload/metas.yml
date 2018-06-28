@@ -8,6 +8,21 @@ props:
     default: ''
     en: "Header's title"
     zh-CN: "标题"
+  data:
+    type: Array
+    default: []
+    en: "Preview picture"
+    zh-CN: "预览的图片"
+  showType:
+    type: String
+    default: 'cell'
+    en: "Display type, one of `cell` `form`"
+    zh-CN: "展示类型, 可选值为`cell` `form`"
+  sdkType:
+    type: String
+    default: 'wx'
+    en: "SDK Type, "
+    zh-CN: "sdk类型, 目前只支持wx"
 changes:
   v1.0.1:
     en:

@@ -1,13 +1,9 @@
 <template>
   <div style="margin: 20px 0;">
     <group label-width="4.5em">
-      <k12-upload title="故障描述" showType="cell"
-        :data="data" :formData="formData">
-        <p slot="desc">故障描述</p>
-      </k12-upload>
-      <k12-upload title="故障描述" showType="form" sdkType="wx"
-        :data="data" :formData="formData">
-        <p slot="desc">故障描述</p>
+      <k12-upload v-model="localIds" title="故障描述" showType="form" sdkType="wx"></k12-upload>
+      <k12-upload title="故障描述" showType="cell" :data="uploadPreviewData">
+        <p slot="desc">测试信息</p>
       </k12-upload>
     </group>
   </div>
@@ -26,8 +22,8 @@ export default {
   created () {},
   data () {
     return {
-      data: [imgurl1, imgurl1, imgurl1, imgurl2, imgurl1, imgurl2, imgurl1],
-      formData: [imgurl1, imgurl2]
+      localIds: [],
+      uploadPreviewData: [imgurl1, imgurl1, imgurl1, imgurl2, imgurl1, imgurl2, imgurl1]
     }
   }
 }

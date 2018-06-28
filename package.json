@@ -1,6 +1,6 @@
 {
   "name": "k12vux",
-  "version": "12.0.6",
+  "version": "12.0.8",
   "main": "index.js",
   "description": "Mobile web UI based on Vue and WeUI",
   "keywords": [
@@ -24,7 +24,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
-    "build": "node build/build.js && rimraf docs/demos/v2/ && mkdirp docs/demos/v2 && cp -r docs/demos/temp/* docs/demos/v2/",
+    "build": "node build/build.js && rimraf docs/public/ && mkdirp docs/public && cp -r docs/demos/temp/* docs/public/",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",

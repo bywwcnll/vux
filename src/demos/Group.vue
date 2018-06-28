@@ -41,15 +41,23 @@
       <x-switch title="选择"></x-switch>
       <x-textarea title="详细信息" placeholder="请填写详细信息" :show-counter="false" :rows="3"></x-textarea>
     </group>
+    <group label-width="4.5em" label-margin-right="2em">
+      <k12-upload title="故障描述" showType="form"></k12-upload>
+      <k12-upload title="故障描述" showType="cell" :data="uploadPreviewData"></k12-upload>
+    </group>
     <br>
   </div>
 </template>
 
 <script>
-  import { GroupTitle, Group, Cell, XInput, Selector, PopupPicker, Datetime, XNumber, ChinaAddressData, XAddress, XTextarea, XSwitch } from 'k12vux'
+  import { K12Upload, GroupTitle, Group, Cell, XInput, Selector, PopupPicker, Datetime, XNumber, ChinaAddressData, XAddress, XTextarea, XSwitch } from 'k12vux'
+
+  const imgurl1 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530011862663&di=b61bde672c28a5bce0a8a7d033b60651&imgtype=0&src=http%3A%2F%2Fam.zdmimg.com%2F201511%2F12%2F5644a9d9cc6a8.jpg_a200.jpg'
+  const imgurl2 = 'https://sjbz-fd.zol-img.com.cn/t_s320x510c/g5/M00/0F/05/ChMkJlsZ4CCIChwoAAXw0q4yG1gAAo30wNa8a0ABfDq759.jpg'
 
   export default {
     components: {
+      K12Upload,
       Group,
       GroupTitle,
       Cell,
@@ -64,6 +72,7 @@
     },
     data () {
       return {
+        uploadPreviewData: [imgurl1, imgurl2, imgurl1],
         addressData: ChinaAddressData,
         addressValue: ['广东省', '深圳市', '南山区'],
         value1: '张三',

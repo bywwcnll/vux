@@ -1,4 +1,4 @@
-import Comp from './k12-upload.vue'
+import Comp from './index.vue'
 
 import { mount } from 'vue-test-utils'
 import { expect } from 'chai'

@@ -39,6 +39,9 @@ var markdown = require('markdown-it')({
 
 module.exports = {
   entry: 'src/_index.js',
+  rootPublicFiles: [
+    'index.html'
+  ],
   generate: {
     routes: require('./src/routes.json')
   },

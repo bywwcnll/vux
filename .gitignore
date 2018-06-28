@@ -16,6 +16,7 @@ dist/components-commonjs/
 /docs/**/demos
 /docs/**/changelog
 /docs/.ream/
+/docs/public
 *.vue.vux.*
 src/locales/components.yml
 /dist/**/*

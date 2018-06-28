@@ -1,18 +1,18 @@
 <template>
   <div class="k12-upload-container weui-cell" :class="{'k12-upload-container-form': showType === 'form'}">
-    <div class="k12-upload-leftC">
-        <label class="vux-label k12-upload-label" :style="labelStyles">
-          <slot name="title">{{ title }}</slot>
-        </label>
-      </div>
+    <div class="vux-cell-bd">
+      <label class="vux-label k12-upload-label" :style="labelStyles" :class="labelClass">
+        <slot name="title">{{ title }}</slot>
+      </label>
+    </div>
     <template v-if="showType === 'cell'">
       <div class="k12-upload-rightC">
         <div class="k12-upload-desc">
-          <slot name="desc">投影仪打开后，数秒钟自动熄灭</slot>
+          <slot name="desc"></slot>
         </div>
         <div ref="k12UploadImgC" class="k12-upload-imgC">
           <div v-for="(el, index) in renderData" :key="index" :style="{height: imgCellCHeight + 'px'}" class="k12-upload-imgCellC">
-            <img v-for="(item, itemIndex) in el" :key="itemIndex" :src="item" alt="" class="k12-upload-imgCell">
+            <img v-for="(item, itemIndex) in el" :key="itemIndex" :src="item" @click="onPerview(item)" alt="" class="k12-upload-imgCell">
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
           <div v-for="(el, index) in renderFormData" :key="index" :style="{height: imgCellCFormHeight + 'px'}" class="k12-upload-imgCellC-form">
             <template v-for="(item, itemIndex) in el">
               <div v-if="item !== 'addBtn'" :key="itemIndex" class="k12-upload-imgCell-form">
-                <img :src="item" alt="">
+                <img :src="item.srcData" alt="">
                 <div @click="onDeleteAddedImg(item)" class="k12-upload-img-close">
                   <x-icon class="k12-upload-img-close-icon" type="android-close" size="20"></x-icon>
                 </div>
@@ -53,11 +53,7 @@ export default {
     },
     data: {
       type: Array,
-      default: []
-    },
-    formData: {
-      type: Array,
-      default: []
+      default: () => []
     },
     showType: {
       type: String,
@@ -77,7 +73,8 @@ export default {
   data () {
     return {
       imgCellCHeight: 0,
-      imgCellCFormHeight: 0
+      imgCellCFormHeight: 0,
+      formData: []
     }
   },
   mounted () {
@@ -90,6 +87,11 @@ export default {
         textAlign: getParentProp(this, 'labelAlign'),
         marginRight: getParentProp(this, 'labelMarginRight')
       })
+    },
+    labelClass () {
+      return {
+        'vux-cell-justify': this.$parent.labelAlign === 'justify' || this.$parent.$parent.labelAlign === 'justify'
+      }
     },
     renderData () {
       if (!this.data || !(this.data instanceof Array) || this.data.length < 1) {
@@ -125,9 +127,10 @@ export default {
   },
   watch: {
     showType () {
-      this.$nextTick(() => {
-        this.rebuildHeight()
-      })
+      this.rebuildHeight()
+    },
+    formData (v) {
+      this.$emit('input', v.map(el => el.localId))
     }
   },
   methods: {
@@ -139,41 +142,78 @@ export default {
         this.imgCellCFormHeight = (this.$refs.k12UploadImgCForm.clientWidth - 20) / 3
       }
     },
+    onPerview (v) {
+      if (!this.sdkType) {
+        throw new Error('未指定SDK类型')
+      }
+      if (this.sdkType === 'wx') {
+        if (!this.$wechat && !this.$wechat.previewImage) {
+          throw new Error('this.$wechat未定义，请先引入微信jssdk')
+        }
+        this.$wechat.previewImage({
+          current: v,
+          urls: this.data
+        })
+      }
+    },
+    getLocalImgDataPromise (localId) {
+      return new Promise((resolve, reject) => {
+        this.$wechat.getLocalImgData({
+          localId,
+          success: res => {
+            /* localData是图片的base64数据，可以用img标签显示 */
+            resolve({
+              localId,
+              srcData: res.localData
+            })
+          }
+        })
+      })
+    },
     onAddBtn () {
       if (!this.sdkType) {
         throw new Error('未指定SDK类型')
       }
       if (this.sdkType === 'wx') {
-        console.log(this.$wechat)
         if (!this.$wechat && !this.$wechat.chooseImage) {
           throw new Error('this.$wechat未定义，请先引入微信jssdk')
         }
         this.$wechat.chooseImage({
-          count: 1, /* 默认9 */
+          count: 9, /* 默认9 */
           sizeType: ['original', 'compressed'], /* 可以指定是原图还是压缩图，默认二者都有 */
           sourceType: ['album', 'camera'], /* 可以指定来源是相册还是相机，默认二者都有 */
           defaultCameraMode: 'batch', /* 表示进入拍照界面的默认模式，目前有normal与batch两种选择，normal表示普通单拍模式，batch表示连拍模式，不传该参数则为normal模式。（注：用户进入拍照界面仍然可自由切换两种模式） */
-          success: (res) => {
+          success: async res => {
             /* 返回选定照片的本地ID列表，
             andriod中localId可以作为img标签的src属性显示图片；
             而在IOS中需通过getLocalImgData获取图片base64数据，从而用于img标签的显示 */
             let localIds = res.localIds
-            alert(JSON.stringify(localIds))
-            /*
-            this.$wechat.getLocalImgData({
-              localId: '', // 图片的localID
-              success: function (res) {
-                let localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+            let allLocalImgData = []
+            if (window.navigator.userAgent.indexOf('iPhone') > -1) {
+              /* Iphone手机 */
+              let allLocalImgDataPromise = []
+              for (let i = 0; i < localIds.length; i++) {
+                allLocalImgDataPromise.push(this.getLocalImgDataPromise(localIds[i]))
               }
-            })
-            */
+              allLocalImgData = await Promise.all(allLocalImgDataPromise)
+            } else {
+              allLocalImgData = localIds.map(localId => {
+                return {
+                  localId,
+                  srcData: localId
+                }
+              })
+            }
+            this.formData = [...this.formData, ...allLocalImgData]
           }
         })
       }
     },
     onDeleteAddedImg (data) {
-      console.log(data)
-      // this.$emit()
+      let delIndex = this.formData.findIndex(el => el.localId === data.localId)
+      if (delIndex > -1) {
+        this.formData.splice(delIndex, 1)
+      }
     }
   }
 }
@@ -181,23 +221,24 @@ export default {
 
 <style lang="less">
 @import '../../styles/k12.less';
+.vux-label {
+  display: block;
+  word-wrap: break-word;
+  word-break: break-all;
+}
 .k12-upload-container {
   display: flex;
-  align-items: baseline !important;
+  align-items: flex-start !important;
   &.k12-upload-container-form {
     flex-direction: column;
   }
-  .k12-upload-label {
-    width: 80px;
+  .k12-upload-leftC {
+    min-width: 80px;
   }
   .k12-upload-rightC {
     width: 100%;
     &.k12-upload-rightC-form {
       margin-top: 6px;
-    }
-    .k12-upload-desc {
-      color: #000;
-      margin-bottom: 6px;
     }
     .k12-upload-imgC {
       width: 100%;
@@ -221,7 +262,7 @@ export default {
         display: flex;
         align-items: stretch;
         &:not(:last-child) {
-          margin-bottom: 10px;
+          margin-bottom: 20px;
         }
         .k12-upload-imgCell-form {
           width: calc(~"(100% - 40px) / 3");
