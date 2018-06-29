@@ -12,7 +12,7 @@
         </div>
         <div ref="k12UploadImgC" class="k12-upload-imgC">
           <div v-for="(el, index) in renderData" :key="index" :style="{height: imgCellCHeight + 'px'}" class="k12-upload-imgCellC">
-            <img v-for="(item, itemIndex) in el" :key="itemIndex" :src="item" @click="onPerview(item)" alt="" class="k12-upload-imgCell">
+            <img v-for="(item, itemIndex) in el" :key="itemIndex" :src="item.thumbnailUrl" @click="onPerview(index, itemIndex)" alt="" class="k12-upload-imgCell">
           </div>
         </div>
       </div>
@@ -68,6 +68,10 @@ export default {
       validator: function (value) {
         return ['', 'wx'].indexOf(value) !== -1
       }
+    },
+    count: {
+      type: Number,
+      default: 9
     }
   },
   data () {
@@ -117,10 +121,12 @@ export default {
       if (this.formData.length % 3 > 0) {
         result.push(this.formData.slice(-(this.formData.length % 3)))
       }
-      if (result[result.length - 1].length < 3) {
-        result[result.length - 1].push('addBtn')
-      } else {
-        result.push(['addBtn'])
+      if (this.formData.length < this.count) {
+        if (result[result.length - 1].length < 3) {
+          result[result.length - 1].push('addBtn')
+        } else {
+          result.push(['addBtn'])
+        }
       }
       return result
     }
@@ -142,7 +148,7 @@ export default {
         this.imgCellCFormHeight = (this.$refs.k12UploadImgCForm.clientWidth - 20) / 3
       }
     },
-    onPerview (v) {
+    onPerview (index, itemIndex) {
       if (!this.sdkType) {
         throw new Error('未指定SDK类型')
       }
@@ -151,8 +157,8 @@ export default {
           throw new Error('this.$wechat未定义，请先引入微信jssdk')
         }
         this.$wechat.previewImage({
-          current: v,
-          urls: this.data
+          current: this.renderData[index][itemIndex].previewUrl,
+          urls: this.data.map(el => el.previewUrl)
         })
       }
     },
@@ -179,7 +185,7 @@ export default {
           throw new Error('this.$wechat未定义，请先引入微信jssdk')
         }
         this.$wechat.chooseImage({
-          count: 9, /* 默认9 */
+          count: this.count - this.formData.length, /* 默认9 */
           sizeType: ['original', 'compressed'], /* 可以指定是原图还是压缩图，默认二者都有 */
           sourceType: ['album', 'camera'], /* 可以指定来源是相册还是相机，默认二者都有 */
           defaultCameraMode: 'batch', /* 表示进入拍照界面的默认模式，目前有normal与batch两种选择，normal表示普通单拍模式，batch表示连拍模式，不传该参数则为normal模式。（注：用户进入拍照界面仍然可自由切换两种模式） */
