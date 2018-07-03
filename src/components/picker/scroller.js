@@ -72,6 +72,26 @@ const Scroller = function (container, options) {
   }
   content.innerHTML = html
 
+  var k12mask = component.querySelector('[data-role=mask]')
+  var k12maskInnerHTML = ''
+  for (var k12i = 0; k12i < 7; k12i++) {
+    k12maskInnerHTML += '<div class="scroller-mask-item" data-role="scroller-mask-item"></div>'
+  }
+  k12mask.innerHTML = k12maskInnerHTML
+  k12mask.querySelectorAll('[data-role=scroller-mask-item]').forEach(function (node, index) {
+    node.addEventListener('click', function () {
+      // console.log(index)
+      var selectedIndex = self.options.data.findIndex(el => el.value === self.value)
+      var willSelectedIndex = selectedIndex + index - 3
+      if (willSelectedIndex > -1 && willSelectedIndex < self.options.data.length) {
+        self.selectByIndex(willSelectedIndex)
+        if (self.__prevValue !== null && self.__prevValue !== self.value) {
+          self.options.onSelect(self.value)
+        }
+      }
+    }, false)
+  })
+
   self.__container.appendChild(component)
 
   self.__itemHeight = parseFloat(getComputedStyle(indicator, 'height'), 10)
