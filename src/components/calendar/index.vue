@@ -4,7 +4,8 @@
       :title="title"
       primary="content"
       @click.native="onClick"
-      :is-link="!readonly">
+      :is-link="!readonly"
+      v-show="showCell">
       <span class="vux-cell-placeholder" v-if="shouldShowPlaceholder">{{ placeholder }}</span>
       <span class="vux-cell-value" v-if="!shouldShowPlaceholder">{{ displayFormat(value, getType(value)) }}</span>
     </cell>
@@ -109,7 +110,16 @@ const Props = {
     type: Boolean,
     default: true
   },
-  readonly: Boolean
+  readonly: Boolean,
+  // k12定制
+  showCell: {
+    type: Boolean,
+    default: true
+  },
+  visible: {
+    type: Boolean,
+    default: true
+  }
 }
 
 export default {
@@ -153,11 +163,13 @@ export default {
   methods: {
     onPopupShow () {
       this.$emit('on-show')
+      this.$emit('update:visible', true)
     },
     onPopupHide () {
       this.$emit('on-hide')
       // reset value to show value
       this.currentValue = pure(this.value)
+      this.$emit('update:visible', false)
     },
     getType,
     onClickLeft () {
@@ -196,6 +208,11 @@ export default {
           this.$emit('on-change', pure(newVal))
         }
         this.currentValue = pure(newVal)
+      }
+    },
+    visible (newVal, oldVal) {
+      if (!this.readonly) {
+        this.show = newVal
       }
     }
   },

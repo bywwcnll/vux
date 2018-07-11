@@ -8,6 +8,14 @@
       <x-button type="primary" @click.native="readonly = !readonly">{{ $t('Toggle readonly') }}</x-button>
     </div>
 
+    <div style="padding:15px;">
+      <x-button type="primary" @click.native="showcellVisible = true">{{ $t('Using show-cell') }}</x-button>
+    </div>
+
+    <group>
+      <calendar v-model="showcell1" :visible.sync="showcellVisible" :title="$t('Using show-cell')" :show-cell="false"></calendar>
+    </group>
+
     <group>
       <calendar v-model="demo2" :title="$t('Set value as TODAY')" disable-past></calendar>
     </group>
@@ -58,6 +66,8 @@ Empty value:
   zh-CN: 清空值
 Toggle readonly:
   zh-CN: 切换 readonly
+Using show-cell:
+  zh-CN: show-cell属性使用
 </i18n>
 
 <script>
@@ -75,6 +85,8 @@ export default {
   data () {
     return {
       readonly: false,
+      showcellVisible: false,
+      showcell1: '',
       demo1: '',
       demo2: 'TODAY',
       demo3: 'TODAY',

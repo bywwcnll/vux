@@ -80,8 +80,14 @@ const Scroller = function (container, options) {
   k12mask.innerHTML = k12maskInnerHTML
   k12mask.querySelectorAll('[data-role=scroller-mask-item]').forEach(function (node, index) {
     node.addEventListener('click', function () {
-      // console.log(index)
-      var selectedIndex = self.options.data.findIndex(el => el.value === self.value)
+      var selectedIndex = self.options.data.findIndex(el => {
+        if (typeof el === 'number' || typeof el === 'string') {
+          return el === self.value
+        } else if (typeof el === 'object' && el.value) {
+          return el.value === self.value
+        }
+        return -1
+      })
       var willSelectedIndex = selectedIndex + index - 3
       if (willSelectedIndex > -1 && willSelectedIndex < self.options.data.length) {
         self.selectByIndex(willSelectedIndex)
