@@ -52,6 +52,7 @@
 
 ### 更新文档 ( **`重要`** )
 ```bash
+$ yarn doc:build
 $ cd docs
 $ yarn build
 ```
