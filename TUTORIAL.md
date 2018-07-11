@@ -8,7 +8,7 @@
 > `yarn dev --env.include k12-flow,k12-upload`
 
 ### build
-> 构建组件
+> 构建组件 完整构建，demos下的示例组件更新也使用此命令
 
 ### doc:build
 > 生成文档，生成以下文件：
