@@ -6,6 +6,7 @@
 
     <group :title="$t('Default format: YYYY-MM-DD')">
       <datetime
+        required
         v-model="value1"
         @on-change="change"
         :title="$t('Birthday')"

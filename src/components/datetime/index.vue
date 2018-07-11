@@ -5,34 +5,36 @@
     :data-cancel-text="$t('cancel_text')"
     :data-confirm-text="$t('confirm_text')"
     href="javascript:">
-    <slot>
-      <div>
-        <slot name="title">
-          <p
-            :style="styles"
-            :class="labelClass"
-            v-html="title"></p>
-        </slot>
-        <inline-desc v-if="inlineDesc">{{ inlineDesc }}</inline-desc>
-      </div>
-      <div
-        class="weui-cell__ft vux-cell-primary vux-datetime-value"
-        :style="{
-          textAlign: valueTextAlign
-        }">
-        <span
-          class="vux-cell-placeholder"
-          v-if="!currentValue && placeholder">{{ placeholder }}</span>
-        <span
-          class="vux-cell-value"
-          v-if="currentValue">{{ displayFormat ? displayFormat(currentValue) : currentValue }}</span>
-        <icon
-          class="vux-input-icon"
-          type="warn"
-          v-show="!valid"
-          :title="firstError"></icon>
-      </div>
-    </slot>
+    <div class="k12vux-datetime-container" :class="{'vux-cell-required': required}">
+      <slot>
+        <div>
+          <slot name="title">
+            <p
+              :style="styles"
+              :class="labelClass"
+              v-html="title"></p>
+          </slot>
+          <inline-desc v-if="inlineDesc">{{ inlineDesc }}</inline-desc>
+        </div>
+        <div
+          class="weui-cell__ft vux-cell-primary vux-datetime-value"
+          :style="{
+            textAlign: valueTextAlign
+          }">
+          <span
+            class="vux-cell-placeholder"
+            v-if="!currentValue && placeholder">{{ placeholder }}</span>
+          <span
+            class="vux-cell-value"
+            v-if="currentValue">{{ displayFormat ? displayFormat(currentValue) : currentValue }}</span>
+          <icon
+            class="vux-input-icon"
+            type="warn"
+            v-show="!valid"
+            :title="firstError"></icon>
+        </div>
+      </slot>
+    </div>
   </a>
 </template>
 
@@ -349,4 +351,21 @@ export default {
 
 <style lang="less">
 @import './style.less';
+.k12vux-datetime-container {
+  flex: 1;
+  align-items: center;
+  position: relative;
+  display: flex;
+}
+.vux-cell-required {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    content: '*';
+    color: red;
+  }
+}
 </style>

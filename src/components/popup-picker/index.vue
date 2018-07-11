@@ -1,7 +1,9 @@
 <template>
   <div class="vux-cell-box">
     <div class="weui-cell vux-tap-active" :class="{'weui-cell_access': !disabled}" @click="onClick" v-show="showCell">
-      <div class="weui-cell__hd">
+      <div class="weui-cell__hd" :class="{
+        'vux-cell-required': required
+      }">
         <slot name="title" label-class="weui-label" :label-style="labelStyles" :label-title="title">
           <label class="weui-label" :class="labelClass" :style="labelStyles" v-if="title" v-html="title"></label>
         </slot>
@@ -142,7 +144,8 @@ export default {
     columnWidth: Array,
     popupStyle: Object,
     popupTitle: String,
-    disabled: Boolean
+    disabled: Boolean,
+    required: Boolean
   },
   computed: {
     labelStyles () {
