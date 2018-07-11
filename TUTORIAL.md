@@ -8,7 +8,7 @@
 > `yarn dev --env.include k12-flow,k12-upload`
 
 ### build
-> 构建组件 完整构建，demos下的示例组件更新也使用此命令
+> 构建组件 完整构建手机端页面示例，demos下的示例组件更新也使用此命令
 
 ### doc:build
 > 生成文档，生成以下文件：
@@ -49,3 +49,9 @@
 7. 运行 ```yarn dev``` 开始查看
 
 > 其中第4、5、6可以通过```yarn doc:build```命令实现
+
+### 更新文档 ( **`重要`** )
+```bash
+$ cd docs
+$ yarn build
+```
