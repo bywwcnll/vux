@@ -23,7 +23,28 @@ export default {
   data () {
     return {
       localIds: [],
-      uploadPreviewData: [imgurl1, imgurl1, imgurl1, imgurl2, imgurl1, imgurl2, imgurl1]
+      uploadPreviewData: [
+        {
+          thumbnailUrl: imgurl1,
+          previewUrl: imgurl1
+        },
+        {
+          thumbnailUrl: imgurl2,
+          previewUrl: imgurl2
+        },
+        {
+          thumbnailUrl: imgurl2,
+          previewUrl: imgurl2
+        },
+        {
+          thumbnailUrl: imgurl1,
+          previewUrl: imgurl1
+        },
+        {
+          thumbnailUrl: imgurl1,
+          previewUrl: imgurl1
+        }
+      ]
     }
   }
 }
