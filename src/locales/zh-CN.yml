@@ -1,6 +1,7 @@
 vux.actionsheet.cancel: 取消
 vux.alert.button_text: 确定
 vux.calendar.cancel_text: 取消
+vux.calendar.clear_text: 清空
 vux.calendar.confirm_text: 确定
 vux.confirm.confirm_text: 确定
 vux.confirm.cancel_text: 取消

@@ -11,8 +11,11 @@
           <slot name="desc"></slot>
         </div>
         <div ref="k12UploadImgC" class="k12-upload-imgC">
-          <div v-for="(el, index) in renderData" :key="index" :style="{height: imgCellCHeight + 'px'}" class="k12-upload-imgCellC">
-            <img v-for="(item, itemIndex) in el" :key="itemIndex" :src="item.thumbnailUrl" @click="onPerview(index, itemIndex)" alt="" class="k12-upload-imgCell">
+          <div v-for="(el, index) in renderData" :key="index" class="k12-upload-imgCellC"
+            :style="{height: imgCellCHeight + 'px'}">
+            <imgFix v-for="(item, itemIndex) in el" :key="itemIndex" class="k12-upload-imgCell"
+              :style="{width: imgCellCHeight + 'px'}" cc="ss"
+              :src="item.thumbnailUrl" @click.native="onPerview(index, itemIndex)"></imgFix>
           </div>
         </div>
       </div>
@@ -23,8 +26,9 @@
           <div v-for="(el, index) in renderFormData" :key="index" :style="{height: imgCellCFormHeight + 'px'}" class="k12-upload-imgCellC-form">
             <template v-for="(item, itemIndex) in el">
               <div v-if="item !== 'addBtn'" :key="itemIndex" class="k12-upload-imgCell-form">
-                <img :src="item.srcData" alt="">
-                <div @click="onDeleteAddedImg(item)" class="k12-upload-img-close">
+                <imgFix :src="(item.thumbnailUrl ? item.thumbnailUrl : item.srcData)" class="k12-upload-imgCell-form-imgC"
+                  @click.native="onPerview(index, itemIndex)"></imgFix>
+                <div @click.prevent="onDeleteAddedImg(item)" class="k12-upload-img-close">
                   <x-icon class="k12-upload-img-close-icon" type="android-close" size="20"></x-icon>
                 </div>
               </div>
@@ -36,16 +40,21 @@
         </div>
       </div>
     </template>
+    <previewer ref="previewer" :list="previewerList"></previewer>
   </div>
 </template>
 
 <script>
+import previewer from '../previewer'
+import imgFix from './imgFix'
 import cleanStyle from '../../libs/clean-style'
 import getParentProp from '../../libs/get-parent-prop'
 
 export default {
   name: 'k12-upload',
-  components: {},
+  components: {
+    previewer, imgFix
+  },
   props: {
     title: {
       type: String,
@@ -64,10 +73,14 @@ export default {
     },
     sdkType: {
       type: String,
-      default: '',
+      default: 'wx',
       validator: function (value) {
         return ['', 'wx'].indexOf(value) !== -1
       }
+    },
+    defaultFormData: {
+      type: Array,
+      default: () => []
     },
     count: {
       type: Number,
@@ -80,6 +93,9 @@ export default {
       imgCellCFormHeight: 0,
       formData: []
     }
+  },
+  created () {
+    this.formData = [...this.defaultFormData]
   },
   mounted () {
     this.rebuildHeight()
@@ -129,6 +145,30 @@ export default {
         }
       }
       return result
+    },
+    previewerList () {
+      if (this.showType === 'cell') {
+        if (!this.data || !(this.data instanceof Array) || this.data.length < 1) {
+          return []
+        }
+        return this.data.map(el => {
+          return {
+            msrc: el.thumbnailUrl,
+            src: el.previewUrl
+          }
+        })
+      } else if (this.showType === 'form') {
+        if (!this.formData || !(this.formData instanceof Array) || this.formData.length < 1) {
+          return []
+        }
+        return this.formData.map(el => {
+          return {
+            msrc: el.thumbnailUrl ? el.thumbnailUrl : el.srcData,
+            src: el.srcData
+          }
+        })
+      }
+      return []
     }
   },
   watch: {
@@ -136,7 +176,7 @@ export default {
       this.rebuildHeight()
     },
     formData (v) {
-      this.$emit('input', v.map(el => el.localId))
+      this.$emit('input', v)
     }
   },
   methods: {
@@ -149,18 +189,7 @@ export default {
       }
     },
     onPerview (index, itemIndex) {
-      if (!this.sdkType) {
-        throw new Error('未指定SDK类型')
-      }
-      if (this.sdkType === 'wx') {
-        if (!this.$wechat && !this.$wechat.previewImage) {
-          throw new Error('this.$wechat未定义，请先引入微信jssdk')
-        }
-        this.$wechat.previewImage({
-          current: this.renderData[index][itemIndex].previewUrl,
-          urls: this.data.map(el => el.previewUrl)
-        })
-      }
+      this.$refs.previewer.show((index * 3) + itemIndex)
     },
     getLocalImgDataPromise (localId) {
       return new Promise((resolve, reject) => {
@@ -170,7 +199,8 @@ export default {
             /* localData是图片的base64数据，可以用img标签显示 */
             resolve({
               localId,
-              srcData: res.localData
+              srcData: res.localData,
+              isLocal: true
             })
           }
         })
@@ -206,7 +236,8 @@ export default {
               allLocalImgData = localIds.map(localId => {
                 return {
                   localId,
-                  srcData: localId
+                  srcData: localId,
+                  isLocal: true
                 }
               })
             }
@@ -276,8 +307,7 @@ export default {
           &:not(:last-child) {
             margin-right: 20px;
           }
-          > img {
-            display: block;
+          > .k12-upload-imgCell-form-imgC {
             width: 100%;
             height: 100%;
           }

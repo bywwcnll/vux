@@ -20,7 +20,7 @@
           @on-click-left="onClickLeft"
           @on-click-right="onClickRight"
           :title="popupHeaderTitle"
-          :left-text="$t('cancel_text')"
+          :left-text="(showClear ? $t('clear_text') : $t('cancel_text'))"
           :right-text="$t('confirm_text')"></popup-header>
 
         <slot name="popup-before-calendar"></slot>
@@ -58,6 +58,9 @@
 cancel_text:
   en: cancel
   zh-CN: 取消
+clear_text:
+  en: clear
+  zh-CN: 清空
 confirm_text:
   en: done
   zh-CN: 确定
@@ -119,7 +122,8 @@ const Props = {
   visible: {
     type: Boolean,
     default: true
-  }
+  },
+  showClear: Boolean
 }
 
 export default {
@@ -174,7 +178,12 @@ export default {
     getType,
     onClickLeft () {
       this.show = false
-      this.currentValue = pure(this.value)
+      if (this.showClear) {
+        this.currentValue = ''
+        this.$emit('input', '')
+      } else {
+        this.currentValue = pure(this.value)
+      }
     },
     onClickRight () {
       this.show = false

@@ -25,7 +25,7 @@
     </group>
 
     <group>
-      <calendar @on-change="onChange" v-model="demo4" :title="$t('Show popup header')" show-popup-header :popup-header-title="$t('Please select')" disable-future></calendar>
+      <calendar showClear @on-change="onChange" v-model="demo4" :title="$t('Show popup header')" show-popup-header :placeholder="$t('Please select')" :popup-header-title="$t('Please select')" disable-future></calendar>
     </group>
 
     <group>

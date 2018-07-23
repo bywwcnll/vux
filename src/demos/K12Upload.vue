@@ -1,7 +1,7 @@
 <template>
   <div style="margin: 20px 0;">
     <group label-width="4.5em">
-      <k12-upload v-model="localIds" title="故障描述" showType="form" sdkType="wx"></k12-upload>
+      <k12-upload v-model="localIds" title="故障描述" showType="form" :defaultFormData="defaultFormData"></k12-upload>
       <k12-upload title="故障描述" showType="cell" :data="uploadPreviewData">
         <p slot="desc">测试信息</p>
       </k12-upload>
@@ -43,6 +43,24 @@ export default {
         {
           thumbnailUrl: imgurl1,
           previewUrl: imgurl1
+        }
+      ],
+      defaultFormData: [
+        {
+          thumbnailUrl: imgurl1,
+          srcData: imgurl1
+        },
+        {
+          thumbnailUrl: imgurl2,
+          srcData: imgurl2
+        },
+        {
+          thumbnailUrl: imgurl1,
+          srcData: imgurl1
+        },
+        {
+          thumbnailUrl: imgurl2,
+          srcData: imgurl2
         }
       ]
     }
