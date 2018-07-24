@@ -177,6 +177,9 @@ export default {
     },
     formData (v) {
       this.$emit('input', v)
+    },
+    defaultFormData (v) {
+      this.formData = [...v]
     }
   },
   methods: {
