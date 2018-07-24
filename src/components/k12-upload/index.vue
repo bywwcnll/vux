@@ -250,7 +250,7 @@ export default {
       }
     },
     onDeleteAddedImg (data) {
-      let delIndex = this.formData.findIndex(el => el.localId === data.localId)
+      let delIndex = this.formData.map(el => el.localId).indexOf(data.localId)
       if (delIndex > -1) {
         this.formData.splice(delIndex, 1)
       }
