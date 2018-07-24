@@ -303,6 +303,7 @@ export default {
         }
         .k12-upload-imgCell-form {
           width: calc(~"(100% - 40px) / 3");
+          height: 100%;
           position: relative;
           &:not(:last-child) {
             margin-right: 20px;
