@@ -1,8 +1,10 @@
 <template>
   <div style="margin: 20px 0;">
     <group label-width="4.5em">
-      <k12-upload v-model="localIds" title="故障描述" showType="form" :defaultFormData="defaultFormData"></k12-upload>
-      <k12-upload title="故障描述" showType="cell" :data="uploadPreviewData">
+      <k12-upload v-model="localIds" title="故障描述" showType="form"
+        :defaultFormData="defaultFormData" :rowLength="4" :rowGap="10"></k12-upload>
+      <k12-upload title="故障描述" showType="cell"
+        :data="uploadPreviewData" :rowLength="3" :rowGap="10">
         <p slot="desc">测试信息</p>
       </k12-upload>
     </group>
@@ -12,8 +14,8 @@
 <script>
 import { Group, K12Upload } from 'k12vux'
 
-const imgurl1 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530011862663&di=b61bde672c28a5bce0a8a7d033b60651&imgtype=0&src=http%3A%2F%2Fam.zdmimg.com%2F201511%2F12%2F5644a9d9cc6a8.jpg_a200.jpg'
-const imgurl2 = 'https://sjbz-fd.zol-img.com.cn/t_s320x510c/g5/M00/0F/05/ChMkJlsZ4CCIChwoAAXw0q4yG1gAAo30wNa8a0ABfDq759.jpg'
+const imgurl1 = 'http://static.fuwo.com/upload/attachment/1602/19/a501971ad6da11e5a84b00163e00254c.jpg'
+const imgurl2 = 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1532078542&di=698138658162761e2f1951c45670ab3f&src=http://pic36.photophoto.cn/20150713/0032018153945140_b.jpg'
 
 export default {
   components: {
@@ -47,18 +49,22 @@ export default {
       ],
       defaultFormData: [
         {
+          localId: 1,
           thumbnailUrl: imgurl1,
           srcData: imgurl1
         },
         {
+          localId: 2,
           thumbnailUrl: imgurl2,
           srcData: imgurl2
         },
         {
+          localId: 3,
           thumbnailUrl: imgurl1,
           srcData: imgurl1
         },
         {
+          localId: 4,
           thumbnailUrl: imgurl2,
           srcData: imgurl2
         }

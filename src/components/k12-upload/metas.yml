@@ -21,8 +21,28 @@ props:
   sdkType:
     type: String
     default: 'wx'
-    en: "SDK Type, "
+    en: "SDK Type"
     zh-CN: "sdk类型, 目前只支持wx"
+  defaultFormData:
+    type: Array
+    default: []
+    en: "form表单的初始值"
+    zh-CN: "form表单的初始值"
+  rowLength:
+    type: Number
+    default: 3
+    en: "一行显示的数量"
+    zh-CN: "一行显示的数量"
+  rowGap:
+    type: Number
+    default: 10
+    en: "图片间隔 单位px"
+    zh-CN: "图片间隔 单位px"
+  count:
+    type: Number
+    default: 9
+    en: "上传数量限制"
+    zh-CN: "上传数量限制"
 changes:
   v1.0.1:
     en:

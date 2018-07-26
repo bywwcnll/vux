@@ -12,9 +12,9 @@
         </div>
         <div ref="k12UploadImgC" class="k12-upload-imgC">
           <div v-for="(el, index) in renderData" :key="index" class="k12-upload-imgCellC"
-            :style="{height: imgCellCHeight + 'px'}">
+            :style="{height: imgCellCHeight + 'px', marginBottom: (index < renderData.length - 1 ? rowGap + 'px' : '0')}">
             <imgFix v-for="(item, itemIndex) in el" :key="itemIndex" class="k12-upload-imgCell"
-              :style="{width: imgCellCHeight + 'px'}" cc="ss"
+              :style="{width: imgCellCHeight + 'px', marginRight: (itemIndex < rowLength - 1 ? rowGap + 'px' : '0')}"
               :src="item.thumbnailUrl" @click.native="onPerview(index, itemIndex)"></imgFix>
           </div>
         </div>
@@ -23,16 +23,19 @@
     <template v-if="showType === 'form'">
       <div class="k12-upload-rightC k12-upload-rightC-form">
         <div ref="k12UploadImgCForm" class="k12-upload-imgC-form">
-          <div v-for="(el, index) in renderFormData" :key="index" :style="{height: imgCellCFormHeight + 'px'}" class="k12-upload-imgCellC-form">
+          <div v-for="(el, index) in renderFormData" :key="index" class="k12-upload-imgCellC-form"
+            :style="{height: imgCellCFormHeight + 'px', marginBottom: (index < renderFormData.length - 1 ? rowGap + 'px' : '0')}">
             <template v-for="(item, itemIndex) in el">
-              <div v-if="item !== 'addBtn'" :key="itemIndex" class="k12-upload-imgCell-form">
+              <div v-if="item !== 'addBtn'" :key="itemIndex" class="k12-upload-imgCell-form"
+                :style="{width: imgCellCFormHeight + 'px', marginRight: (itemIndex < rowLength - 1 ? rowGap + 'px' : '0')}">
                 <imgFix :src="(item.thumbnailUrl ? item.thumbnailUrl : item.srcData)" class="k12-upload-imgCell-form-imgC"
                   @click.native="onPerview(index, itemIndex)"></imgFix>
                 <div @click.prevent="onDeleteAddedImg(item)" class="k12-upload-img-close">
                   <x-icon class="k12-upload-img-close-icon" type="android-close" size="20"></x-icon>
                 </div>
               </div>
-              <div v-if="item === 'addBtn'" :key="itemIndex" @click="onAddBtn" class="k12-upload-imgCell-form k12-upload-addBtn">
+              <div v-if="item === 'addBtn'" :key="itemIndex" @click="onAddBtn" class="k12-upload-imgCell-form k12-upload-addBtn"
+                :style="{width: imgCellCFormHeight + 'px', marginRight: (itemIndex < rowLength - 1 ? rowGap + 'px' : '0')}">
                 <x-icon type="ios-plus-empty" size="68" style="fill: #ccc;"></x-icon>
               </div>
             </template>
@@ -82,6 +85,14 @@ export default {
       type: Array,
       default: () => []
     },
+    rowLength: {
+      type: Number,
+      default: 3
+    },
+    rowGap: {
+      type: Number,
+      default: 10
+    },
     count: {
       type: Number,
       default: 9
@@ -118,11 +129,11 @@ export default {
         return []
       }
       let result = []
-      for (let i = 0; i < Math.floor(this.data.length / 3); i++) {
-        result.push(this.data.slice(i * 3, (i + 1) * 3))
+      for (let i = 0; i < Math.floor(this.data.length / this.rowLength); i++) {
+        result.push(this.data.slice(i * this.rowLength, (i + 1) * this.rowLength))
       }
-      if (this.data.length % 3 > 0) {
-        result.push(this.data.slice(-(this.data.length % 3)))
+      if (this.data.length % this.rowLength > 0) {
+        result.push(this.data.slice(-(this.data.length % this.rowLength)))
       }
       return result
     },
@@ -131,14 +142,14 @@ export default {
         return [['addBtn']]
       }
       let result = []
-      for (let i = 0; i < Math.floor(this.formData.length / 3); i++) {
-        result.push(this.formData.slice(i * 3, (i + 1) * 3))
+      for (let i = 0; i < Math.floor(this.formData.length / this.rowLength); i++) {
+        result.push(this.formData.slice(i * this.rowLength, (i + 1) * this.rowLength))
       }
-      if (this.formData.length % 3 > 0) {
-        result.push(this.formData.slice(-(this.formData.length % 3)))
+      if (this.formData.length % this.rowLength > 0) {
+        result.push(this.formData.slice(-(this.formData.length % this.rowLength)))
       }
       if (this.formData.length < this.count) {
-        if (result[result.length - 1].length < 3) {
+        if (result[result.length - 1].length < this.rowLength) {
           result[result.length - 1].push('addBtn')
         } else {
           result.push(['addBtn'])
@@ -185,14 +196,14 @@ export default {
   methods: {
     rebuildHeight () {
       if (this.$refs.k12UploadImgC) {
-        this.imgCellCHeight = (this.$refs.k12UploadImgC.clientWidth - 12) / 3
+        this.imgCellCHeight = (this.$refs.k12UploadImgC.clientWidth - (this.rowGap * (this.rowLength - 1))) / this.rowLength
       }
       if (this.$refs.k12UploadImgCForm) {
-        this.imgCellCFormHeight = (this.$refs.k12UploadImgCForm.clientWidth - 20) / 3
+        this.imgCellCFormHeight = (this.$refs.k12UploadImgCForm.clientWidth - (this.rowGap * (this.rowLength - 1))) / this.rowLength
       }
     },
     onPerview (index, itemIndex) {
-      this.$refs.previewer.show((index * 3) + itemIndex)
+      this.$refs.previewer.show((index * this.rowLength) + itemIndex)
     },
     getLocalImgDataPromise (localId) {
       return new Promise((resolve, reject) => {
@@ -281,19 +292,11 @@ export default {
       margin-top: 6px;
     }
     .k12-upload-imgC {
+      margin-top: 6px;
       width: 100%;
-      .k12-upload-imgCellC {
+      & .k12-upload-imgCellC {
         display: flex;
         align-items: stretch;
-        &:not(:last-child) {
-          margin-bottom: 6px;
-        }
-        .k12-upload-imgCell {
-          width: calc(~"(100% - 12px) / 3");
-          &:not(:last-child) {
-            margin-right: 6px;
-          }
-        }
       }
     }
     .k12-upload-imgC-form {
@@ -301,16 +304,9 @@ export default {
       .k12-upload-imgCellC-form {
         display: flex;
         align-items: stretch;
-        &:not(:last-child) {
-          margin-bottom: 20px;
-        }
         .k12-upload-imgCell-form {
-          width: calc(~"(100% - 40px) / 3");
           height: 100%;
           position: relative;
-          &:not(:last-child) {
-            margin-right: 20px;
-          }
           > .k12-upload-imgCell-form-imgC {
             width: 100%;
             height: 100%;
