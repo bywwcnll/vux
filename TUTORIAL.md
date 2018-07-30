@@ -56,3 +56,11 @@ $ yarn doc:build
 $ cd docs
 $ yarn build
 ```
+
+### 终极更新文档
+```bash
+$ yarn build
+$ yarn doc:build
+$ cd docs
+$ yarn build
+```
