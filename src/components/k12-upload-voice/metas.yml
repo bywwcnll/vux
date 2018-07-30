@@ -1,0 +1,26 @@
+category:
+  en: K12 customization
+  zh-CN: K12 定制
+icon: '&#xe656;'
+props:
+  show:
+    type: Boolean
+    default: false
+    en: "visible"
+    zh-CN: "显示"
+  sdkType:
+    type: String
+    default: 'wx'
+    en: "SDK Type"
+    zh-CN: "sdk类型, 目前只支持wx"
+  maxRecordSeconds:
+    type: Number
+    default: 10
+    en: "the biggest recording time"
+    zh-CN: "最大录音时长 单位秒"
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'
