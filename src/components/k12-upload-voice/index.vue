@@ -56,6 +56,7 @@ import popup from '../popup'
 import commonLoopProgress from './commonLoopProgress'
 
 export default {
+  name: 'k12-upload-voice',
   props: {
     show: Boolean,
     sdkType: {
@@ -80,10 +81,9 @@ export default {
     popup,
     commonLoopProgress
   },
-  async created () {
+  created () {
     this.showPopup = this.show
   },
-  async mounted () {},
   data () {
     return {
       showPopup: false,

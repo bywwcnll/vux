@@ -78,6 +78,7 @@
   "K12Flow": "src/components/k12-flow/k12-flow.vue",
   "K12FlowItem": "src/components/k12-flow/k12-flow-item.vue",
   "K12Template": "src/components/k12-template/index.vue",
+  "K12Tree": "src/components/k12-tree/index.vue",
   "K12Upload": "src/components/k12-upload/index.vue",
   "K12UploadVoice": "src/components/k12-upload-voice/index.vue",
   "Loading": "src/components/loading/index.vue",

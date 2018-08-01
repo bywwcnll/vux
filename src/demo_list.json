@@ -115,6 +115,7 @@
   "InlineXSwitch",
   "K12Flow",
   "K12Template",
+  "K12Tree",
   "K12Upload",
   "K12UploadVoice"
 ]

@@ -1,0 +1,36 @@
+category:
+  en: K12 customization
+  zh-CN: K12 定制
+icon: '&#xe656;'
+props:
+  value:
+    type: Array
+    default: []
+    en: "selected of Depts and Users"
+    zh-CN: "选择的部门或人员数据"
+  show:
+    type: Boolean
+    default: false
+    en: "show Popup"
+    zh-CN: "是否显示弹框"
+  onlySelectUser:
+    type: Boolean
+    default: false
+    en: "only select user"
+    zh-CN: "是否只选择人员"
+  defaultDeptId:
+    type: Boolean
+    default: "-1"
+    en: "default deptId"
+    zh-CN: "默认初始的DeptId"
+  load:
+    type: Function
+    default: "-"
+    en: "function of load data"
+    zh-CN: "数据加载方法，必需"
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'
