@@ -14,11 +14,17 @@
             </div>
           </div>
           <div class="k12-tree-popup-contentC">
-            <div v-if="loaded" class="k12-tree-popup-content">
-              <k12-tree-cell v-for="(el, index) in deptAndUserList" :key="index"
-                :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
-                @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
-            </div>
+            <template v-if="loaded">
+              <div v-if="deptAndUserList && deptAndUserList.length > 0" class="k12-tree-popup-content">
+                <k12-tree-cell v-for="(el, index) in deptAndUserList" :key="index"
+                  :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
+                  @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
+              </div>
+              <div v-if="!deptAndUserList || deptAndUserList.length === 0" class="k12-tree-popup-content-loading">
+                <img class="k12-tree-popup-content-loading-text" :src="recordIcon" alt="" />
+                <div class="k12-tree-popup-content-loading-text">~暂无数据~</div>
+              </div>
+            </template>
             <div v-if="!loaded" class="k12-tree-popup-content-loading">
               <spinner type="ios"></spinner>
               <div class="k12-tree-popup-content-loading-text">~正在加载中，请稍后~</div>
@@ -55,6 +61,7 @@
 </template>
 
 <script>
+import recordIcon from '../../assets/component/record.png'
 import TransferDom from '../../directives/transfer-dom/index.js'
 import popup from '../popup'
 import spinner from '../spinner'
@@ -96,6 +103,7 @@ export default {
   },
   data () {
     return {
+      recordIcon,
       showPopup: false,
       showViewPopup: false,
       loaded: false,
@@ -231,6 +239,11 @@ export default {
     background-color: #fff;
     white-space: nowrap;
     overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
     .k12-tree-popup-deptNameC {
       display: inline-block;
       padding: 0 20px;

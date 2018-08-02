@@ -302,7 +302,10 @@ export default {
     },
     onSave () {
       this.showPopup = false
-      this.$emit('save', this.localId)
+      this.$emit('save', {
+        localId: this.localId,
+        recordSeconds: this.recordSeconds
+      })
     }
   }
 }

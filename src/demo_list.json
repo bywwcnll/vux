@@ -117,5 +117,6 @@
   "K12Template",
   "K12Tree",
   "K12Upload",
-  "K12UploadVoice"
+  "K12UploadVoice",
+  "K12VoicePlay"
 ]

@@ -42,7 +42,7 @@ export default {
           }
         }
         setTimeout(() => {
-          resolve(list)
+          resolve(Math.random() > 0.5 ? list : [])
         }, 1000)
       })
     },
