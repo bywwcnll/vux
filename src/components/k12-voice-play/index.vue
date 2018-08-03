@@ -14,7 +14,7 @@
         <div class="k12-voice-play-info-size">{{filesizeDisplay}}</div>
       </div>
     </div>
-    <div v-if="showDelete" class="k12-voice-play-delete" @click="onDelete">
+    <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
       <x-icon class="k12-voice-play-icon-delete" type="minus-circled"></x-icon>
     </div>
     <div class="k12-voice-play-audioC">
@@ -47,7 +47,10 @@ export default {
     filesize: {
       type: [String, Number]
     },
-    showDelete: Boolean
+    hideDelete: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {

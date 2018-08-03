@@ -29,10 +29,11 @@ props:
     type: String, Number
     en: "文件大小，`String` 直接显示，`Number` 以字节为单位自动转换"
     zh-CN: "文件大小，`String` 直接显示，`Number` 以字节为单位自动转换"
-  showDelete:
-    type: Boolean
+  hideDelete:
+    type: Boolean,
+    default: false,
     en: "show or hidden delete button"
-    zh-CN: "是否显示删除按钮"
+    zh-CN: "是否隐藏删除按钮"
 changes:
   v1.0.1:
     en:
