@@ -168,7 +168,7 @@ if (process.env.NODE_ENV === 'production') {
     wx.config({
       beta: true,
       debug: false,
-      ...res.data,
+      ...res.data.data,
       jsApiList
     })
   })
