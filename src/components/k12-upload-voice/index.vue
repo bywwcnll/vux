@@ -68,7 +68,7 @@ export default {
     },
     maxRecordSeconds: {
       type: Number,
-      default: 10,
+      default: 60,
       validator: value => {
         return value >= 3 && value <= 60
       }
@@ -95,6 +95,7 @@ export default {
         strokeWidth: 6
       },
       isRecording: false,
+      commonStartRecordTimer: null,
       recordSeconds: 0,
       recordIntervalTimer: null,
 
@@ -138,6 +139,12 @@ export default {
         this.recordIntervalTimer = null
       }
     },
+    clearCommonStartRecordTimer () {
+      if (this.commonStartRecordTimer) {
+        clearTimeout(this.commonStartRecordTimer)
+        this.commonStartRecordTimer = null
+      }
+    },
     clearPlayIntervalTimer () {
       if (this.playIntervalTimer) {
         clearInterval(this.playIntervalTimer)
@@ -150,6 +157,7 @@ export default {
       this.localId = null
       this.status = 'startRecord'
       this.isRecording = false
+      this.controlStatus = 'stop'
       this.recordSeconds = this.playSeconds = 0
     },
     commonStartRecord () {
@@ -161,6 +169,16 @@ export default {
             },
             fail: res => {
               reject(res)
+            }
+          })
+          this.$wechat.onVoiceRecordEnd({
+            complete: res => {
+              this.clearRecordIntervalTimer()
+              this.clearCommonStartRecordTimer()
+              this.recordSeconds = 60
+              this.isRecording = false
+              this.status = 'endRecord'
+              this.localId = res.localId
             }
           })
         }
@@ -238,8 +256,15 @@ export default {
                 this.recordSeconds += 1
                 if (this.recordSeconds >= this.maxRecordSeconds) {
                   this.clearRecordIntervalTimer()
-                  setTimeout(() => {
-                    this.onRecordEnd()
+                  this.clearCommonStartRecordTimer()
+                  this.commonStartRecordTimer = setTimeout(() => {
+                    this.isRecording = false
+                    this.commonEndRecord()
+                      .then(localId => {
+                        this.status = 'endRecord'
+                        this.localId = localId
+                      })
+                      .catch(e => alert((e.errMsg.indexOf('tooshort') > -1 ? '录音时间太短' : e.errMsg)))
                   }, 500)
                 }
               }

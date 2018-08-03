@@ -1,8 +1,8 @@
 <template>
   <div class="pageContainer">
-    <div class="warning">此组件无法在示例中直接使用，请直接按照示例代码开发</div>
+    <div class="warning">此组件无法在文档示例中直接使用，请直接按照示例代码开发</div>
     <div>添加语音</div>
-    <div class="localIds">saveLocalId: {{saveLocalId}}</div>
+    <div class="localIds">savedVoice: {{savedVoice}}</div>
     <div @click="show = true" class="addBtn">+</div>
     <k12-upload-voice :show.sync="show" @save="handleSave"></k12-upload-voice>
   </div>
@@ -18,7 +18,7 @@ export default {
   async mounted () {},
   data () {
     return {
-      saveLocalId: null,
+      savedVoice: null,
       show: false
     }
   },
@@ -27,7 +27,7 @@ export default {
   filters: {},
   methods: {
     handleSave (data) {
-      this.saveLocalId = JSON.stringify(data)
+      this.savedVoice = JSON.stringify(data)
     }
   }
 }

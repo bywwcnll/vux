@@ -15,9 +15,9 @@ props:
     zh-CN: "sdk类型, 目前只支持wx"
   maxRecordSeconds:
     type: Number
-    default: 10
+    default: 60
     en: "the biggest recording time"
-    zh-CN: "最大录音时长 单位秒"
+    zh-CN: "最大录音时长 单位秒 范围在3s~60s"
 events:
   save:
     en: save the record

@@ -57,7 +57,7 @@ export default {
       controlStatus: 'stop',
       audioStatus: 'stoped',
 
-      wxPlayVoiceTimer: null,
+      wxPlayVoiceIntervalTimer: null,
       wxPlayVoiceSeconds: 0
     }
   },
@@ -105,6 +105,14 @@ export default {
     }
   },
   methods: {
+    clearWXPlayVoiceIntervalTimer () {
+      if (this.wxPlayVoiceIntervalTimer) {
+        clearInterval(this.wxPlayVoiceIntervalTimer)
+        this.wxPlayVoiceIntervalTimer = null
+        this.wxPlayVoiceSeconds = 0
+        this.audioStatus = 'stoped'
+      }
+    },
     commonPlay () {
       if (this.isHttpAudio) {
         this.$refs.audio.play()
@@ -113,12 +121,10 @@ export default {
           localId: this.audioSrc,
           success: res => {
             this.audioStatus = 'playing'
-            this.wxPlayVoiceTimer = setTimeout(() => {
+            this.wxPlayVoiceSeconds = 0
+            this.wxPlayVoiceIntervalTimer = setInterval(() => {
               if (this.wxPlayVoiceSeconds >= this.audioSeconds) {
-                clearTimeout(this.wxPlayVoiceTimer)
-                this.wxPlayVoiceTimer = null
-                this.wxPlayVoiceSeconds = 0
-                this.audioStatus = 'stoped'
+                this.clearWXPlayVoiceIntervalTimer()
               } else {
                 this.wxPlayVoiceSeconds += 1
               }
@@ -136,9 +142,7 @@ export default {
         this.$wechat.stopVoice({
           localId: this.audioSrc,
           success: res => {
-            this.wxPlayVoiceTimer = null
-            this.wxPlayVoiceSeconds = 0
-            this.audioStatus = 'stoped'
+            this.clearWXPlayVoiceIntervalTimer()
           }
         })
       }
