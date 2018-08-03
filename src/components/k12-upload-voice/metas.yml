@@ -18,6 +18,23 @@ props:
     default: 10
     en: "the biggest recording time"
     zh-CN: "最大录音时长 单位秒"
+events:
+  save:
+    en: save the record
+    zh-CN: 保存录音
+extra: |
+  ::: warning
+  save事件返回以下格式数据
+  :::
+
+  ``` js
+  {
+    localId: 'wx://xxxxxxxxxx',
+    recordFileName: '20180803094622.amr',
+    recordSeconds: 20
+  }
+  ```
+
 changes:
   v1.0.1:
     en:

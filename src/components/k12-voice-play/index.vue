@@ -14,7 +14,7 @@
         <div class="k12-voice-play-info-size">{{filesizeDisplay}}</div>
       </div>
     </div>
-    <div class="k12-voice-play-delete" @click="onDelete">
+    <div v-if="showDelete" class="k12-voice-play-delete" @click="onDelete">
       <x-icon class="k12-voice-play-icon-delete" type="minus-circled"></x-icon>
     </div>
     <div class="k12-voice-play-audioC">
@@ -27,15 +27,18 @@
 export default {
   name: 'k12-voice-play',
   props: {
-    id: Object,
+    id: [Object, String, Number],
     audioType: {
       type: String,
-      default: 'http',
+      default: 'url',
       validator: value => {
-        return ['http', 'wx'].indexOf(value) !== -1
+        return ['url', 'wx'].indexOf(value) !== -1
       }
     },
-    audioSrc: String,
+    audioSrc: {
+      type: String,
+      required: true
+    },
     audioSeconds: Number,
     filename: {
       type: String,
@@ -43,7 +46,8 @@ export default {
     },
     filesize: {
       type: [String, Number]
-    }
+    },
+    showDelete: Boolean
   },
   data () {
     return {
@@ -71,9 +75,9 @@ export default {
           return this.filesize
         } else if (typeof this.filesize === 'number') {
           if (this.filesize >= 1024 * 1024) {
-            return Math.round(this.filesize / 1024 / 1024) + 'M'
+            return Math.round(this.filesize / 1024 / 1024 * 10) / 10 + 'M'
           } else if (this.filesize >= 1024) {
-            return Math.round(this.filesize / 1024) + 'K'
+            return Math.round(this.filesize / 1024 * 10) / 10 + 'K'
           } else {
             return this.filesize + 'B'
           }
@@ -84,7 +88,7 @@ export default {
       return ''
     },
     isHttpAudio () {
-      return this.audioType === 'http' && this.audioSrc
+      return this.audioType === 'url' && this.audioSrc
     },
     isWXAudio () {
       return this.audioType === 'wx' && this.audioSrc
@@ -138,6 +142,10 @@ export default {
     },
     async onControl () {
       if (this.controlStatus === 'stop') {
+        if (!this.audioSrc) {
+          alert('未设置音频源')
+          return
+        }
         this.controlStatus = 'play'
         this.commonPlay()
       } else {
@@ -156,7 +164,7 @@ export default {
 @import '../../styles/k12.less';
 .k12-voice-play-container {
   position: relative;
-  padding-left: 15px;
+  padding: 0 15px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -200,6 +208,9 @@ export default {
       flex-direction: column;
       justify-content: center;
       .k12-voice-play-info-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: 14px;
         color: #333;
         height: 22px;
@@ -212,7 +223,7 @@ export default {
     }
   }
   .k12-voice-play-delete {
-    margin: 0 15px;
+    margin-left: 15px;
     .k12-flex-center;
     .k12-voice-play-icon-delete {
       width: 25px;

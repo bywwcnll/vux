@@ -27,7 +27,7 @@ export default {
   filters: {},
   methods: {
     handleSave (data) {
-      this.saveLocalId = data
+      this.saveLocalId = JSON.stringify(data)
     }
   }
 }

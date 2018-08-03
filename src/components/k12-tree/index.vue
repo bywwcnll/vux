@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import recordIcon from '../../assets/component/record.png'
+import recordIcon from './record.png'
 import TransferDom from '../../directives/transfer-dom/index.js'
 import popup from '../popup'
 import spinner from '../spinner'

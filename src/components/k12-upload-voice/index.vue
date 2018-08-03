@@ -302,8 +302,21 @@ export default {
     },
     onSave () {
       this.showPopup = false
+      let zerofill = (num) => {
+        if (num < 10) return '0' + num
+        return num
+      }
+      let dateStr = []
+      let date = new Date()
+      dateStr[0] = date.getFullYear()
+      dateStr[1] = zerofill(date.getMonth() + 1)
+      dateStr[2] = zerofill(date.getDate())
+      dateStr[3] = zerofill(date.getHours())
+      dateStr[4] = zerofill(date.getMinutes())
+      dateStr[5] = zerofill(date.getSeconds())
       this.$emit('save', {
         localId: this.localId,
+        recordFileName: dateStr.join('') + '.amr',
         recordSeconds: this.recordSeconds
       })
     }

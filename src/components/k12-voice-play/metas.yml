@@ -3,11 +3,36 @@ category:
   zh-CN: K12 定制
 icon: '&#xe656;'
 props:
-  title:
+  id:
+    type: Object, String, Number
+    en: "return the id when click delete"
+    zh-CN: "唯一标识，删除时返回"
+  audioType:
     type: String
-    default: ''
-    en: "Header's title"
-    zh-CN: "标题"
+    default: "url"
+    en: "type of the audio"
+    zh-CN: "音频类型，只支持`url`和`wx`"
+  audioSrc:
+    type: String
+    en: "src of the audio"
+    zh-CN: "音频源"
+  audioSeconds:
+    type: Number
+    en: "total seconds of the audio"
+    zh-CN: "仅当`audioType`为wx时需要传递，录音的持续时间"
+  filename:
+    type: String
+    default: "未知"
+    en: "the file name"
+    zh-CN: "文件名称"
+  filesize:
+    type: String, Number
+    en: "文件大小，`String` 直接显示，`Number` 以字节为单位自动转换"
+    zh-CN: "文件大小，`String` 直接显示，`Number` 以字节为单位自动转换"
+  showDelete:
+    type: Boolean
+    en: "show or hidden delete button"
+    zh-CN: "是否显示删除按钮"
 changes:
   v1.0.1:
     en:
