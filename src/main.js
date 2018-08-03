@@ -130,10 +130,51 @@ if (process.env.NODE_ENV === 'production') {
     })
   })
 
-  const permissions = JSON.stringify(['onMenuShareTimeline', 'onMenuShareAppMessage'])
+  const jsApiList = [
+    'onMenuShareAppMessage',
+    'onMenuShareWechat',
+    'startRecord',
+    'stopRecord',
+    'onVoiceRecordEnd',
+    'playVoice',
+    'pauseVoice',
+    'stopVoice',
+    'onVoicePlayEnd',
+    'uploadVoice',
+    'downloadVoice',
+    'chooseImage',
+    'previewImage',
+    'uploadImage',
+    'downloadImage',
+    'previewFile',
+    'getNetworkType',
+    'openLocation',
+    'getLocation',
+    'onHistoryBack',
+    'hideOptionMenu',
+    'showOptionMenu',
+    'hideMenuItems',
+    'showMenuItems',
+    'hideAllNonBaseMenuItem',
+    'showAllNonBaseMenuItem',
+    'closeWindow',
+    'scanQRCode',
+    'selectEnterpriseContact',
+    'openEnterpriseChat',
+    'chooseInvoice'
+  ]
   const url = document.location.href
-  http.post('https://vux.li/jssdk?url=' + encodeURIComponent(url.split('#')[0]) + '&jsApiList=' + permissions).then(res => {
-    wx.config(res.data.data)
+  let params = {
+    appCode: 'notification',
+    url: encodeURIComponent(url.split('#')[0])
+  }
+  http.get('http://k12.wisedu.com/api/corpwechat/getJsApiSignature?' + JSON.stringify(params)).then(res => {
+    wx.config({
+      beta: true,
+      debug: false,
+      ...res.data,
+      jsApiList
+    })
   })
 }
 
