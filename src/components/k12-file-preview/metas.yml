@@ -9,11 +9,12 @@ props:
     zh-CN: "文件预览地址"
   previewType:
     type: String
-    default: "url"
+    default: "''"
     en: "preview's type"
     zh-CN: "预览类型 ['', 'wx', 'url']"
   filename:
     type: String
+    default: "未知"
     en: "file name"
     zh-CN: "文件名称"
   filesize:
@@ -24,7 +25,7 @@ props:
     type: Boolean,
     default: false,
     en: "show or hidden the right arrow"
-    zh-CN: "是否右箭头"
+    zh-CN: "是否显示右箭头"
 changes:
   v1.0.1:
     en:
