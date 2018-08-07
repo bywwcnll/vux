@@ -75,6 +75,7 @@
   "InlineXNumber": "src/components/inline-x-number/index.vue",
   "InlineXSwitch": "src/components/inline-x-switch/index.vue",
   "InviewDirective": "src/directives/inview/index.js",
+  "K12FilePreview": "src/components/k12-file-preview/index.vue",
   "K12Flow": "src/components/k12-flow/k12-flow.vue",
   "K12FlowItem": "src/components/k12-flow/k12-flow-item.vue",
   "K12Template": "src/components/k12-template/index.vue",

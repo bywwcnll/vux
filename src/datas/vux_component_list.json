@@ -287,6 +287,14 @@
     "hasHome": false
   },
   {
+    "name": "k12-file-preview",
+    "icon": "&#xe656;",
+    "category_en": "K12 customization",
+    "category_zh-CN": "K12 定制",
+    "category_order": 998,
+    "hasHome": false
+  },
+  {
     "name": "k12-flow",
     "icon": "&#xe656;",
     "items": [

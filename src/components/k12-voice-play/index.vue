@@ -73,16 +73,17 @@ export default {
   },
   computed: {
     filesizeDisplay () {
-      if (this.filesize) {
-        if (typeof this.filesize === 'string') {
-          return this.filesize
-        } else if (typeof this.filesize === 'number') {
-          if (this.filesize >= 1024 * 1024) {
-            return Math.round(this.filesize / 1024 / 1024 * 10) / 10 + 'M'
-          } else if (this.filesize >= 1024) {
-            return Math.round(this.filesize / 1024 * 10) / 10 + 'K'
+      let filesize = this.filesize
+      if (filesize) {
+        if (typeof filesize === 'string') {
+          return filesize
+        } else if (typeof filesize === 'number') {
+          if (filesize >= 1024 * 1024) {
+            return Math.round(filesize / 1024 / 1024 * 10) / 10 + 'M'
+          } else if (filesize >= 1024) {
+            return Math.round(filesize / 1024 * 10) / 10 + 'K'
           } else {
-            return this.filesize + 'B'
+            return filesize + 'B'
           }
         } else {
           return ''

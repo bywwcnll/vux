@@ -1,0 +1,33 @@
+category:
+  en: K12 customization
+  zh-CN: K12 定制
+icon: '&#xe656;'
+props:
+  url:
+    type: String
+    en: "link of preview file"
+    zh-CN: "文件预览地址"
+  previewType:
+    type: String
+    default: "url"
+    en: "preview's type"
+    zh-CN: "预览类型 ['', 'wx', 'url']"
+  filename:
+    type: String
+    en: "file name"
+    zh-CN: "文件名称"
+  filesize:
+    type: String, Number
+    en: "file size"
+    zh-CN: "文件大小，当`previewType`为`wx`时必传"
+  hideRightArrow:
+    type: Boolean,
+    default: false,
+    en: "show or hidden the right arrow"
+    zh-CN: "是否右箭头"
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'
