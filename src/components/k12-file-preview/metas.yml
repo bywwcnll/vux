@@ -22,8 +22,8 @@ props:
     en: "file size"
     zh-CN: "文件大小，当`previewType`为`wx`时必传"
   hideRightArrow:
-    type: Boolean,
-    default: false,
+    type: Boolean
+    default: false
     en: "show or hidden the right arrow"
     zh-CN: "是否显示右箭头"
 changes:
