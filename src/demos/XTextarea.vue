@@ -12,7 +12,7 @@
     </group>
     <group :title="$t('autosize')">
       <x-textarea :placeholder="$t('Type something')" :show-counter="false" :rows="1" autosize></x-textarea>
-      <x-textarea :title="$t('title')" :placeholder="$t('Type something')" :show-counter="false" :rows="1" autosize></x-textarea>
+      <x-textarea :title="$t('title')" required :placeholder="$t('Type something')" :show-counter="false" :rows="1" autosize></x-textarea>
     </group>
     <group :title="$t('set height=200')">
       <x-textarea :title="$t('title')" :max="200" :placeholder="$t('placeholder')" :show-counter="false" :height="200" :rows="8" :cols="30"></x-textarea>

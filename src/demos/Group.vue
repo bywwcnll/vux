@@ -52,8 +52,8 @@
 <script>
   import { K12Upload, GroupTitle, Group, Cell, XInput, Selector, PopupPicker, Datetime, XNumber, ChinaAddressData, XAddress, XTextarea, XSwitch } from 'k12vux'
 
-  const imgurl1 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530011862663&di=b61bde672c28a5bce0a8a7d033b60651&imgtype=0&src=http%3A%2F%2Fam.zdmimg.com%2F201511%2F12%2F5644a9d9cc6a8.jpg_a200.jpg'
-  const imgurl2 = 'https://sjbz-fd.zol-img.com.cn/t_s320x510c/g5/M00/0F/05/ChMkJlsZ4CCIChwoAAXw0q4yG1gAAo30wNa8a0ABfDq759.jpg'
+  const imgurl1 = 'http://static.fuwo.com/upload/attachment/1602/19/a501971ad6da11e5a84b00163e00254c.jpg'
+  const imgurl2 = 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1532078542&di=698138658162761e2f1951c45670ab3f&src=http://pic36.photophoto.cn/20150713/0032018153945140_b.jpg'
 
   export default {
     components: {
@@ -72,7 +72,28 @@
     },
     data () {
       return {
-        uploadPreviewData: [imgurl1, imgurl2, imgurl1],
+        uploadPreviewData: [
+          {
+            thumbnailUrl: imgurl1,
+            previewUrl: imgurl1
+          },
+          {
+            thumbnailUrl: imgurl2,
+            previewUrl: imgurl2
+          },
+          {
+            thumbnailUrl: imgurl2,
+            previewUrl: imgurl2
+          },
+          {
+            thumbnailUrl: imgurl1,
+            previewUrl: imgurl1
+          },
+          {
+            thumbnailUrl: imgurl1,
+            previewUrl: imgurl1
+          }
+        ],
         addressData: ChinaAddressData,
         addressValue: ['广东省', '深圳市', '南山区'],
         value1: '张三',

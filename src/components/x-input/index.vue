@@ -556,6 +556,9 @@ export default {
   text-align: center;
 }
 .vux-x-input .vux-input-icon {
+  display: block;
+  height: 30px;
+  overflow: hidden;
   font-size: 21px;
 }
 .vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before {

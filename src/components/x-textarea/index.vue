@@ -1,6 +1,6 @@
 <template>
   <div class="weui-cell vux-x-textarea">
-    <div class="weui-cell__hd">
+    <div class="weui-cell__hd" :class="{'vux-cell-required': required}">
       <div :style="labelStyles" v-if="hasRestrictedLabel">
         <slot name="restricted-label"></slot>
       </div>
@@ -97,7 +97,9 @@ export default {
       type: String,
       default: 'false'
     },
-    autosize: Boolean // prop.autosize
+    autosize: Boolean, // prop.autosize
+     /* 基教定制 */
+    required: Boolean
   },
   created () {
     this.currentValue = this.value
@@ -189,5 +191,16 @@ export default {
 
 .vux-x-textarea.weui-cell  {
   align-items: flex-start;
+}
+.vux-cell-required {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    content: '*';
+    color: red;
+  }
 }
 </style>
