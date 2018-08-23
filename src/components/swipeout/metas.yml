@@ -65,6 +65,12 @@ swipeout-item:
     right-menu:
       zh-CN: 右菜单
   events:
+    on-start:
+      zh-CN: 滑动前触发
+    on-move:
+      zh-CN: 滑动中触发
+    on-transitionend:
+      zh-CN: 滑动动画结束后触发
     on-open:
       zh-CN: 菜单完全打开时触发
     on-close:

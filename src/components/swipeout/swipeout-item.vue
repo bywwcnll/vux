@@ -95,6 +95,7 @@ export default {
       const touch = ev.touches ? ev.touches[0] : ev
       this.pageX = touch.pageX
       this.pageY = touch.pageY
+      this.$emit('on-start')
     },
     move (ev) {
       if (this.disabled) {
@@ -144,6 +145,7 @@ export default {
         }
         ev.preventDefault()
       }
+      this.$emit('on-move')
     },
     end (ev) {
       if (this.disabled) {
@@ -207,6 +209,7 @@ export default {
             self.isAnimated = false
             target.removeEventListener('webkitTransitionEnd', cb)
             target.removeEventListener('transitionend', cb)
+            self.$emit('on-transitionend', self.isOpen)
           }
         })(this, this.target)
 

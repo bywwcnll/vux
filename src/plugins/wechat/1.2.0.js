@@ -48,12 +48,13 @@ let wx
       var b = new Image;
       if (E.appId = F.appId, E.initTime = D.initEndTime - D.initStartTime, E.preVerifyTime = D.preVerifyEndTime - D.preVerifyStartTime, x) {
         var c = "https://open.work.weixin.qq.com/wwopen/report/sdk?v=" + E.version + "&o=" + E.isPreVerifyOk + "&cv=" + E.clientVersion + "&appid=" + E.appId + "&nt=pc&it=" + E.initTime + "&pt=" + E.preVerifyTime + "&url=" + E.url;
-        b.src = c
+        // b.src = c
       } else I.getNetworkType({
         isInnerInvoke: !0,
         success: function (a) {
           E.networkType = a.networkType;
-          var c = "https://open.work.weixin.qq.com/wwopen/report/sdk?v=" + E.version + "&o=" + E.isPreVerifyOk + "&cv=" + E.clientVersion + "&appid=" + E.appId + "&nt=" + E.networkType + "&it=" + E.initTime + "&pt=" + E.preVerifyTime + "&url=" + E.url; b.src = c
+          var c = "https://open.work.weixin.qq.com/wwopen/report/sdk?v=" + E.version + "&o=" + E.isPreVerifyOk + "&cv=" + E.clientVersion + "&appid=" + E.appId + "&nt=" + E.networkType + "&it=" + E.initTime + "&pt=" + E.preVerifyTime + "&url=" + E.url;
+          // b.src = c
         }
       })
     }

@@ -41,6 +41,7 @@ export default {
   font-size: 14px;
   color: @swipeout-button-font-color;
   border: none;
+  outline: none;
 }
 .vux-swipeout-content {
   position: relative;
