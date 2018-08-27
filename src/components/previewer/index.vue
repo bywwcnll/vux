@@ -55,6 +55,11 @@ import objectAssign from 'object-assign'
 
 export default {
   name: 'previewer',
+  data () {
+    return {
+      isLoading: false
+    }
+  },
   computed: {
     imgs () {
       return this.list.map(one => {
@@ -131,6 +136,7 @@ export default {
       this.photoswipe.init()
       this.photoswipe.listen('close', () => {
         this.$emit('on-close')
+        this.isLoading = false
       })
       this.photoswipe.listen('afterChange', (a, b) => {
         this.$emit('on-index-change', {
@@ -139,7 +145,10 @@ export default {
       })
     },
     show (index) {
-      this.init(index)
+      if (!this.isLoading) {
+        this.isLoading = true
+        this.init(index)
+      }
     },
     getCurrentIndex () {
       return this.photoswipe.getCurrentIndex()

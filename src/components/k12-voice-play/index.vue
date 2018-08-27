@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
-      <x-icon class="k12-voice-play-icon-delete" type="minus-circled"></x-icon>
+      <img class="k12-voice-play-icon-delete" :src="deleteIcon" alt=""/>
     </div>
     <div class="k12-voice-play-audioC">
       <audio ref="audio" :src="audioSrc">您的浏览器不支持 audio 标签。</audio>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import deleteIcon from './delete.png'
 export default {
   name: 'k12-voice-play',
   props: {
@@ -54,6 +55,7 @@ export default {
   },
   data () {
     return {
+      deleteIcon,
       controlStatus: 'stop',
       audioStatus: 'stoped',
 
@@ -234,9 +236,8 @@ export default {
     margin-left: 15px;
     .k12-flex-center;
     .k12-voice-play-icon-delete {
-      width: 25px;
-      height: 25px;
-      fill: #F43530;
+      display: block;
+      width: 18px;
     }
   }
 }

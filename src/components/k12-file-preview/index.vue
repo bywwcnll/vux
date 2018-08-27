@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { isMobile, downloadFile } from '../../libs/k12Util.js'
 export default {
   name: 'k12-file-preview',
   props: {
@@ -71,6 +72,10 @@ export default {
       }
       if (!this.url) {
         alert('未设置url')
+        return
+      }
+      if (!isMobile()) {
+        downloadFile({ action: this.url })
         return
       }
       if (this.previewType === 'wx') {

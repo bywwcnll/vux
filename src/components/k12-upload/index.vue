@@ -43,11 +43,14 @@
         </div>
       </div>
     </template>
-    <previewer ref="previewer" :list="previewerList"></previewer>
+    <div v-transfer-dom>
+      <previewer ref="k12uploadpreviewer" :list="previewerList"></previewer>
+    </div>
   </div>
 </template>
 
 <script>
+import TransferDom from '../../directives/transfer-dom/index.js'
 import previewer from '../previewer'
 import imgFix from './imgFix'
 import cleanStyle from '../../libs/clean-style'
@@ -57,6 +60,9 @@ export default {
   name: 'k12-upload',
   components: {
     previewer, imgFix
+  },
+  directives: {
+    TransferDom
   },
   props: {
     title: {
@@ -203,7 +209,7 @@ export default {
       }
     },
     onPerview (index, itemIndex) {
-      this.$refs.previewer.show((index * this.rowLength) + itemIndex)
+      this.$refs.k12uploadpreviewer.show((index * this.rowLength) + itemIndex)
     },
     getLocalImgDataPromise (localId) {
       return new Promise((resolve, reject) => {
@@ -232,15 +238,15 @@ export default {
           count: this.count - this.formData.length, /* 默认9 */
           sizeType: ['original', 'compressed'], /* 可以指定是原图还是压缩图，默认二者都有 */
           sourceType: ['album', 'camera'], /* 可以指定来源是相册还是相机，默认二者都有 */
-          defaultCameraMode: 'batch', /* 表示进入拍照界面的默认模式，目前有normal与batch两种选择，normal表示普通单拍模式，batch表示连拍模式，不传该参数则为normal模式。（注：用户进入拍照界面仍然可自由切换两种模式） */
+          defaultCameraMode: 'normal', /* 表示进入拍照界面的默认模式，目前有normal与batch两种选择，normal表示普通单拍模式，batch表示连拍模式，不传该参数则为normal模式。（注：用户进入拍照界面仍然可自由切换两种模式） */
           success: async res => {
             /* 返回选定照片的本地ID列表，
             andriod中localId可以作为img标签的src属性显示图片；
             而在IOS中需通过getLocalImgData获取图片base64数据，从而用于img标签的显示 */
             let localIds = res.localIds
             let allLocalImgData = []
-            if (window.navigator.userAgent.indexOf('iPhone') > -1) {
-              /* Iphone手机 */
+            if (window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+              /* IOS平台 */
               let allLocalImgDataPromise = []
               for (let i = 0; i < localIds.length; i++) {
                 allLocalImgDataPromise.push(this.getLocalImgDataPromise(localIds[i]))
@@ -327,6 +333,7 @@ export default {
           border-radius: 50%;
           background-color: rgba(0, 0, 0, 0.5);
           overflow: hidden;
+          .k12-flex-center;
           .k12-upload-img-close-icon {
             fill: #fff;
           }
