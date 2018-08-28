@@ -95,7 +95,7 @@
         <img slot="right-full-height" src="https://ws1.sinaimg.cn/large/663d3650gy1fq684go3glj203m01hmwy.jpg">
       </x-input>
       <x-input title="发送验证码" class="weui-vcode">
-        <x-button slot="right" type="primary" mini style="display: block;">发送验证码</x-button>
+        <x-button slot="right" type="primary" mini>发送验证码</x-button>
       </x-input>
     </group>
 

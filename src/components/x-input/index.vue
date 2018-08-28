@@ -123,7 +123,7 @@
       @keyup="onKeyUp"
       ref="input"/>
     </div>
-    <div class="weui-cell__ft">
+    <div class="weui-cell__ft k12vux-input-ft">
       <icon type="clear" v-show="!hasRightFullHeightSlot && !equalWith && showClear && currentValue !== '' && !readonly && !disabled && isFocus" @click.native="clear"></icon>
 
       <icon @click.native="onClickErrorIcon" class="vux-input-icon" type="warn" :title="!valid ? firstError : ''" v-show="showWarn"></icon>
@@ -134,7 +134,9 @@
       <icon type="success" class="vux-input-icon" v-show="novalidate && iconType === 'success'"></icon>
       <icon type="warn" class="vux-input-icon" v-show="novalidate && iconType === 'error'"></icon>
 
-      <slot name="right"></slot>
+      <div v-if="hasRightSlot" class="k12vux-input-ft-rightC">
+        <slot name="right"></slot>
+      </div>
       <div v-if="hasRightFullHeightSlot" class="vux-x-input-right-full">
         <slot name="right-full-height"></slot>
       </div>
@@ -203,6 +205,9 @@ export default {
   beforeMount () {
     if (this.$slots && this.$slots['restricted-label']) {
       this.hasRestrictedLabel = true
+    }
+    if (this.$slots && this.$slots['right']) {
+      this.hasRightSlot = true
     }
     if (this.$slots && this.$slots['right-full-height']) {
       this.hasRightFullHeightSlot = true
@@ -487,6 +492,7 @@ export default {
   },
   data () {
     return {
+      hasRightSlot: false,
       hasRightFullHeightSlot: false,
       hasRestrictedLabel: false,
       firstError: '',
@@ -556,10 +562,13 @@ export default {
   text-align: center;
 }
 .vux-x-input .vux-input-icon {
-  display: block;
+  // display: block;
   height: 30px;
   overflow: hidden;
   font-size: 21px;
+}
+.vux-input-icon {
+  line-height: 30px;
 }
 .vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before {
   font-size: 21px;
@@ -602,5 +611,13 @@ export default {
     content: '*';
     color: red;
   }
+}
+.k12vux-input-ft {
+  font-size: 0;
+}
+.k12vux-input-ft-rightC {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 5px;
 }
 </style>
