@@ -266,6 +266,7 @@ export default {
         .k12-tree-popup-icon {
           position: absolute;
           right: -22px;
+          top: 18px;
           fill: #999;
         }
       }
