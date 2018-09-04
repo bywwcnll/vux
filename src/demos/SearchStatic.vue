@@ -2,9 +2,11 @@
   <div>
     <img src="https://ws1.sinaimg.cn/large/663d3650gy1fq685v5csyj208c06ygm0.jpg" style="width: 100%">
     <br>
-    <search @on-submit="onSubmit" :auto-fixed="autoFixed" @on-focus="onFocus" @on-cancel="onCancel"></search>
+    <search v-model="value1" @on-submit="onSubmit" :auto-fixed="autoFixed" @on-focus="onFocus" @on-cancel="onCancel"></search>
     <divider>set value</divider>
-    <search @on-submit="onSubmit" :auto-fixed="false" v-model="value2" @on-focus="onFocus" @on-cancel="onCancel"></search>
+    <search :auto-fixed="false" :debounce="500"
+     @on-focus="onFocus" @on-cancel="onCancel"
+     @on-change="onChange" @on-submit="onSubmit"></search>
   </div>
 </template>
 
@@ -31,6 +33,9 @@ export default {
     },
     onFocus () {
       console.log('on focus')
+    },
+    onChange (v) {
+      console.log('onChange: ', v)
     }
   },
   data () {
@@ -38,8 +43,7 @@ export default {
       results: [],
       autoFixed: false,
       value: '',
-      value1: 'hello',
-      value2: 'k12vux'
+      value1: 'hello'
     }
   }
 }

@@ -39,7 +39,7 @@
       </popup>
     </div>
     <div v-transfer-dom>
-      <popup v-model="showViewPopup" height="50%">
+      <popup v-model="showViewPopup" :height="viewPopupHeight">
         <div class="k12-tree-popup-viewPopupC">
           <div class="k12-tree-popup-viewPopup-header">
             <div class="k12-tree-popup-viewPopup-header-left" @click="showViewPopup = false">取消</div>
@@ -83,6 +83,10 @@ export default {
     load: {
       type: Function,
       required: true
+    },
+    viewPopupHeight: {
+      type: String,
+      default: '100%'
     }
   },
   directives: {

@@ -28,6 +28,11 @@ props:
     default: "-"
     en: "function of load data"
     zh-CN: "数据加载方法，必需"
+  viewPopupHeight:
+    type: String
+    default: "100%"
+    en: "view popup's height"
+    zh-CN: "预览已选择的弹框高度"
 changes:
   v1.0.1:
     en:

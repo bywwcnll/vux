@@ -74,6 +74,7 @@ placeholder:
 </i18n>
 
 <script>
+import Debounce from '../../tools/debounce'
 import uuidMixin from '../../mixins/uuid'
 
 export default {
@@ -108,11 +109,23 @@ export default {
       type: String,
       default: 'fixed'
     },
-    autoScrollToTop: Boolean
+    autoScrollToTop: Boolean,
+    /* k12定制 */
+    debounce: Number
   },
   created () {
     if (this.value) {
       this.currentValue = this.value
+    }
+    if (this.debounce) {
+      this._debounce = Debounce(() => {
+        this.$emit('on-change', this.currentValue)
+      }, this.debounce)
+    }
+  },
+  beforeDestroy () {
+    if (this._debounce) {
+      this._debounce.cancel()
     }
   },
   computed: {
@@ -127,7 +140,11 @@ export default {
     emitEvent () {
       this.$nextTick(() => {
         this.$emit('input', this.currentValue)
-        this.$emit('on-change', this.currentValue)
+        if (this._debounce) {
+          this._debounce()
+        } else {
+          this.$emit('on-change', this.currentValue)
+        }
       })
     },
     onComposition ($event, type) {
@@ -196,7 +213,9 @@ export default {
       currentValue: '',
       isCancel: true,
       isFocus: false,
-      isFixed: false
+      isFixed: false,
+      /* k12定制 */
+      _debounce: null
     }
   },
   watch: {

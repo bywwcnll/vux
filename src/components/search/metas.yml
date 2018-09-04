@@ -45,6 +45,11 @@ props:
     default: false
     en: if auto scroll to top when input gets focus
     zh-CN: '`Safari`下弹出键盘时可能会出现看不到input，需要手动滚动，启用该属性会在fix时滚动到顶端'
+  debounce:
+    type: Number
+    default: ''
+    en: debounce time
+    zh-CN: '`debounce`用以限制`on-change`事件触发。如果你需要根据用户输入做`ajax`请求，建议开启以节省无效请求和服务器资源，单位为毫秒'
 events:
   on-submit:
     params: '`(value)`'

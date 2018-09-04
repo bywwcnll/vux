@@ -9,6 +9,7 @@
       position="absolute"
       auto-scroll-to-top
       top="46px"
+      :debounce="500"
       @on-focus="onFocus"
       @on-cancel="onCancel"
       @on-submit="onSubmit"
