@@ -3,14 +3,14 @@
     <div class="k12-tree-popup-cc-iconC" @click="onSelect(data)">
       <template v-if="!isDepth || !onlySelectUser">
         <x-icon v-if="!selected" class="k12-tree-popup-cc-icon" type="ios-circle-outline" size="26"></x-icon>
-        <x-icon v-else="selected" class="k12-tree-popup-cc-icon active" type="ios-checkmark" size="26"></x-icon>
+        <x-icon v-if="selected" class="k12-tree-popup-cc-icon active" type="ios-checkmark" size="26"></x-icon>
       </template>
     </div>
     <div class="k12-tree-popup-cc-textC" @click="onNavNext(data)">
       <div v-if="isDepth" class="k12-tree-popup-cct-icon">
         <x-icon class="k12-tree-popup-cct-icon-folder" type="ios-folder" size="20"></x-icon>
       </div>
-      <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="avatar">
+      <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="">
       <div class="k12-tree-popup-cc-text">
         <div class="k12-tree-popup-cct-dept">{{data.deptName || data.userName}}</div>
         <div v-if="isDepth && !hideRightArrow" class="k12-tree-popup-cct-rightC">
