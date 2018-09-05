@@ -82,9 +82,9 @@ const Scroller = function (container, options) {
     node.addEventListener('click', function () {
       var selectedIndex = self.options.data.findIndex(el => {
         if (typeof el === 'number' || typeof el === 'string') {
-          return el === self.value
+          return String(el) === self.value
         } else if (typeof el === 'object' && el.value) {
-          return el.value === self.value
+          return String(el.value) === self.value
         }
         return -1
       })
