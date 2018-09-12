@@ -11,7 +11,10 @@
       </div>
       <div class="k12-voice-play-info">
         <div class="k12-voice-play-info-name">{{filename}}</div>
-        <div class="k12-voice-play-info-size">{{filesizeDisplay}}</div>
+        <div class="k12-voice-play-info-size">
+          <span>{{filesizeDisplay}}</span>
+          <span v-if="audioSeconds">{{currentTime | timeFilter}}/{{audioSeconds | timeFilter}}</span>
+        </div>
       </div>
     </div>
     <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
@@ -59,17 +62,24 @@ export default {
       controlStatus: 'stop',
       audioStatus: 'stoped',
 
+      h5PlayVoiceSeconds: 0,
+
       wxPlayVoiceIntervalTimer: null,
       wxPlayVoiceSeconds: 0
     }
   },
   mounted () {
     if (this.isHttpAudio) {
-      this.$refs.audio.onplay = () => {
+      let audioDom = this.$refs.audio
+      audioDom.onplay = () => {
         this.audioStatus = 'playing'
       }
-      this.$refs.audio.onended = () => {
+      audioDom.ontimeupdate = () => {
+        this.h5PlayVoiceSeconds = audioDom.currentTime
+      }
+      audioDom.onended = () => {
         this.audioStatus = 'stoped'
+        this.h5PlayVoiceSeconds = 0
       }
     }
   },
@@ -98,6 +108,13 @@ export default {
     },
     isWXAudio () {
       return this.audioType === 'wx' && this.audioSrc
+    },
+    currentTime () {
+      if (this.isHttpAudio) {
+        return Math.floor(this.h5PlayVoiceSeconds)
+      } else if (this.isWXAudio) {
+        return this.wxPlayVoiceSeconds
+      }
     }
   },
   watch: {
@@ -105,6 +122,24 @@ export default {
       if (v === 'stoped') {
         this.controlStatus = 'stop'
       }
+    }
+  },
+  filters: {
+    timeFilter (v) {
+      v = Number(v)
+      let fillZero = (t) => String((t < 10 ? '0' + t : t))
+      if (v) {
+        let min = 0
+        let sec = 0
+        min = Math.floor(v / 60)
+        if (min > 0) {
+          sec = v % 60
+        } else {
+          sec = v
+        }
+        return min + ':' + fillZero(sec)
+      }
+      return '0:00'
     }
   },
   methods: {
@@ -118,6 +153,7 @@ export default {
     },
     commonPlay () {
       if (this.isHttpAudio) {
+        this.h5PlayVoiceSeconds = 0
         this.$refs.audio.play()
       } else if (this.isWXAudio) {
         this.$wechat.playVoice({
@@ -138,6 +174,7 @@ export default {
     },
     commonStop () {
       if (this.isHttpAudio) {
+        this.h5PlayVoiceSeconds = 0
         this.$refs.audio.pause()
         this.$refs.audio.currentTime = 0
         this.audioStatus = 'stoped'
@@ -229,6 +266,9 @@ export default {
         font-size: 12px;
         color: #999;
         height: 19px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }
