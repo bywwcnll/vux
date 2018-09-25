@@ -72,6 +72,7 @@ export default {
       if (this.styles.transform.indexOf('(0px, 0, 0)') === -1) {
         this._setClose(200)
         ev.preventDefault()
+        ev.stopPropagation()
       }
     },
     onItemClick () {
