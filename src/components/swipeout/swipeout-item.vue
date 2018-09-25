@@ -68,9 +68,10 @@ export default {
       })
       this[`${direction}MenuWidth`] = width
     },
-    onContentClick () {
+    onContentClick (ev) {
       if (this.styles.transform.indexOf('(0px, 0, 0)') === -1) {
         this._setClose(200)
+        ev.preventDefault()
       }
     },
     onItemClick () {
@@ -88,7 +89,7 @@ export default {
           openItems.forEach(item => {
             item.setOffset(0, true)
           })
-          ev.preventDefault()
+          // ev.preventDefault()
           return
         }
       }
