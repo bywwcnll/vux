@@ -28,6 +28,7 @@
         <inline-calendar
           v-model="currentValue"
           @on-change="onCalendarValueChange"
+          @on-view-change="onCalendarViewChange"
           @on-select-single-date="onSelectSingleDate"
           :render-month="renderMonth"
           :start-date="startDate"
@@ -200,6 +201,9 @@ export default {
         this.show = false
         this.$emit('input', pure(val))
       }
+    },
+    onCalendarViewChange (data, index) {
+      this.$emit('on-view-change', data, index)
     },
     onSelectSingleDate () {
       if (!this.shouldConfirm) {
