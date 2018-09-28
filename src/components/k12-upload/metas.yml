@@ -43,6 +43,11 @@ props:
     default: 9
     en: "上传数量限制"
     zh-CN: "上传数量限制"
+  widthComputeMode:
+    type: String
+    default: current
+    en: "宽度计算方式"
+    zh-CN: "宽度计算方式 ['current', 'window']"
 changes:
   v1.0.1:
     en:

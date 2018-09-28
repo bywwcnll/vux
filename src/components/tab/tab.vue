@@ -1,7 +1,8 @@
 <template>
   <div
     class="vux-tab-wrap"
-    :class="barPosition === 'top' ? 'vux-tab-bar-top' : ''">
+    :class="barPosition === 'top' ? 'vux-tab-bar-top' : ''"
+    ref="vux-tab-wrap">
     <div class="vux-tab-container">
       <div
         class="vux-tab"
@@ -62,18 +63,28 @@ export default {
       validator (val) {
         return ['bottom', 'top'].indexOf(val) !== -1
       }
+    },
+    widthComputeMode: {
+      type: String,
+      default: 'current',
+      validator (val) {
+        return ['current', 'window'].indexOf(val) !== -1
+      }
     }
   },
   computed: {
+    computeWidth () {
+      return this.widthComputeMode === 'window' ? window.innerWidth : this.$refs['vux-tab-wrap'].clientWidth
+    },
     barLeft () {
       if (this.hasReady) {
-        const count = this.scrollable ? (window.innerWidth / this.$children[this.currentIndex || 0].$el.getBoundingClientRect().width) : this.number
+        const count = this.scrollable ? (this.computeWidth / this.$children[this.currentIndex || 0].$el.getBoundingClientRect().width) : this.number
         return `${this.currentIndex * (100 / count)}%`
       }
     },
     barRight () {
       if (this.hasReady) {
-        const count = this.scrollable ? (window.innerWidth / this.$children[this.currentIndex || 0].$el.getBoundingClientRect().width) : this.number
+        const count = this.scrollable ? (this.computeWidth / this.$children[this.currentIndex || 0].$el.getBoundingClientRect().width) : this.number
         return `${(count - this.currentIndex - 1) * (100 / count)}%`
       }
     },
