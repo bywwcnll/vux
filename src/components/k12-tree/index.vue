@@ -246,6 +246,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   .k12-tree-popup-deptPath {
     z-index: 1;
     box-shadow: 1px 1px 5px #ddd;
@@ -325,7 +326,7 @@ export default {
     }
     .k12-tree-popup-footer-confirm {
       width: 80px;
-      height: 25px;
+      height: 35px;
       background-color: @k12-flow-border-active-color;
       color: #fff;
       border-radius: 3px;
