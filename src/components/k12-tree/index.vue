@@ -87,7 +87,8 @@ export default {
     viewPopupHeight: {
       type: String,
       default: '100%'
-    }
+    },
+    limit: Number
   },
   directives: {
     TransferDom
@@ -195,6 +196,14 @@ export default {
         tmp.splice(index, 1)
         this.selectedList = tmp
       } else {
+        if (this.limit) {
+          if (this.limit === 1) {
+            this.selectedList = [data]
+            return
+          } else if (this.limit <= this.selectedList.length) {
+            return
+          }
+        }
         let deptList = this.selectedList.filter(el => this.isDepth(el))
         let userList = this.selectedList.filter(el => !this.isDepth(el))
         if (this.isDepth(data)) {
@@ -280,6 +289,7 @@ export default {
     flex: 1;
     overflow: auto;
     margin-top: 10px;
+    font-size: 16px;
     .k12-tree-popup-content {
       border-width: 1px 0 1px 0;
       border-style: solid;
@@ -315,6 +325,7 @@ export default {
     }
     .k12-tree-popup-footer-confirm {
       width: 80px;
+      height: 25px;
       background-color: @k12-flow-border-active-color;
       color: #fff;
       border-radius: 3px;

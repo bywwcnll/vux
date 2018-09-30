@@ -1,25 +1,51 @@
 <template>
   <div style="margin: 20px 0;">
-    <button @click="onClick">点我</button>
-    <k12-tree v-model="selectedList" :show.sync="showTree"
+    <group title="部门人员选择控件">
+      <cell title="普通用法" is-link @click.native="handleShow(1)"></cell>
+      <cell title="只选人" is-link @click.native="handleShow(2)"></cell>
+      <cell title="增加数量限制1" is-link @click.native="handleShow(3)"></cell>
+      <cell title="增加数量限制5" is-link @click.native="handleShow(4)"></cell>
+    </group>
+    <group title="结果信息">
+      <div>{{ selectedList && selectedList.length > 0 ? JSON.stringify(selectedList) : ''}}</div>
+    </group>
+
+    <k12-tree v-model="selectedList1" :show.sync="showTree1"
       :load="load"></k12-tree>
-    <div>已选择：</div>
-    <div>{{JSON.stringify(selectedList)}}</div>
+    <k12-tree v-model="selectedList2" :show.sync="showTree2" onlySelectUser
+      :load="load"></k12-tree>
+    <k12-tree v-model="selectedList3" :show.sync="showTree3" :limit="1"
+      :load="load"></k12-tree>
+    <k12-tree v-model="selectedList4" :show.sync="showTree4" :limit="5"
+      :load="load"></k12-tree>
   </div>
 </template>
 
 <script>
-import { K12Tree } from 'k12vux'
+import { Cell, Group, K12Tree } from 'k12vux'
 
 export default {
   components: {
-    K12Tree
+    Cell, Group, K12Tree
   },
   created () {},
   data () {
     return {
-      showTree: false,
-      selectedList: []
+      showTree1: false,
+      showTree2: false,
+      showTree3: false,
+      showTree4: false,
+      selectedList1: [],
+      selectedList2: [],
+      selectedList3: [],
+      selectedList4: [],
+
+      showType: null
+    }
+  },
+  computed: {
+    selectedList () {
+      return this['selectedList' + this.showType]
     }
   },
   methods: {
@@ -43,11 +69,12 @@ export default {
         }
         setTimeout(() => {
           resolve(Math.random() > 0.2 ? list : [])
-        }, 1000)
+        }, 500)
       })
     },
-    onClick () {
-      this.showTree = true
+    handleShow (type) {
+      this.showType = type
+      this['showTree' + type] = true
     }
   }
 }

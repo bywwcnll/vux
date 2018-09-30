@@ -33,6 +33,11 @@ props:
     default: "100%"
     en: "view popup's height"
     zh-CN: "预览已选择的弹框高度"
+  limit:
+    type: Number
+    default:
+    en: "limit"
+    zh-CN: "数量限制，默认无限制"
 changes:
   v1.0.1:
     en:
