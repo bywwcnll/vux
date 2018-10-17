@@ -107,6 +107,11 @@ props:
     params: '`(date)`'
     en: check if a date should be disabled
     zh-CN: 自定义标记特定日期是否应该禁用，返回 true 表示禁用，false 表示不禁用，不返回表示和原有逻辑一致(这样不影响和 disable-weekend 等禁用属性同时使用)
+  firstDayOfWeek:
+    type: Number
+    default: 0
+    en: firstDayOfWeek
+    zh-CN: 周起始日 0(周日)-6(周六)
 slots:
   each-day:
     version: v2.3.5

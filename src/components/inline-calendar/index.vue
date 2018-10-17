@@ -26,13 +26,13 @@
     <table>
       <thead v-show="!hideWeekList">
         <tr>
-          <th v-for="(week, index) in _weeksList" class="week" :class="`is-week-list-${index}`">{{ week || $t('week_day_' + index /* en: week, zh-CN: week */) }}</th>
+          <th v-for="(week, index) in _weeksList" class="week" :key="index" :class="`is-week-list-${index}`">{{ week || $t('week_day_' + index /* en: week, zh-CN: week */) }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(day,k1) in days">
+        <tr v-for="(day,k1) in days" :key="k1">
           <td
-          v-for="(child,k2) in day"
+          v-for="(child,k2) in day" :key="k2"
           :data-date="formatDate(year, month, child)"
           :data-current="currentValue"
           :class="buildClass(k2, child)"
@@ -130,6 +130,8 @@ export default {
   },
   computed: {
     _weeksList () {
+      let zhArray = ['日', '一', '二', '三', '四', '五', '六']
+      let enArray = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
       if (this.weeksList && this.weeksList.length) {
         return this.weeksList
       }
@@ -139,14 +141,16 @@ export default {
           if (process.env.NODE_ENV === 'development') {
             console.warn('[VUX warn] 抱歉，inline-calendar 组件需要升级 vux-loader 到最新版本才能正常使用')
           }
-          return ['日', '一', '二', '三', '四', '五', '六']
+          return zhArray.slice(this.firstDayOfWeek).concat(zhArray.slice(0, this.firstDayOfWeek))
         } else {
           if (V_LOCALE === 'en') { // eslint-disable-line
-            return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+            return enArray.slice(this.firstDayOfWeek).concat(enArray.slice(0, this.firstDayOfWeek))
           } else if (V_LOCALE === 'zh-CN') { // eslint-disable-line
-            return ['日', '一', '二', '三', '四', '五', '六']
+            return zhArray.slice(this.firstDayOfWeek).concat(zhArray.slice(0, this.firstDayOfWeek))
           } else if (V_LOCALE === 'MULTI') { // eslint-disable-line
             return [0, 0, 0, 0, 0, 0, 0]
+          } else {
+            return zhArray.slice(this.firstDayOfWeek).concat(zhArray.slice(0, this.firstDayOfWeek))
           }
         }
       }
@@ -320,7 +324,8 @@ export default {
         rangeEnd: this.convertDate(this.endDate),
         returnSixRows: this.returnSixRows,
         disablePast: this.disablePast,
-        disableFuture: this.disableFuture
+        disableFuture: this.disableFuture,
+        firstDayOfWeek: this.firstDayOfWeek
       })
 
       if (this.year === data.year && this.month === data.month && !force) {

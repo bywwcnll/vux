@@ -80,5 +80,10 @@ export default () => ({
     default () {
       return []
     }
+  },
+  // K12定制
+  firstDayOfWeek: {
+    type: Number,
+    default: 0
   }
 })

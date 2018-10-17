@@ -81,7 +81,7 @@ function getRange (disablePast = false, disableFuture = false, rangeBegin, range
   }
 }
 
-export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = true}) {
+export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = true, firstDayOfWeek = 0}) {
   let today = format(new Date(), 'YYYY-MM-DD')
 
   let _splitValue = splitValue(value || today)
@@ -92,7 +92,7 @@ export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRow
     month = _splitValue.month
   }
 
-  var firstDayOfMonth = new Date(year, month, 1).getDay()
+  // var firstDayOfMonth = new Date(year, month, 1).getDay()
   var lastDateOfMonth = new Date(year, month + 1, 0).getDate()
   var lastDayOfLastMonth = new Date(year, month, 0).getDate()
 
@@ -101,23 +101,24 @@ export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRow
   var temp = []
   for (i = 1; i <= lastDateOfMonth; i++) {
     var dow = new Date(year, month, i).getDay()
-      // 第一行
-    if (dow === 0) {
+    let endDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
+    // 第一行
+    if (dow === firstDayOfWeek) {
       temp[line] = []
     } else if (i === 1) {
       temp[line] = []
-
-      var k = lastDayOfLastMonth - firstDayOfMonth + 1
-      for (let j = 0; j < firstDayOfMonth; j++) {
+      let perLengthArray = [0, 1, 2, 3, 4, 5, 6]
+      perLengthArray = perLengthArray.slice(7 - firstDayOfWeek).concat(perLengthArray.slice(0, 7 - firstDayOfWeek))
+      let perLength = perLengthArray[dow]
+      for (let j = perLength - 1; j >= 0; j--) {
         let rs = getPrevTime(year, month)
         temp[line].push({
           year: rs.year,
           month: rs.month,
           month_str: rs.month + 1,
-          day: k,
+          day: lastDayOfLastMonth - j,
           isLastMonth: true
         })
-        k++
       }
     }
 
@@ -132,11 +133,12 @@ export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRow
     }
     temp[line].push(options)
 
-    if (dow === 6) {
+    if (dow === endDayOfWeek) {
       line++
     } else if (i === lastDateOfMonth) {
       let k = 1
-      for (dow; dow < 6; dow++) {
+      let tempEndLength = temp[line].length
+      for (let l = 0; l < 7 - tempEndLength; l++) {
         let rs = getNextTime(year, month)
         temp[line].push({
           year: rs.year,
@@ -149,7 +151,6 @@ export function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRow
       }
     }
   }
-
   if (returnSixRows && temp.length === 5) {
     let rs = getNextTime(year, month)
     let start = temp[4][6].isNextMonth ? temp[4][6].day : 0

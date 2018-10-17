@@ -22,7 +22,8 @@
   :disable-past="disablePast"
   :disable-future="disableFuture"
   :disable-weekend="disableWeekend"
-  :disable-date-function="disableDateFunction">
+  :disable-date-function="disableDateFunction"
+  :firstDayOfWeek="1">
   </inline-calendar>
 
   <group>
