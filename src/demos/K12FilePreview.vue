@@ -19,22 +19,22 @@ export default {
     return {
       fileList: [
         {
-          url: 'http://k12.wisedu.com/test1/asserts/word.docx',
+          url: 'http://demo.wysource.com.cn/test1/asserts/word.docx',
           filename: 'word.docx',
           filesize: 377437
         },
         {
-          url: 'http://k12.wisedu.com/test1/asserts/excle.xlsx',
+          url: 'http://demo.wysource.com.cn/test1/asserts/excle.xlsx',
           filename: 'excle.xlsx',
           filesize: 26372
         },
         {
-          url: 'http://k12.wisedu.com/test1/asserts/music.mp3',
+          url: 'http://demo.wysource.com.cn/test1/asserts/music.mp3',
           filename: 'music.mp3',
           filesize: 28915
         },
         {
-          url: 'http://k12.wisedu.com/test1/asserts/movie.mp4',
+          url: 'http://demo.wysource.com.cn/test1/asserts/movie.mp4',
           filename: 'movie.mp4',
           filesize: 1382521
         }
