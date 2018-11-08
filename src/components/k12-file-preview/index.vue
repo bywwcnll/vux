@@ -75,7 +75,7 @@ export default {
         return
       }
       if (!isMobile()) {
-        downloadFile({ action: this.url })
+        downloadFile({ action: this.url, method: 'POST' })
         return
       }
       if (this.previewType === 'wx') {

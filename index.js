@@ -36,6 +36,7 @@ import ClickOutsideDirective from './src/directives/click-outside/index.js'
 import Clocker from './src/components/clocker/index.vue'
 import CloseDialogsPlugin from './src/plugins/close-dialogs/index.js'
 import ColorPicker from './src/components/color-picker/index.vue'
+import Commonloopprogress from './src/components/k12-upload-voice/commonLoopProgress.vue'
 import ConfigPlugin from './src/plugins/config/index.js'
 import Confirm from './src/components/confirm/index.vue'
 import ConfirmPlugin from './src/plugins/confirm/index.js'
@@ -69,12 +70,22 @@ import GridItem from './src/components/grid/grid-item.vue'
 import Group from './src/components/group/index.vue'
 import GroupTitle from './src/components/group-title/index.vue'
 import Icon from './src/components/icon/index.vue'
+import Imgfix from './src/components/k12-upload/imgFix.vue'
 import InlineCalendar from './src/components/inline-calendar/index.vue'
 import InlineDesc from './src/components/inline-desc/index.vue'
 import InlineLoading from './src/components/inline-loading/index.vue'
 import InlineXNumber from './src/components/inline-x-number/index.vue'
 import InlineXSwitch from './src/components/inline-x-switch/index.vue'
 import InviewDirective from './src/directives/inview/index.js'
+import K12FilePreview from './src/components/k12-file-preview/index.vue'
+import K12Flow from './src/components/k12-flow/k12-flow.vue'
+import K12FlowItem from './src/components/k12-flow/k12-flow-item.vue'
+import K12Template from './src/components/k12-template/index.vue'
+import K12Tree from './src/components/k12-tree/index.vue'
+import K12TreeCell from './src/components/k12-tree/k12-tree-cell.vue'
+import K12Upload from './src/components/k12-upload/index.vue'
+import K12UploadVoice from './src/components/k12-upload-voice/index.vue'
+import K12VoicePlay from './src/components/k12-voice-play/index.vue'
 import Loading from './src/components/loading/index.vue'
 import LoadingPlugin from './src/plugins/loading/index.js'
 import LoadMore from './src/components/load-more/index.vue'
@@ -198,6 +209,7 @@ export {
   Clocker,
   CloseDialogsPlugin,
   ColorPicker,
+  Commonloopprogress,
   ConfigPlugin,
   Confirm,
   ConfirmPlugin,
@@ -231,12 +243,22 @@ export {
   Group,
   GroupTitle,
   Icon,
+  Imgfix,
   InlineCalendar,
   InlineDesc,
   InlineLoading,
   InlineXNumber,
   InlineXSwitch,
   InviewDirective,
+  K12FilePreview,
+  K12Flow,
+  K12FlowItem,
+  K12Template,
+  K12Tree,
+  K12TreeCell,
+  K12Upload,
+  K12UploadVoice,
+  K12VoicePlay,
   Loading,
   LoadingPlugin,
   LoadMore,

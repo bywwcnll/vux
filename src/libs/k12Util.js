@@ -5,7 +5,7 @@ export const isMobile = () => {
 }
 
 export const downloadFile = async ({action = '', params = {}, method = 'GET'}) => {
-  if (action.indexOf('?') > -1) {
+  if (method === 'GET' && action.indexOf('?') > -1) {
     let queryStr = action.slice(action.indexOf('?') + 1) || ''
     if (queryStr.length > 0) {
       let queryParamsArray = queryStr.split('&')

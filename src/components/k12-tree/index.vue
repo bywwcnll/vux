@@ -57,6 +57,8 @@
         </div>
       </popup>
     </div>
+    <toast v-model="showToastFlag" type="text" :time="800"
+      is-show-mask position="middle">已包含选中项</toast>
   </div>
 </template>
 
@@ -66,6 +68,7 @@ import TransferDom from '../../directives/transfer-dom/index.js'
 import popup from '../popup'
 import spinner from '../spinner'
 import k12TreeCell from './k12-tree-cell'
+import toast from '../toast'
 
 export default {
   name: 'k12-tree',
@@ -96,7 +99,8 @@ export default {
   components: {
     popup,
     spinner,
-    k12TreeCell
+    k12TreeCell,
+    toast
   },
   created () {
     this.selectedList = this.value
@@ -109,6 +113,7 @@ export default {
   data () {
     return {
       recordIcon,
+      showToastFlag: false,
       showPopup: false,
       showViewPopup: false,
       loaded: false,
@@ -207,7 +212,11 @@ export default {
         let deptList = this.selectedList.filter(el => this.isDepth(el))
         let userList = this.selectedList.filter(el => !this.isDepth(el))
         if (this.isDepth(data)) {
-          deptList.push(data)
+          // if (data.deptPath && deptList.some(el => data.deptPath.indexOf(el.deptPath) === 0)) {
+          //   this.showToastFlag = true
+          // } else {
+            deptList.push(data)
+          // }
         } else {
           userList.push(data)
         }
@@ -233,6 +242,7 @@ export default {
     },
     onConfirm () {
       this.$emit('input', this.selectedList)
+      this.$emit('confirm', this.selectedList)
       this.showPopup = false
     }
   }
