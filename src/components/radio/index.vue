@@ -2,7 +2,7 @@
   <div class="weui-cells_radio" :class="disabled ? 'vux-radio-disabled' : ''">
     <label class="weui-cell weui-cell_radio weui-check__label" :for="`radio_${uuid}_${index}`" v-for="(one, index) in options">
       <div class="weui-cell__bd">
-        <slot name="each-item" :icon="one.icon" :label="getValue(one)" :index="index" :selected="currentValue === getKey(one)">
+        <slot name="each-item" :icon="one.icon" :label="getValue(one)" :index="index" :selected="currentValue === getKey(one)" :row="one">
           <p>
             <img class="vux-radio-icon" :src="one.icon" v-show="one && one.icon">
             <span class="vux-radio-label" :style="currentValue === getKey(one) ? (selectedLabelStyle || '') : ''">{{ one | getValue }}</span>

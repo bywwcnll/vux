@@ -80,11 +80,15 @@ export default {
       }
       if (this.previewType === 'wx') {
         if (this.filesize) {
-          this.$wechat.previewFile({
-            url: this.url,
-            name: this.filename,
-            size: this.filesize
-          })
+          if (window.navigator.userAgent.indexOf('wxwork') > -1) {
+            this.$wechat.previewFile({
+              url: this.url,
+              name: this.filename,
+              size: this.filesize
+            })
+          } else {
+            window.location.href = this.url
+          }
         } else {
           alert('未设置filesize')
         }
