@@ -215,7 +215,7 @@ export default {
           // if (data.deptPath && deptList.some(el => data.deptPath.indexOf(el.deptPath) === 0)) {
           //   this.showToastFlag = true
           // } else {
-            deptList.push(data)
+          deptList.push(data)
           // }
         } else {
           userList.push(data)
