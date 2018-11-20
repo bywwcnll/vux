@@ -163,6 +163,8 @@ import Debounce from '../../tools/debounce'
 
 import mask from 'vanilla-masker'
 
+import { isMobile } from '../../libs/k12Util.js'
+
 const validators = {
   'email': {
     fn: isEmail,
@@ -377,7 +379,13 @@ export default {
     onBlur ($event) {
       this.setTouched()
       this.validate()
-      this.isFocus = false
+      if (isMobile()) {
+        this.isFocus = false
+      } else {
+        setTimeout(() => {
+          this.isFocus = false
+        }, 200)
+      }
       this.$emit('on-blur', this.currentValue, $event)
     },
     onKeyUp (e) {

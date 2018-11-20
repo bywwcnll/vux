@@ -147,7 +147,13 @@ export default {
     show (index) {
       if (!this.isLoading) {
         this.isLoading = true
-        this.init(index)
+        if (this.isDelayShow) {
+          this.$nextTick(() => {
+            this.init(index)
+          })
+        } else {
+          this.init(index)
+        }
       }
     },
     getCurrentIndex () {
@@ -180,6 +186,10 @@ export default {
       default () {
         return {}
       }
+    },
+    isDelayShow: {
+      type: Boolean,
+      default: true
     }
   }
 }
