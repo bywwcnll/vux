@@ -33,19 +33,19 @@ export default {
       showUploadVoice: false,
       list: [
         {
-          audioSrc: 'http://k12.wisedu.com/test1/asserts/music.mp3',
+          audioSrc: 'http://demo.wysource.com.cn/test1/asserts/music.mp3',
           filename: 'music.mp3',
           filesize: 34,
           hideDelete: false
         },
         {
-          audioSrc: 'http://k12.wisedu.com/test1/asserts/music.mp3',
+          audioSrc: 'http://demo.wysource.com.cn/test1/asserts/music.mp3',
           filename: 'music.mp3',
           filesize: 3400,
           hideDelete: false
         },
         {
-          audioSrc: 'http://k12.wisedu.com/test1/asserts/music.mp3',
+          audioSrc: 'http://demo.wysource.com.cn/test1/asserts/music.mp3',
           filename: 'music.mp3',
           filesize: 2345400,
           hideDelete: true

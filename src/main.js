@@ -164,7 +164,7 @@ if (process.env.NODE_ENV === 'production') {
     'chooseInvoice'
   ]
   const url = document.location.href
-  http.get('http://k12.wisedu.com/api/corpwechat/getJsApiSignature?appCode=inspect&url=' + encodeURIComponent(url.split('#')[0])).then(res => {
+  http.get('http://demo.wysource.com.cn/api/corpwechat/getJsApiSignature?appCode=inspect&url=' + encodeURIComponent(url.split('#')[0])).then(res => {
     wx.config({
       beta: true,
       debug: false,
