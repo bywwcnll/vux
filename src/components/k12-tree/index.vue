@@ -3,29 +3,37 @@
     <div v-transfer-dom>
       <popup v-model="showPopup" height="100%">
         <div class="k12-tree-popupC">
-          <div ref="k12-tree-popup-deptPath" class="k12-tree-popup-deptPath">
-            <div v-for="(el, index) in deptPathList" :key="index" class="k12-tree-popup-deptNameC"
-              :class="{active: index === deptPathList.length - 1}"
-              @click="onDeptPath(el, index)">
-              <div class="k12-tree-popup-deptName">
-                <span>{{el.deptName}}</span>
-                <x-icon v-if="index !== deptPathList.length - 1" class="k12-tree-popup-icon" type="chevron-right" size="12"></x-icon>
+          <div class="k12-tree-popup-headerC" :class="{hasNoSearch: !showSearch}">
+            <div ref="k12-tree-popup-deptPath" class="k12-tree-popup-deptPath">
+              <div v-for="(el, index) in deptPathList" :key="index" class="k12-tree-popup-deptNameC"
+                   :class="{active: index === deptPathList.length - 1}"
+                   @click="onDeptPath(el, index)">
+                <div class="k12-tree-popup-deptName">
+                  <span>{{el.deptName}}</span>
+                  <x-icon v-if="index !== deptPathList.length - 1" class="k12-tree-popup-icon" type="chevron-right" size="12"></x-icon>
+                </div>
               </div>
             </div>
+            <div @click="onHide" class="k12-tree-popup-header-close">关闭</div>
           </div>
-          <div class="k12-tree-popup-contentC">
-            <template v-if="loaded">
+          <div v-if="showSearch" class="k12-tree-popup-searchC">
+            <search v-model="searchVal" auto-scroll-to-top position="absolute" :placeholder="searchPlaceholder"
+                    @on-change="onSearchChange" :debounce="800"></search>
+          </div>
+          <div class="k12-tree-popup-contentC" :class="{hasNoSearch: !showSearch}">
+            <template v-if="!isLoading">
               <div v-if="deptAndUserList && deptAndUserList.length > 0" class="k12-tree-popup-content">
                 <k12-tree-cell v-for="(el, index) in deptAndUserList" :key="index"
                   :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
+                  :showDeptNames="showDeptNamesFlag"
                   @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
               </div>
               <div v-if="!deptAndUserList || deptAndUserList.length === 0" class="k12-tree-popup-content-loading">
-                <img class="k12-tree-popup-content-loading-text" :src="recordIcon" alt="" />
+                <img class="k12-tree-popup-content-loading-text" :src="recordIcon" alt=""/>
                 <div class="k12-tree-popup-content-loading-text">~暂无数据~</div>
               </div>
             </template>
-            <div v-if="!loaded" class="k12-tree-popup-content-loading">
+            <div v-if="isLoading" class="k12-tree-popup-content-loading">
               <spinner type="ios"></spinner>
               <div class="k12-tree-popup-content-loading-text">~正在加载中，请稍后~</div>
             </div>
@@ -66,6 +74,7 @@
 import recordIcon from './record.png'
 import TransferDom from '../../directives/transfer-dom/index.js'
 import popup from '../popup'
+import search from '../search'
 import spinner from '../spinner'
 import k12TreeCell from './k12-tree-cell'
 import toast from '../toast'
@@ -91,13 +100,21 @@ export default {
       type: String,
       default: '100%'
     },
-    limit: Number
+    limit: Number,
+    searchPlaceholder: {
+      type: String,
+      default: '按用户名和手机号搜索'
+    },
+    showSearch: Boolean,
+    clearSearchValAfterConfirm: Boolean,
+    searchLoad: Function
   },
   directives: {
     TransferDom
   },
   components: {
     popup,
+    search,
     spinner,
     k12TreeCell,
     toast
@@ -116,12 +133,17 @@ export default {
       showToastFlag: false,
       showPopup: false,
       showViewPopup: false,
-      loaded: false,
+      isLoading: true,
+      showDeptNamesFlag: false,
       deptPathList: [],
       deptAndUserList: [],
 
       selectedList: [],
-      viewPopupSelectedList: []
+      viewPopupSelectedList: [],
+
+      loadedCounts: 0,
+      searchVal: '',
+      isClearedSearchFlag: true
     }
   },
   mounted () {},
@@ -178,12 +200,18 @@ export default {
       return -1
     },
     commonLoad (data) {
-      this.loaded = false
+      this.loadedCounts++
+      this.isLoading = true
       this.load(data).then(res => {
         this.deptAndUserList = res
-        this.loaded = true
+        this.showDeptNamesFlag = false
+        this.isLoading = false
+        if (this.loadedCounts < 2 && res.length === 1 && this.isDepth(res[0])) {
+          this.deptPathList = [...this.deptPathList, res[0]]
+          this.commonLoad(res[0])
+        }
       }).catch(e => {
-        this.loaded = true
+        this.isLoading = false
       })
     },
     async onDeptPath (data, index) {
@@ -243,7 +271,36 @@ export default {
     onConfirm () {
       this.$emit('input', this.selectedList)
       this.$emit('confirm', this.selectedList)
+      if (this.clearSearchValAfterConfirm) {
+        this.searchVal = ''
+      }
       this.showPopup = false
+    },
+    onHide () {
+      if (this.clearSearchValAfterConfirm) {
+        this.searchVal = ''
+      }
+      this.showPopup = false
+    },
+    async onSearchChange (v) {
+      if (v) {
+        this.isClearedSearchFlag = false
+        this.isLoading = true
+        let res = await this.searchLoad(v)
+        this.deptAndUserList = res
+        this.isLoading = false
+        this.showDeptNamesFlag = true
+      } else {
+        if (!this.isClearedSearchFlag) {
+          let deptPathLength = this.deptPathList.length
+          if (deptPathLength > 0) {
+            this.commonLoad(this.deptPathList[deptPathLength - 1])
+          } else {
+            this.deptAndUserList = []
+          }
+          this.isClearedSearchFlag = true
+        }
+      }
     }
   }
 }
@@ -256,103 +313,143 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  .k12-tree-popup-deptPath {
+}
+.k12-tree-popup-headerC {
+  background-color: #fff;
+  height: 50px;
+  display: flex;
+  &.hasNoSearch {
     z-index: 1;
     box-shadow: 1px 1px 5px #ddd;
-    background-color: #fff;
-    white-space: nowrap;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-    .k12-tree-popup-deptNameC {
-      display: inline-block;
-      padding: 0 20px;
-      height: 50px;
-      font-size: 16px;
-      &.active {
-        .k12-tree-popup-deptName {
-          color: @k12-flow-border-active-color;
-          border-bottom: 2px solid @k12-flow-border-active-color;
-        }
-      }
-      .k12-tree-popup-deptName {
-        height: 100%;
-        position: relative;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        color: #333;
-        border-bottom: 2px solid #fff;
-        .k12-tree-popup-icon {
-          position: absolute;
-          right: -22px;
-          top: 18px;
-          fill: #999;
-        }
-      }
-    }
   }
-  .k12-tree-popup-contentC {
-    flex: 1;
-    overflow: auto;
-    margin-top: 10px;
-    font-size: 16px;
-    .k12-tree-popup-content {
-      border-width: 1px 0 1px 0;
-      border-style: solid;
-      border-color: @k12-flow-border-color;
-      background-color: #fff;
-    }
-    .k12-tree-popup-content-loading {
-      height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .k12-tree-popup-content-loading-text {
-        margin-top: 20px;
-        color: #999;
-      }
-    }
-  }
-  .k12-tree-popup-footer {
-    z-index: 1;
-    height: 50px;
-    padding: 0 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: 1px -1px 5px #ddd;
-    font-size: 16px;
-    .k12-tree-popup-footer-selectedList {
-      flex: 1;
-      margin-right: 20px;
-      .k12-flex-center;
-    }
-    .k12-tree-popup-footer-confirm {
-      width: 80px;
-      height: 35px;
-      background-color: @k12-flow-border-active-color;
-      color: #fff;
-      border-radius: 3px;
-      padding: 5px 0;
-      box-sizing: border-box;
-      .k12-flex-center;
-    }
-  }
-  .k12-tree-popupC-mask {
+}
+.k12-tree-popup-header-close {
+  width: 54px;
+  font-size: 16px;
+  color: #3292FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /*
+  &:after {
     position: absolute;
+    content: '';
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
+    right: 55px;
+    width: 200px;
+    background-image: linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
   }
+  */
+}
+.k12-tree-popup-searchC {
+  position: relative;
+  height: 44px;
+  z-index: 1;
+  box-shadow: 1px 1px 5px #ddd;
+}
+.k12-tree-popup-deptPath {
+  flex: 1;
+  width: 0;
+  height: 100%;
+  box-sizing: content-box;
+  padding-bottom: 10px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+.k12-tree-popup-deptNameC {
+  display: inline-block;
+  padding: 0 20px;
+  height: 50px;
+  font-size: 16px;
+  &.active {
+    .k12-tree-popup-deptName {
+      color: @k12-flow-border-active-color;
+      border-bottom: 2px solid @k12-flow-border-active-color;
+    }
+  }
+  .k12-tree-popup-deptName {
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    color: #333;
+    border-bottom: 2px solid #fff;
+    .k12-tree-popup-icon {
+      position: absolute;
+      right: -22px;
+      top: 18px;
+      fill: #999;
+    }
+  }
+}
+.k12-tree-popup-contentC {
+  flex: 1;
+  overflow: auto;
+  font-size: 16px;
+  &.hasNoSearch {
+    margin-top: 10px;
+  }
+  .k12-tree-popup-content {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: @k12-flow-border-color;
+    background-color: #fff;
+  }
+  .k12-tree-popup-content-loading {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .k12-tree-popup-content-loading-text {
+      margin-top: 20px;
+      color: #999;
+    }
+  }
+}
+.k12-tree-popup-footer {
+  z-index: 1;
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px -1px 5px #ddd;
+  font-size: 16px;
+  .k12-tree-popup-footer-selectedList {
+    flex: 1;
+    margin-right: 20px;
+    .k12-flex-center;
+  }
+  .k12-tree-popup-footer-confirm {
+    width: 80px;
+    height: 35px;
+    background-color: @k12-flow-border-active-color;
+    color: #fff;
+    border-radius: 3px;
+    padding: 5px 0;
+    box-sizing: border-box;
+    .k12-flex-center;
+  }
+}
+.k12-tree-popupC-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .k12-tree-popup-viewPopupC {
   height: 100%;

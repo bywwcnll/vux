@@ -12,7 +12,11 @@
       </div>
       <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="">
       <div class="k12-tree-popup-cc-text">
-        <div class="k12-tree-popup-cct-dept">{{data.deptName || data.userName}}</div>
+        <div v-if="!isDepth && showDeptNames" class="k12-tree-popup-cct-deptNames">
+          <span>{{data.userName}}</span>
+          <span>{{data.deptNames}}</span>
+        </div>
+        <div v-else class="k12-tree-popup-cct-dept">{{data.deptName || data.userName}}</div>
         <div v-if="isDepth && !hideRightArrow" class="k12-tree-popup-cct-rightC">
           <x-icon class="k12-tree-popup-cct-right" type="chevron-right" size="12"></x-icon>
         </div>
@@ -31,7 +35,8 @@ export default {
       default: () => { return {} }
     },
     hideRightArrow: Boolean,
-    onlySelectUser: Boolean
+    onlySelectUser: Boolean,
+    showDeptNames: Boolean
   },
   components: {},
   created () {},
@@ -122,6 +127,27 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+    .k12-tree-popup-cct-deptNames {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      > span {
+        width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:first-child {
+          flex: 2;
+        }
+        &:last-child {
+          margin-left: 8px;
+          flex: 3;
+          color: #999;
+          padding-right: 10px;
+          text-align: right;
+        }
+      }
     }
     .k12-tree-popup-cct-rightC {
       width: 40px;
