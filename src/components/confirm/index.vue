@@ -13,7 +13,7 @@
       </div>
       <template v-if="showContent">
         <div class="weui-dialog__bd" v-if="!showInput">
-          <slot><div v-html="content"></div></slot>
+          <slot><div class="vux-content-div" v-html="content"></div></slot>
         </div>
         <div v-else class="vux-prompt">
           <input
@@ -26,8 +26,8 @@
         </div>
       </template>
       <div class="weui-dialog__ft">
-        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" @click="_onCancel">{{cancelText || $t('cancel_text')}}</a>
-        <a href="javascript:;" class="weui-dialog__btn" :class="`weui-dialog__btn_${confirmType}`" @click="_onConfirm">{{confirmText || $t('confirm_text')}}</a>
+        <a v-if="showCancel" href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" @click="_onCancel">{{cancelText || $t('cancel_text')}}</a>
+        <a v-if="showConfirm" href="javascript:;" class="weui-dialog__btn" :class="`weui-dialog__btn_${confirmType}`" @click="_onConfirm">{{confirmText || $t('confirm_text')}}</a>
       </div>
     </x-dialog>
   </div>
@@ -95,6 +95,14 @@ export default {
     confirmType: {
       type: String,
       default: 'primary'
+    },
+    showCancel: {
+      type: Boolean,
+      default: true
+    },
+    showConfirm: {
+      type: Boolean,
+      default: true
     }
   },
   created () {
@@ -180,5 +188,13 @@ export default {
   appearance: none;
   outline: none;
   font-size: 16px;
+}
+
+.vux-content-div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
 }
 </style>
