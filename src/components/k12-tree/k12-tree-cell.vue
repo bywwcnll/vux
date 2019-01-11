@@ -82,18 +82,18 @@ export default {
       border-bottom: 1px solid @k12-flow-border-color;
     }
   }
-  .k12-tree-popup-cc-iconC {
-    width: 40px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .k12-tree-popup-cc-icon {
-      fill: #999;
-      &.active {
-        fill: @k12-flow-border-active-color;
-      }
-    }
+}
+.k12-tree-popup-cc-iconC {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.k12-tree-popup-cc-icon {
+  fill: #999;
+  &.active {
+    fill: @k12-flow-border-active-color;
   }
 }
 .k12-tree-popup-cc-textC {
@@ -103,62 +103,63 @@ export default {
   display: flex;
   align-items: center;
   overflow: hidden;
-  .k12-tree-popup-cct-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 4px;
-    background-color: #e9eef5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .k12-tree-popup-cct-icon-folder {
-      fill: #6fa0e2;
-    }
-  }
-  .k12-tree-popup-cc-text {
-    flex: 1;
-    height: 100%;
-    padding: 0 0 0 10px;
+}
+.k12-tree-popup-cct-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  background-color: #e9eef5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.k12-tree-popup-cct-icon-folder {
+  fill: #6fa0e2;
+}
+.k12-tree-popup-cc-text {
+  flex: 1;
+  height: 100%;
+  padding: 0 0 0 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.k12-tree-popup-cct-dept {
+  width: 0;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.k12-tree-popup-cct-deptNames {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  > span {
+    width: 0;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    .k12-tree-popup-cct-dept {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &:first-child {
+      flex: 2;
     }
-    .k12-tree-popup-cct-deptNames {
-      flex: 1;
-      display: flex;
-      align-items: stretch;
-      > span {
-        width: 0;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        &:first-child {
-          flex: 2;
-        }
-        &:last-child {
-          margin-left: 8px;
-          flex: 3;
-          color: #999;
-          padding-right: 10px;
-          text-align: right;
-        }
-      }
-    }
-    .k12-tree-popup-cct-rightC {
-      width: 40px;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .k12-tree-popup-cct-right {
-        fill: #999;
-      }
+    &:last-child {
+      margin-left: 8px;
+      flex: 3;
+      color: #999;
+      padding-right: 10px;
+      text-align: right;
     }
   }
+}
+.k12-tree-popup-cct-rightC {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.k12-tree-popup-cct-right {
+  fill: #999;
 }
 </style>

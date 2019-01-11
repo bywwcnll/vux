@@ -22,13 +22,13 @@
           </div>
           <div class="k12-tree-popup-contentC" :class="{hasNoSearch: !showSearch}">
             <template v-if="!isLoading">
-              <div v-if="deptAndUserList && deptAndUserList.length > 0" class="k12-tree-popup-content">
-                <k12-tree-cell v-for="(el, index) in deptAndUserList" :key="index"
+              <div v-if="!deptAndUserListIsEmpty" class="k12-tree-popup-content">
+                <k12-tree-cell v-for="(el, index) in renderDeptAndUserList" :key="index"
                   :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
                   :showDeptNames="showDeptNamesFlag"
                   @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
               </div>
-              <div v-if="!deptAndUserList || deptAndUserList.length === 0" class="k12-tree-popup-content-loading">
+              <div v-if="deptAndUserListIsEmpty" class="k12-tree-popup-content-loading">
                 <img class="k12-tree-popup-content-loading-text" :src="recordIcon" alt=""/>
                 <div class="k12-tree-popup-content-loading-text">~暂无数据~</div>
               </div>
@@ -103,11 +103,12 @@ export default {
     limit: Number,
     searchPlaceholder: {
       type: String,
-      default: '按用户名和手机号搜索'
+      default: '按姓名和手机号搜索'
     },
     showSearch: Boolean,
     clearSearchValAfterConfirm: Boolean,
-    searchLoad: Function
+    searchLoad: Function,
+    parentMode: Boolean
   },
   directives: {
     TransferDom
@@ -155,6 +156,16 @@ export default {
         } else {
           return el.userId
         }
+      })
+    },
+    deptAndUserListIsEmpty () {
+      return !this.deptAndUserList || this.deptAndUserList.length === 0
+    },
+    renderDeptAndUserList () {
+      if (!this.parentMode) return this.deptAndUserList
+      return (this.deptAndUserList || []).map(el => {
+        if (!el.deptId && el.userId) el.userName += '的家长'
+        return el
       })
     }
   },

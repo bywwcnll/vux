@@ -144,11 +144,13 @@ export default {
         font-size: 14px;
         color: #333;
         height: 22px;
+        line-height: 22px;
       }
       .k12-file-preview-info-size {
         font-size: 12px;
         color: #999;
-        height: 19px;
+        height: 16px;
+        line-height: 16px;
       }
     }
   }
