@@ -1,16 +1,18 @@
 <template>
   <div class="k12-tree-popup-content-cell">
     <div class="k12-tree-popup-cc-iconC" @click="onSelect(data)">
-      <template v-if="!isDepth || !onlySelectUser">
+      <template v-if="(!isDepth || !onlySelectUser) && !data.groupMode">
         <x-icon v-if="!selected" class="k12-tree-popup-cc-icon" type="ios-circle-outline" size="26"></x-icon>
         <x-icon v-if="selected" class="k12-tree-popup-cc-icon active" type="ios-checkmark" size="26"></x-icon>
       </template>
     </div>
     <div class="k12-tree-popup-cc-textC" @click="onNavNext(data)">
-      <div v-if="isDepth" class="k12-tree-popup-cct-icon">
-        <x-icon class="k12-tree-popup-cct-icon-folder" type="ios-folder" size="20"></x-icon>
-      </div>
-      <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="">
+      <template v-if="!data.groupMode">
+        <div v-if="isDepth" class="k12-tree-popup-cct-icon">
+          <x-icon class="k12-tree-popup-cct-icon-folder" type="ios-folder" size="20"></x-icon>
+        </div>
+        <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="">
+      </template>
       <div class="k12-tree-popup-cc-text">
         <div v-if="!isDepth && showDeptNames" class="k12-tree-popup-cct-deptNames">
           <span>{{data.userName}}</span>
@@ -112,6 +114,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
 }
 .k12-tree-popup-cct-icon-folder {
   fill: #6fa0e2;
@@ -119,7 +122,7 @@ export default {
 .k12-tree-popup-cc-text {
   flex: 1;
   height: 100%;
-  padding: 0 0 0 10px;
+  padding: 0;
   overflow: hidden;
   display: flex;
   align-items: center;
