@@ -4,7 +4,7 @@ export const isMobile = () => {
   return matchRes && matchRes.length > 0
 }
 
-export const downloadFile = async ({action = '', params = {}, method = 'GET'}) => {
+export const downloadFile = ({action = '', params = {}, method = 'GET'}) => {
   if (method === 'GET' && action.indexOf('?') > -1) {
     let queryStr = action.slice(action.indexOf('?') + 1) || ''
     if (queryStr.length > 0) {
@@ -14,7 +14,14 @@ export const downloadFile = async ({action = '', params = {}, method = 'GET'}) =
         if (kw.length === 2) {
           let tmp = {}
           tmp[kw[0]] = kw[1]
-          params = {...tmp, ...params}
+          let tmpParams = {}
+          Object.keys(tmp).forEach(tkey => {
+            tmpParams[tkey] = tmp[tkey]
+          })
+          Object.keys(params).forEach(pkey => {
+            tmpParams[pkey] = params[pkey]
+          })
+          params = tmpParams
         }
       })
     }
