@@ -127,6 +127,12 @@ export default {
       deptId: this.defaultDeptId,
       deptName: '全部'
     })
+    // if (this.show) {
+    //   this.showPopup = true
+    //   if (this.deptAndUserList.length === 0) {
+    //     this.commonLoad(this.deptPathList[this.deptPathList.length - 1])
+    //   }
+    // }
   },
   data () {
     return {
