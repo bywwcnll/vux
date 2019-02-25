@@ -15,10 +15,20 @@
       </template>
       <div class="k12-tree-popup-cc-text">
         <div v-if="!isDepth && showDeptNames" class="k12-tree-popup-cct-deptNames">
-          <span>{{data.userName}}</span>
-          <span>{{data.deptNames}}</span>
+          <div>
+            <span>{{data.userName}}</span>
+            <span>{{data.deptNames}}</span>
+          </div>
+          <p v-if="data.corpName">
+            <span class="k12-tree-popup-cct-corpName">@{{data.corpName}}</span>
+          </p>
         </div>
-        <div v-else class="k12-tree-popup-cct-dept">{{data.deptName || data.userName}}</div>
+        <div v-else class="k12-tree-popup-cct-dept">
+          <div><span>{{data.deptName || data.userName}}</span></div>
+          <p v-if="data.corpName">
+            <span class="k12-tree-popup-cct-corpName">@{{data.corpName}}</span>
+          </p>
+        </div>
         <div v-if="isDepth && !hideRightArrow" class="k12-tree-popup-cct-rightC">
           <x-icon class="k12-tree-popup-cct-right" type="chevron-right" size="12"></x-icon>
         </div>
@@ -125,20 +135,37 @@ export default {
   padding: 0;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 .k12-tree-popup-cct-dept {
-  width: 0;
-  flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.k12-tree-popup-cct-deptNames {
+  padding: 6px 0;
   flex: 1;
   display: flex;
-  align-items: stretch;
-  > span {
+  flex-direction: column;
+  > div, > p {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  > div > span {
+    flex: 1;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+.k12-tree-popup-cct-deptNames {
+  padding: 6px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  > div, > p {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  > div > span {
     width: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -154,6 +181,15 @@ export default {
       text-align: right;
     }
   }
+}
+.k12-tree-popup-cct-corpName {
+  flex: 1;
+  width: 0;
+  font-size: 12px;
+  color: #FF6633;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .k12-tree-popup-cct-rightC {
   width: 40px;
