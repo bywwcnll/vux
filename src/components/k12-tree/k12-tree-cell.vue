@@ -14,20 +14,18 @@
         <img v-else :src="data.avatar" class="k12-tree-popup-cct-icon" alt="">
       </template>
       <div class="k12-tree-popup-cc-text">
-        <div v-if="!isDepth && showDeptNames" class="k12-tree-popup-cct-deptNames">
-          <div>
-            <span>{{data.userName}}</span>
-            <span>{{data.deptNames}}</span>
-          </div>
-          <p v-if="data.corpName">
-            <span class="k12-tree-popup-cct-corpName">@{{data.corpName}}</span>
+        <div class="k12-tree-main-div">
+          <p>
+            <span v-if="!isDepth && showDeptNames">{{data.userName}}</span>
+            <span v-else>{{data.deptName || data.userName}}</span>
           </p>
+          <p v-if="data.corpName && showDeptNames"><span class="k12-tree-popup-cct-corpName">@{{data.corpName}}</span></p>
         </div>
-        <div v-else class="k12-tree-popup-cct-dept">
-          <div><span>{{data.deptName || data.userName}}</span></div>
-          <p v-if="data.corpName">
-            <span class="k12-tree-popup-cct-corpName">@{{data.corpName}}</span>
-          </p>
+        <div v-if="!isDepth && showDeptNames && data.deptNames" class="k12-tree-other-div">
+          <p><span class="k12-tree-deptNames k12-tree-multiOmit">{{data.deptNames}}</span></p>
+        </div>
+        <div v-if="isDepth && showDeptNames && data.parentDeptName" class="k12-tree-other-div">
+          <p><span class="k12-tree-deptNames k12-tree-multiOmit">{{data.parentDeptName}}</span></p>
         </div>
         <div v-if="isDepth && !hideRightArrow" class="k12-tree-popup-cct-rightC">
           <x-icon class="k12-tree-popup-cct-right" type="chevron-right" size="12"></x-icon>
@@ -130,57 +128,50 @@ export default {
   fill: #6fa0e2;
 }
 .k12-tree-popup-cc-text {
+  padding: 6px 0;
   flex: 1;
+  width: 0;
   height: 100%;
-  padding: 0;
-  overflow: hidden;
   display: flex;
   align-items: stretch;
-}
-.k12-tree-popup-cct-dept {
-  padding: 6px 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  > div, > p {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-  > div > span {
-    flex: 1;
-    width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-}
-.k12-tree-popup-cct-deptNames {
-  padding: 6px 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  > div, > p {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-  > div > span {
-    width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    &:first-child {
-      flex: 2;
+  > div {
+    &.k12-tree-main-div {
+      flex: 4;
     }
-    &:last-child {
-      margin-left: 8px;
+    &.k12-tree-other-div {
       flex: 3;
-      color: #999;
-      padding-right: 10px;
-      text-align: right;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > p {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      &:first-child {
+        flex: 1;
+      }
+      > span {
+        flex: 1;
+        width: 0;
+        &:not(.k12-tree-multiOmit) {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
     }
   }
+}
+.k12-tree-deptNames {
+  margin-left: 10px;
+  font-size: 12px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .k12-tree-popup-cct-corpName {
   flex: 1;

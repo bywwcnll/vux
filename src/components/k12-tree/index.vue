@@ -57,7 +57,8 @@
           <div class="k12-tree-popup-viewPopup-contentC">
             <div v-if="viewPopupSelectedList.length > 0" class="k12-tree-popup-viewPopup-content">
               <k12-tree-cell v-for="(el, index) in viewPopupSelectedList" :key="index"
-                             :data="el" :selected="el.viewPopupSelected" :onlySelectUser="onlySelectUser" :hideRightArrow="true"
+                             :data="el" :selected="el.viewPopupSelected" :onlySelectUser="onlySelectUser"
+                             showDeptNames hideRightArrow
                              @select="onViewPopupSelect(el, index)"></k12-tree-cell>
             </div>
             <div v-else class="k12-tree-popup-viewPopup-empty">~暂无数据~</div>
@@ -220,8 +221,16 @@ export default {
       this.loadedCounts++
       this.isLoading = true
       this.load(data).then(res => {
-        this.deptAndUserList = res
-        this.showDeptNamesFlag = false
+        if (res instanceof Array) {
+          this.deptAndUserList = res
+          this.showDeptNamesFlag = false
+        } else if (res.hasOwnProperty('data')) {
+          this.deptAndUserList = res.data
+          this.showDeptNamesFlag = Boolean(res.showDeptNamesFlag)
+        } else {
+          this.deptAndUserList = res
+          this.showDeptNamesFlag = false
+        }
         this.isLoading = false
         if (this.loadedCounts < 2 && res.length === 1 && this.isDepth(res[0])) {
           this.deptPathList = [...this.deptPathList, res[0]]
