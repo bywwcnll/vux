@@ -351,6 +351,12 @@ export default {
 
 <style lang="less">
 @import './style.less';
+.vux-input-icon {
+  line-height: 30px;
+}
+.vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before {
+  font-size: 21px;
+}
 .k12vux-datetime-container {
   flex: 1;
   align-items: center;
