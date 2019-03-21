@@ -352,6 +352,7 @@ export default {
 <style lang="less">
 @import './style.less';
 .vux-input-icon {
+  height: 30px;
   line-height: 30px;
 }
 .vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before {
