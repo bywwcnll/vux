@@ -1,6 +1,6 @@
 <template>
   <div v-transfer-dom>
-    <popup v-model="showPopup">
+    <popup v-model="showPopup" :hide-on-blur="hideOnBlur">
       <div class="k12-voice-upload-popupC">
         <div v-if="status === 'startRecord'" class="k12-voice-upload-startRecordC">
           <div v-if="!isRecording" class="k12-voice-upload-ws-timeLimit">录音时间不能超过{{maxRecordSeconds}}秒</div>
@@ -72,6 +72,10 @@ export default {
       validator: value => {
         return value >= 3 && value <= 60
       }
+    },
+    hideOnBlur: {
+      type: Boolean,
+      default: true
     }
   },
   directives: {
@@ -291,6 +295,7 @@ export default {
     },
     onCancelRecord () {
       this.showPopup = false
+      this.$emit('cancel')
     },
     onReRecord () {
       this.initData()

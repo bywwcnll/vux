@@ -262,6 +262,9 @@ export default {
               })
             }
             this.formData = [...this.formData, ...allLocalImgData]
+          },
+          cancel: res => {
+            this.$emit('cancel', res)
           }
         })
       }
