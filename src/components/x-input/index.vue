@@ -163,8 +163,6 @@ import Debounce from '../../tools/debounce'
 
 import mask from 'vanilla-masker'
 
-import { isMobile } from '../../libs/k12Util.js'
-
 const validators = {
   'email': {
     fn: isEmail,
@@ -367,7 +365,15 @@ export default {
     },
     focusHandler ($event) {
       this.$emit('on-focus', this.currentValue, $event)
-      this.isFocus = true
+      if (this.onBlurInstanceTimer) {
+        setTimeout(() => {
+          clearTimeout(this.onBlurInstanceTimer)
+          this.onBlurInstanceTimer = null
+          this.isFocus = true
+        }, 150)
+      } else {
+        this.isFocus = true
+      }
       // this.scrollIntoView(500)
       // this.scrollIntoView(5000)
       setTimeout(() => {
@@ -379,13 +385,9 @@ export default {
     onBlur ($event) {
       this.setTouched()
       this.validate()
-      if (isMobile()) {
+      this.onBlurInstanceTimer = setTimeout(() => {
         this.isFocus = false
-      } else {
-        setTimeout(() => {
-          this.isFocus = false
-        }, 200)
-      }
+      }, 150)
       this.$emit('on-blur', this.currentValue, $event)
     },
     onKeyUp (e) {
@@ -509,7 +511,8 @@ export default {
       valid: true,
       currentValue: '',
       showErrorToast: false,
-      isFocus: false
+      isFocus: false,
+      onBlurInstanceTimer: null
     }
   },
   watch: {
