@@ -1,11 +1,11 @@
 <template>
   <transition
-    :name="`vux-popup-animate-${position}`">
+    :name="transitionName">
     <div
       v-show="show && !initialShow"
       :style="styles"
       class="vux-popup-dialog"
-      :class="[`vux-popup-${position}`, show ? 'vux-popup-show' : '']">
+      :class="[`vux-popup-${position}`, show ? 'vux-popup-show' : '', animation ? 'vux-popup-dialog-animation' : '']">
         <slot v-if="shouldRenderBody"></slot>
     </div>
   </transition>
@@ -53,6 +53,10 @@ export default {
     shouldScrollTopOnShow: {
       type: Boolean,
       default: false
+    },
+    animation: {
+      type: Boolean,
+      default: true
     }
   },
   created () {
@@ -69,6 +73,7 @@ export default {
         showMask: _this.showMask,
         container: _this.$el,
         hideOnBlur: _this.hideOnBlur,
+        animation: _this.animation,
         onOpen () {
           _this.fixSafariOverflowScrolling('auto')
           _this.show = true
@@ -160,6 +165,9 @@ export default {
         }
       }
       return styles
+    },
+    transitionName () {
+      return this.animation ? `vux-popup-animate-${this.position}` : ''
     }
   },
   watch: {
@@ -215,11 +223,13 @@ export default {
   width: 100%;
   background: @popup-background-color;
   z-index: 501;
-  transition-property: transform;
-  transition-duration: 300ms;
   max-height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+.vux-popup-dialog.vux-popup-dialog-animation {
+  transition-property: transform;
+  transition-duration: 300ms;
 }
 .vux-popup-dialog.vux-popup-left {
   width: auto;
@@ -255,6 +265,8 @@ export default {
   opacity: 0;
   tap-highlight-color: rgba(0,0,0,0);
   z-index: -1;
+}
+.vux-popup-mask.vux-popup-mask-animation {
   transition: opacity 400ms;
 }
 .vux-popup-mask.vux-popup-show {

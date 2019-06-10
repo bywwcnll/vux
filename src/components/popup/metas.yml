@@ -70,6 +70,12 @@ props:
     default: false
     en: whether scroll top on show，add class vux-scrollable if you customize the scrollable div
     zh-CN: 是否在显示时自动滚动到顶部，当你自定义滚动容器时需要手动为该容器加上类名 vux-scrollable
+  animation:
+    version: v12.0.55
+    type: Boolean
+    default: true
+    en: if using transparent animation
+    zh-CN: 是否使用过渡动画    
 events:
   on-hide:
     en: emits when then popup is closed

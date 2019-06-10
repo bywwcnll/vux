@@ -22,7 +22,7 @@ const popupDialog = function (option) {
   }
   if (!!document.querySelectorAll('.vux-popup-mask').length <= 0) {
     this.divMask = document.createElement('a')
-    this.divMask.className = 'vux-popup-mask'
+    this.divMask.className = option.animation ? 'vux-popup-mask vux-popup-mask-animation' : 'vux-popup-mask'
     this.divMask.dataset.uuid = ''
     this.divMask.href = 'javascript:void(0)'
     document.body.appendChild(this.divMask)
