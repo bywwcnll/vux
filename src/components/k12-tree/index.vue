@@ -24,10 +24,13 @@
             <template v-if="!isLoading">
               <div v-if="!deptAndUserListIsEmpty" class="k12-tree-popup-content">
                 <k12-tree-cell v-for="(el, index) in renderDeptAndUserList" :key="index"
-                  :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
-                  :showDeptNames="showDeptNamesFlag"
-                  @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
+                               :data="el" :selected="findSelectedIndex(el) > -1" :onlySelectUser="onlySelectUser"
+                               :showDeptNames="showDeptNamesFlag"
+                               @select="onSelect(el)" @navNext="onNavNext(el)"></k12-tree-cell>
               </div>
+              <template v-if="renderDeptAndUserList.length === 50 && searchVal.length > 0">
+                <div class="k12-tree-popup-tip">查询结果最多显示50条</div>
+              </template>
               <div v-if="deptAndUserListIsEmpty" class="k12-tree-popup-content-loading">
                 <img class="k12-tree-popup-content-loading-text" :src="recordIcon" alt=""/>
                 <div class="k12-tree-popup-content-loading-text">~暂无数据~</div>
@@ -39,6 +42,11 @@
             </div>
           </div>
           <div class="k12-tree-popup-footer">
+            <div v-show="searchVal.length > 0 && limit === 0" @click="onSelectAll" class="k12-tree-popup-footer-confirm selectAll">
+              <x-icon v-if="!selectedAllFlag" class="k12-tree-popup-cc-icon" type="ios-circle-outline" size="26"></x-icon>
+              <x-icon v-if="selectedAllFlag" class="k12-tree-popup-cc-icon active" type="ios-checkmark" size="26"></x-icon>
+              <span>全选</span>
+            </div>
             <div @click="onView" class="k12-tree-popup-footer-selectedList">查看已选({{selectedList.length}})</div>
             <div @click="onConfirm" class="k12-tree-popup-footer-confirm">确定</div>
           </div>
@@ -51,6 +59,7 @@
         <div class="k12-tree-popup-viewPopupC">
           <div class="k12-tree-popup-viewPopup-header">
             <div class="k12-tree-popup-viewPopup-header-left" @click="showViewPopup = false">取消</div>
+            <div class="k12-tree-popup-viewPopup-header-left" @click="onViewPopupClear">清空</div>
             <div class="k12-tree-popup-viewPopup-header-title">已选择数据</div>
             <div class="k12-tree-popup-viewPopup-header-right" @click="onViewPopupComfirm">确定</div>
           </div>
@@ -67,7 +76,7 @@
       </popup>
     </div>
     <toast v-model="showToastFlag" type="text" :time="800"
-      is-show-mask position="middle">已包含选中项</toast>
+           is-show-mask position="middle">已包含选中项</toast>
   </div>
 </template>
 
@@ -104,7 +113,7 @@ export default {
     limit: Number,
     searchPlaceholder: {
       type: String,
-      default: '按姓名和手机号搜索'
+      default: '按姓名和手机号搜索，查询多人用空格隔开'
     },
     showSearch: Boolean,
     clearSearchValAfterConfirm: Boolean,
@@ -174,6 +183,9 @@ export default {
         if (!el.deptId && el.userId) el.userName += '的家长'
         return el
       })
+    },
+    selectedAllFlag () {
+      return this.renderDeptAndUserList.filter(el => this.findSelectedIndex(el) === -1).length === 0
     }
   },
   watch: {
@@ -287,12 +299,41 @@ export default {
       tmp[index].viewPopupSelected = !viewPopupSelected
       this.viewPopupSelectedList = tmp
     },
+    onViewPopupClear () {
+      this.viewPopupSelectedList = this.viewPopupSelectedList.map(el => {
+        el.viewPopupSelected = false
+        return el
+      })
+    },
     onViewPopupComfirm () {
       this.selectedList = this.viewPopupSelectedList.filter(el => el.viewPopupSelected).map(el => {
         delete el.viewPopupSelected
         return el
       })
       this.showViewPopup = false
+    },
+    onSelectAll () {
+      if (!this.selectedAllFlag) {
+        let deptList = this.selectedList.filter(el => this.isDepth(el))
+        let userList = this.selectedList.filter(el => !this.isDepth(el))
+        this.renderDeptAndUserList.filter(el => this.findSelectedIndex(el) === -1).forEach(el => {
+          if (this.isDepth(el)) {
+            deptList.push(el)
+          } else {
+            userList.push(el)
+          }
+        })
+        this.selectedList = [...deptList, ...userList]
+      } else {
+        let willDelIndexList = []
+        this.renderDeptAndUserList.forEach(el => {
+          let index = this.findSelectedIndex(el)
+          if (index > -1) {
+            willDelIndexList.push(index)
+          }
+        })
+        this.selectedList = this.selectedList.filter((el, index) => willDelIndexList.indexOf(index) === -1)
+      }
     },
     onConfirm () {
       this.$emit('input', this.selectedList)
@@ -466,6 +507,13 @@ export default {
     padding: 5px 0;
     box-sizing: border-box;
     .k12-flex-center;
+    &.selectAll {
+      background-color: #fff;
+      color: #000;
+      > svg {
+        margin-right: 5px;
+      }
+    }
   }
 }
 .k12-tree-popupC-mask {
@@ -517,5 +565,11 @@ export default {
       .k12-flex-center;
     }
   }
+}
+.k12-tree-popup-tip {
+  font-size: 14px;
+  color: #999;
+  line-height: 40px;
+  text-align: center;
 }
 </style>
