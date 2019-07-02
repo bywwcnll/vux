@@ -185,7 +185,7 @@ export default {
       })
     },
     selectedAllFlag () {
-      return this.renderDeptAndUserList.filter(el => this.findSelectedIndex(el) === -1).length === 0
+      return this.renderDeptAndUserList.length > 0 && this.renderDeptAndUserList.filter(el => this.findSelectedIndex(el) === -1).length === 0
     }
   },
   watch: {
