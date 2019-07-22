@@ -12,13 +12,13 @@
       <div class="k12-voice-play-info">
         <div class="k12-voice-play-info-name">{{filename}}</div>
         <div class="k12-voice-play-info-size">
-          <span>{{filesizeDisplay}}</span>
-          <span v-if="audioSeconds">{{currentTime | timeFilter}}/{{audioSeconds | timeFilter}}</span>
+          <span v-if="audioSeconds"><span v-show="controlStatus === 'play'">{{currentTime | timeFilter}}/</span>{{audioSeconds | timeFilter}}</span>
+          <span style="margin-left: 20px;">{{filesizeDisplay}}</span>
         </div>
       </div>
-    </div>
-    <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
-      <img class="k12-voice-play-icon-delete" :src="deleteIcon" alt=""/>
+      <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
+        <img class="k12-voice-play-icon-delete" :src="deleteIcon" alt=""/>
+      </div>
     </div>
     <div class="k12-voice-play-audioC">
       <audio ref="audio" :src="audioSrc">您的浏览器不支持 audio 标签。</audio>
@@ -217,7 +217,7 @@ export default {
   align-items: center;
   overflow: hidden;
   + .k12-voice-play-container {
-    margin-top: 15px;
+    margin-top: 10px;
   }
   .k12-voice-play-main {
     flex: 1;
@@ -269,17 +269,17 @@ export default {
         height: 16px;
         line-height: 16px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
       }
     }
   }
   .k12-voice-play-delete {
-    margin-left: 15px;
+    padding: 0 5px 0 15px;
+    height: 100%;
     .k12-flex-center;
     .k12-voice-play-icon-delete {
       display: block;
-      width: 18px;
+      width: 20px;
     }
   }
 }
