@@ -1,0 +1,25 @@
+category:
+  en: K12 customization
+  zh-CN: K12 定制
+icon: '&#xe656;'
+props:
+  id:
+    type: Object, String, Number
+    en: "return the id when click delete"
+    zh-CN: "唯一标识，删除时返回"
+  data:
+    type: Object
+    default: "{}"
+    en: "{resourceName: 'link title', resourceContent: 'link url'}"
+    zh-CN: "{resourceName: '链接标题', resourceContent: '链接地址'}"
+  hideDelete:
+    type: Boolean,
+    default: false,
+    en: "show or hidden delete button"
+    zh-CN: "是否隐藏删除按钮"  
+changes:
+  v1.0.1:
+    en:
+      - '[feature] new component'
+    zh-CN:
+      - '[feature] 新组件'

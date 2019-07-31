@@ -119,5 +119,6 @@
   "K12Tree",
   "K12Upload",
   "K12UploadVoice",
-  "K12VoicePlay"
+  "K12VoicePlay",
+  "K12Link"
 ]

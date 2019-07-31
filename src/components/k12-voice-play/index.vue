@@ -1,7 +1,7 @@
 <template>
-  <div class="k12-voice-play-container">
+  <div class="k12-voice-play-container" @click="onControl">
     <div class="k12-voice-play-main">
-      <div class="k12-voice-play-controlBtn" @click="onControl">
+      <div class="k12-voice-play-controlBtn">
         <svg v-if="controlStatus === 'stop'" class="k12-voice-play-icon-play" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <path d="M882.734114 459.147258l0.024559-0.024559L244.016061 21.12718l-0.199545 0.188288C230.582097 8.748245 212.62819 1.014096 192.840518 1.014096c-40.704051 0-73.699536 32.66905-73.699536 72.996524 0 22.148439-0.954745 65.513086 0 64.572668l0 373.422851 0 393.071354c0 0.325411 0 25.249057 0 44.935422 0 40.302915 32.995485 72.972988 73.699536 72.972988 19.862373 0 37.892005-7.78429 51.125401-20.466124l0.050142 0.025583 638.742613-437.982216-0.024559-0.038886c13.886265-13.270235 22.549575-31.889291 22.549575-52.531424 0-0.050142 0-0.088004 0-0.150426 0-0.050142 0-0.11154 0-0.149403C905.28369 491.048829 896.620379 472.41647 882.734114 459.147258z"/>
         </svg>
@@ -12,11 +12,11 @@
       <div class="k12-voice-play-info">
         <div class="k12-voice-play-info-name">{{filename}}</div>
         <div class="k12-voice-play-info-size">
-          <span v-if="audioSeconds"><span v-show="controlStatus === 'play'">{{currentTime | timeFilter}}/</span>{{audioSeconds | timeFilter}}</span>
-          <span style="margin-left: 20px;">{{filesizeDisplay}}</span>
+          <span v-if="audioSeconds" style="margin-right: 20px;"><span v-show="controlStatus === 'play'">{{currentTime | timeFilter}}/</span>{{audioSeconds | timeFilter}}</span>
+          <span>{{filesizeDisplay}}</span>
         </div>
       </div>
-      <div v-if="!hideDelete" class="k12-voice-play-delete" @click="onDelete">
+      <div v-if="!hideDelete" class="k12-voice-play-delete" @click.stop="onDelete">
         <img class="k12-voice-play-icon-delete" :src="deleteIcon" alt=""/>
       </div>
     </div>

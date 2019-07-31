@@ -15,6 +15,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    align: {
+      type: String,
+      default: 'left'
     }
   },
   data () {

@@ -244,8 +244,8 @@ export default {
     },
     async fetchAnalytics () {
       // 获取统计
-      const summary = await Axios.get('https://vux.li/analytics')
-      this.analytics = summary.data
+      // const summary = await Axios.get('https://vux.li/analytics')
+      // this.analytics = summary.data
     },
     getLang () {
       if (this.$route.path.indexOf('/en/') !== -1) {

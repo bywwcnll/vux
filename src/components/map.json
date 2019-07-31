@@ -78,6 +78,7 @@
   "K12FilePreview": "src/components/k12-file-preview/index.vue",
   "K12Flow": "src/components/k12-flow/k12-flow.vue",
   "K12FlowItem": "src/components/k12-flow/k12-flow-item.vue",
+  "K12Link": "src/components/k12-link/index.vue",
   "K12Template": "src/components/k12-template/index.vue",
   "K12Tree": "src/components/k12-tree/index.vue",
   "K12TreeCell": "src/components/k12-tree/k12-tree-cell.vue",

@@ -12,6 +12,11 @@ k12-flow:
       default: ''
       en: "Header's title"
       zh-CN: "标题"
+    align:
+      type: String
+      default: 'left'
+      en: ""
+      zh-CN: "对齐方式[left, right]"  
 k12-flow-item:
   props:
     data:

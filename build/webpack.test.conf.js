@@ -28,7 +28,7 @@ var webpackConfig = merge(baseConfig, {
 // no need for app entry during tests
 delete webpackConfig.entry
 
-const vuxLoader = require('vux-loader')
+const vuxLoader = require('k12vux-loader')
 
 // set i18n dynamic to false
 module.exports = vuxLoader.merge(webpackConfig, {
