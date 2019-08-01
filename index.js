@@ -80,6 +80,7 @@ import InviewDirective from './src/directives/inview/index.js'
 import K12FilePreview from './src/components/k12-file-preview/index.vue'
 import K12Flow from './src/components/k12-flow/k12-flow.vue'
 import K12FlowItem from './src/components/k12-flow/k12-flow-item.vue'
+import K12Link from './src/components/k12-link/index.vue'
 import K12Template from './src/components/k12-template/index.vue'
 import K12Tree from './src/components/k12-tree/index.vue'
 import K12TreeCell from './src/components/k12-tree/k12-tree-cell.vue'
@@ -253,6 +254,7 @@ export {
   K12FilePreview,
   K12Flow,
   K12FlowItem,
+  K12Link,
   K12Template,
   K12Tree,
   K12TreeCell,
