@@ -748,9 +748,12 @@
 </template>
 
 <script>
-import { Cell, Confirm, Group } from 'k12vux'
+import { Cell, Confirm, Group, TransferDom } from 'k12vux'
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     Cell,
     Confirm,
