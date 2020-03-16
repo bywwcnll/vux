@@ -14,7 +14,9 @@
         <div class="k12-flow-line"></div>
       </div>
       <div class="k12-flow-infos">
-        <div class="k12-flow-name" :class="{'k12-flow-current-stauts': data.status === 'process'}">{{data.name}}</div>
+        <div class="k12-flow-name" :class="{'k12-flow-current-stauts': data.status === 'process'}">
+          <slot name="name">{{data.name}}</slot>
+        </div>
         <div class="k12-flow-desc">
           <slot name="desc"></slot>
         </div>
