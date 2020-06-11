@@ -23,8 +23,8 @@
         :rows="rows"
         :cols="cols"
         v-model="currentValue"
-        @focus="$emit('on-focus')"
-        @blur="$emit('on-blur')"
+        @focus="onFocus"
+        @blur="onBlur"
         :style="textareaStyle"
         :maxlength="max"
         ref="textarea"></textarea>
@@ -126,6 +126,7 @@ export default {
   },
   data () {
     return {
+      scrollTimer: null,
       hasRestrictedLabel: false,
       currentValue: ''
     }
@@ -172,6 +173,24 @@ export default {
     unbindAutosize () {
       Autosize.destroy(this.$refs.textarea)
     },
+    clearScrollTimer () {
+      if (this.scrollTimer){
+        clearTimeout(this.scrollTimer)
+      }
+    },
+    onBlur () {
+      this.scrollTimer = setTimeout(() => {
+        let isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isIOS) {
+          window.scrollTo(0, 0);
+        }
+      }, 10)
+      this.$emit('on-blur')
+    },
+    onFocus () {
+      this.clearScrollTimer()
+      this.$emit('on-focus')
+    },
     // prop.autosize
     focus () {
       this.$refs.textarea.focus()
@@ -179,6 +198,7 @@ export default {
   },
   // prop.autosize
   beforeDestroy () {
+    this.clearScrollTimer()
     this.unbindAutosize()
   }
   // prop.autosize
