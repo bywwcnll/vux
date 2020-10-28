@@ -54,6 +54,7 @@
 import TransferDom from '../../directives/transfer-dom/index.js'
 import popup from '../popup'
 import commonLoopProgress from './commonLoopProgress'
+import Recorder from 'recorder-js'
 
 export default {
   name: 'k12-upload-voice',
@@ -61,10 +62,7 @@ export default {
     show: Boolean,
     sdkType: {
       type: String,
-      default: 'wx',
-      validator: value => {
-        return ['', 'wx'].indexOf(value) !== -1
-      }
+      default: 'wx,h5'
     },
     maxRecordSeconds: {
       type: Number,
@@ -76,7 +74,8 @@ export default {
     hideOnBlur: {
       type: Boolean,
       default: true
-    }
+    },
+    manualRevoke: Boolean
   },
   directives: {
     TransferDom
@@ -105,13 +104,25 @@ export default {
 
       controlStatus: 'stop',
       playSeconds: 0,
-      playIntervalTimer: null
+      playIntervalTimer: null,
+
+      audioContext: new (window.AudioContext || window.webkitAudioContext)(),
+      recorder: null,
+      audioEl: null,
+      blob: null
     }
   },
   computed: {
     currentProgressCount () {
       if (this.recordSeconds === 0) return 0
       return this.playSeconds / this.recordSeconds * 100
+    },
+    types () {
+      let tmp = (this.sdkType || '').split(',')
+      return {
+        isWx: tmp.indexOf('wx') > -1,
+        isH5: tmp.indexOf('h5') > -1
+      }
     }
   },
   watch: {
@@ -166,7 +177,7 @@ export default {
     },
     commonStartRecord () {
       return new Promise((resolve, reject) => {
-        if (this.sdkType === 'wx') {
+        if (this.types.isWx) {
           this.$wechat.startRecord({
             success: res => {
               resolve(res)
@@ -185,12 +196,32 @@ export default {
               this.localId = res.localId
             }
           })
+        } else if (this.types.isH5) {
+          this.recorder = new Recorder(this.audioContext)
+          let { mediaDevices } = window.navigator
+          if (!mediaDevices || !mediaDevices.getUserMedia) {
+            reject(new Error('无法获取录音权限'))
+          } else {
+            mediaDevices.getUserMedia({audio: true})
+              .then(stream => {
+                this.recorder.init(stream)
+                this.recorder.start().then(() => {
+                  resolve()
+                }).catch(e => {
+                  reject(e)
+                })
+              })
+              .catch(err => {
+                reject(new Error('获取录音数据流失败'))
+                console.log(err)
+              })
+          }
         }
       })
     },
     commonEndRecord () {
       return new Promise((resolve, reject) => {
-        if (this.sdkType === 'wx') {
+        if (this.types.isWx) {
           this.$wechat.stopRecord({
             success: res => {
               resolve(res.localId)
@@ -199,12 +230,17 @@ export default {
               reject(res)
             }
           })
+        } else if (this.types.isH5) {
+          this.recorder.stop().then(({blob}) => {
+            this.blob = blob
+            resolve(URL.createObjectURL(blob))
+          })
         }
       })
     },
     commonPlayVoice (data) {
       return new Promise((resolve, reject) => {
-        if (this.sdkType === 'wx') {
+        if (this.types.isWx) {
           this.$wechat.playVoice({
             localId: data,
             success: res => {
@@ -214,12 +250,21 @@ export default {
               reject(res)
             }
           })
+        } else if (this.types.isH5) {
+          try {
+            this.audioEl = window.document.createElement('audio')
+            this.audioEl.src = data
+            this.audioEl.play()
+            resolve()
+          } catch (e) {
+            reject(e)
+          }
         }
       })
     },
     commonPauseVoice (data) {
       return new Promise((resolve, reject) => {
-        if (this.sdkType === 'wx') {
+        if (this.types.isWx) {
           this.$wechat.pauseVoice({
             localId: data,
             success: res => {
@@ -229,12 +274,14 @@ export default {
               reject(res)
             }
           })
+        } else if (this.types.isH5) {
+          if (this.audioEl) this.audioEl.pause()
         }
       })
     },
     commonStopVoice (data) {
       return new Promise((resolve, reject) => {
-        if (this.sdkType === 'wx') {
+        if (this.types.isWx) {
           this.$wechat.stopVoice({
             localId: data,
             success: res => {
@@ -244,6 +291,11 @@ export default {
               reject(res)
             }
           })
+        } else if (this.types.isH5) {
+          if (this.audioEl) {
+            this.audioEl.pause()
+            this.audioEl.currentTime = 0
+          }
         }
       })
     },
@@ -275,7 +327,10 @@ export default {
             }, 1000)
           }
         })
-        .catch(e => { alert(e.errMsg) })
+        .catch(e => {
+          console.log(e)
+          alert(e.errMsg)
+        })
     },
     async onRecordEnd () {
       this.isRecording = false
@@ -344,11 +399,21 @@ export default {
       dateStr[3] = zerofill(date.getHours())
       dateStr[4] = zerofill(date.getMinutes())
       dateStr[5] = zerofill(date.getSeconds())
+      let filename = dateStr.join('') + (this.types.isWx ? '.amr' : '.wav')
       this.$emit('save', {
         localId: this.localId,
-        recordFileName: dateStr.join('') + '.amr',
+        file: new File([this.blob], filename, {type: 'wav'}),
+        recordFileName: filename,
         recordSeconds: this.recordSeconds
       })
+    }
+  },
+  beforeDestroy() {
+    if (!this.manualRevoke && this.types.isH5 && this.localId) {
+      URL.revokeObjectURL(this.localId)
+    }
+    if (this.audioEl) {
+      this.audioEl = null
     }
   }
 }

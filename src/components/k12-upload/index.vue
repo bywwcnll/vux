@@ -103,11 +103,12 @@
         type: Number,
         default: 9
       },
-      // 上传大小，单位：MB
+      // 上传大小，单位：KB
       size: {
         type: Number,
         default: null
-      }
+      },
+      manualRevoke: Boolean
     },
     data () {
       return {
@@ -132,7 +133,7 @@
         return `上传数量不能超过${this.count}张`
       },
       sizeTxt () {
-        return `图片大小不能超过${this.size}MB`
+        return `图片大小不能超过${this.size}KB`
       },
       labelStyles () {
         return cleanStyle({
@@ -234,7 +235,7 @@
         }
         if (this.size) {
           for (let i = 0; i < files.length; i++) {
-            if (files[i].size > this.size * 1024 * 1024) {
+            if (files[i].size > this.size * 1024) {
               this.toastTxt = this.sizeTxt
               this.showToastFlag = true
               result = true
@@ -248,7 +249,7 @@
         let input = document.createElement('input')
         input.type = 'file'
         input.accept = 'image/*'
-        input.style = 'width:0;height:0'
+        input.style = 'display:none;width:0;height:0'
         if (this.count > 1) {
           input.multiple = true
         }
@@ -341,8 +342,9 @@
           if (this.count <= this.formData.length) {
             this.toastTxt = this.countTxt
             this.showToastFlag = true
+          } else {
+            this.inputEle.click()
           }
-          this.inputEle.click()
         }
       },
       onDeleteAddedImg (data) {
@@ -353,9 +355,11 @@
       }
     },
     beforeDestroy() {
-      this.blobURLList.forEach(url => {
-        URL.revokeObjectURL(url)
-      })
+      if (!this.manualRevoke) {
+        this.blobURLList.forEach(url => {
+          URL.revokeObjectURL(url)
+        })
+      }
       this.inputEle.remove()
     }
   }
