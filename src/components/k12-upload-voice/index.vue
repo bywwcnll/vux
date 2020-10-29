@@ -133,7 +133,7 @@ export default {
       if (this.isRecording && this.recordIntervalTimer) {
         this.commonEndRecord()
       }
-      this.initData()
+      this.initData(false)
       this.$emit('update:show', v)
     }
   },
@@ -166,14 +166,21 @@ export default {
         this.playIntervalTimer = null
       }
     },
-    initData () {
+    initData (clear = true) {
       this.clearRecordIntervalTimer()
       this.clearPlayIntervalTimer()
-      this.localId = null
       this.status = 'startRecord'
       this.isRecording = false
       this.controlStatus = 'stop'
       this.recordSeconds = this.playSeconds = 0
+      if (clear) this.localId = null
+    },
+    closeRecorderStream () {
+      let stream = this.recorder.stream || {}
+      let tracks = stream.getTracks && stream.getTracks() || stream.audioTracks || []
+      tracks.forEach(e => {
+        e.stop && e.stop()
+      })
     },
     commonStartRecord () {
       return new Promise((resolve, reject) => {
@@ -230,8 +237,9 @@ export default {
               reject(res)
             }
           })
-        } else if (this.types.isH5) {
+        } else if (this.types.isH5 && this.recorder) {
           this.recorder.stop().then(({blob}) => {
+            this.closeRecorderStream()
             this.blob = blob
             resolve(URL.createObjectURL(blob))
           })
@@ -386,7 +394,6 @@ export default {
       }
     },
     onSave () {
-      this.showPopup = false
       let zerofill = (num) => {
         if (num < 10) return '0' + num
         return num
@@ -406,6 +413,7 @@ export default {
         recordFileName: filename,
         recordSeconds: this.recordSeconds
       })
+      this.showPopup = false
     }
   },
   beforeDestroy() {
