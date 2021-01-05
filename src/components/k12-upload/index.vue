@@ -1,6 +1,6 @@
 <template>
   <div class="k12-upload-container weui-cell" :class="{'k12-upload-container-form': showType === 'form'}">
-    <div class="vux-cell-bd">
+    <div class="vux-cell-bd" :class="{'vux-cell-required': required}">
       <label class="vux-label k12-upload-label" :style="labelStyles" :class="labelClass">
         <slot name="title">{{ title }}</slot>
       </label>
@@ -108,7 +108,8 @@
         type: Number,
         default: null
       },
-      manualRevoke: Boolean
+      manualRevoke: Boolean,
+      required: Boolean
     },
     data () {
       return {
