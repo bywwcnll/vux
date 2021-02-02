@@ -198,8 +198,8 @@
           }
           return this.formData.map(el => {
             return {
-              msrc: el.thumbnailUrl ? el.thumbnailUrl : el.srcData,
-              src: el.srcData
+              msrc: el.thumbnailUrl || el.srcData,
+              src: el.srcData || el.previewUrl
             }
           })
         }
