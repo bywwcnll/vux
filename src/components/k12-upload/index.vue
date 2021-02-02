@@ -280,7 +280,7 @@
           input.value = ''
         }
         this.inputEle = input
-        this.$el.append(input)
+        this.$el.appendChild(input)
       },
       onPerview (index, itemIndex) {
         this.$refs.k12uploadpreviewer.show((index * this.rowLength) + itemIndex)
