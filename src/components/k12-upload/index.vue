@@ -305,7 +305,8 @@
         if (typeList.length === 0) {
           throw new Error('未指定SDK类型')
         }
-        if (typeList.indexOf('wx') > -1 && this.$wechat && this.$wechat.chooseImage) {
+        if (typeList.indexOf('wx') > -1 && this.$wechat && this.$wechat.chooseImage
+          && !/windows|win32/i.test(window.navigator.userAgent)) {
           this.$wechat.chooseImage({
             count: this.count - this.formData.length, /* 默认9 */
             sizeType: ['original', 'compressed'], /* 可以指定是原图还是压缩图，默认二者都有 */
